@@ -23,7 +23,7 @@ class VapingDutySpecs extends BaseSpec {
 
   Feature("Vaping duty page access") {
 
-    Scenario("User can access vape duty page", VapingDutyTaggedTest) {
+    Scenario("User can access vaping duty page", VapingDutyTaggedTest) {
 
       Given("I am on the sign in page")
       VapingDutyPage.goToUrl()
