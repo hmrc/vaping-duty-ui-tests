@@ -22,13 +22,18 @@ sm2 --start VAPING_DUTY_ALL
 
 ## Tests
 
-Run tests as follows:
+To run the full set of tests
+
+```
+./run_tests.sh
+```
 
 * Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
-* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
+* Argument `<environment>` must be `local`, `qa` or `staging`.
+* Argument `<headless>` must be  `true` or `false`.
 
 ```bash
-sbt clean -Dbrowser="<browser>" -Denvironment="<environment>" test testReport
+sbt clean -Dbrowser="chrome" -Denvironment="local" -Dbrowser.option.headless="true" -Dsecurity.assessment=false test testReport
 ```
 
 ## Scalafmt

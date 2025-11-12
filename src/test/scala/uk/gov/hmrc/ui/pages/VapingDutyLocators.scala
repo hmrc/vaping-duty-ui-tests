@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 
-object VapingDutyLocatorsPage extends BasePage {
+object VapingDutyLocators {
 
   val url: String             = TestEnvironment.url("auth-login-stub")
   val redirectUrl: String     = TestEnvironment.url("vaping-duty-frontend")
