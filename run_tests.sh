@@ -23,8 +23,11 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     --help)
-      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <env>] [-h|--headless <true|false>]"
-      echo "Example: $0 -b chrome -e local -h true"
+      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless <true|false>]"
+      echo "Examples:"
+      echo "  $0 -b chrome -e local -h true"
+      echo "  $0 staging            # auto detects environment"
+      echo "  $0 firefox qa false   # positional fallbacks (browser env headless)"
       exit 0
       ;;
     -*|--*)
@@ -38,9 +41,15 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-set -- "${POSITIONAL_ARGS[@]}"
+# ---- Restore positionals ----
+if ((${#POSITIONAL_ARGS[@]:-0})); then
+  set -- "${POSITIONAL_ARGS[@]}"
+else
+  set --
+fi
 
-for arg in "${POSITIONAL_ARGS[@]}"; do
+# ---- Optional positional fallback ----
+for arg in "${POSITIONAL_ARGS[@]-}"; do
   if [[ "$arg" =~ ^(chrome|firefox|edge)$ ]]; then
     BROWSER="$arg"
   elif [[ "$arg" =~ ^(local|qa|staging)$ ]]; then
@@ -50,6 +59,7 @@ for arg in "${POSITIONAL_ARGS[@]}"; do
   fi
 done
 
+# ---- Summary ----
 echo "----------------------------------------"
 echo "Running UI Tests"
 echo "----------------------------------------"
