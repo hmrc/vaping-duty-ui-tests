@@ -31,9 +31,8 @@ To run the full set of tests
 * Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
 * Argument `<environment>` must be `local`, `qa` or `staging`.
 * Argument `<headless>` must be  `true` or `false`.
-
-```bash
-sbt clean -Dbrowser="chrome" -Denvironment="local" -Dbrowser.option.headless="true" -Dsecurity.assessment=false test testReport
+```
+./run_tests.sh chrome local true
 ```
 
 ## Scalafmt
