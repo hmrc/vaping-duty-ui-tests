@@ -27,5 +27,5 @@ trait BasePage extends PageObject {
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(6))
-    .pollingEvery(Duration.ofMillis(1))
+    .pollingEvery(Duration.ofMillis(500))
 }
