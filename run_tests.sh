@@ -12,10 +12,12 @@ POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
   case $1 in
     -b|--browser)
+      [[ -n "${2-}" && ! "${2}" =~ ^- ]] || { echo "Error: Missing value for $1. See --help"; exit 1; }
       BROWSER="$2"
       shift 2
       ;;
     -e|--environment)
+    [[ -n "${2-}" && ! "${2}" =~ ^- ]] || { echo "Error: Missing value for $1. See --help"; exit 1; }
       ENVIRONMENT="$2"
       shift 2
       ;;

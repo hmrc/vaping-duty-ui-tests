@@ -23,14 +23,15 @@ sm2 --start VAPING_DUTY_ALL
 ## Tests
 
 To run the full set of UI tests:
-#### Default (chrome, local, headless=true)
+#### Default (chrome, local, headless browser)
 ```
 ./run_tests.sh
 ```
 
 * Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
 * Argument `<environment>` must be `local`, `qa` or `staging`.
-* Argument `<headless>` must be  `true` or `false`.
+* Argument `<headless>` must be  `-h`.
+* Argument `<Visible>` must be  `-v`.
 
 #### Run visible Chrome browser in QA environment
 ```
