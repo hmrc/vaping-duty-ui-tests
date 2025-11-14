@@ -30,7 +30,7 @@ while [[ $# -gt 0 ]]; do
           shift
           ;;
     --help)
-      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless <true|false>]"
+      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless] [-v|--visible]"
       echo "Examples:"
       echo "  $0 -b chrome -e local -h            # run with a headless browser (sets headless=true)"
       echo "  $0 -v, --visible, --headed          # run with a visible browser (sets headless=false)"

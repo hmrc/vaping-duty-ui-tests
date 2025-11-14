@@ -28,10 +28,10 @@ To run the full set of UI tests:
 ./run_tests.sh
 ```
 
-* Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
-* Argument `<environment>` must be `local`, `qa` or `staging`.
-* Argument `<headless>` must be  `-h`.
-* Argument `<Visible>` must be  `-v`.
+* Argument `<browser>` must be `chrome`, `edge`, or `firefox`  set using `-b` or `--browser`.
+* Argument `<environment>` must be `local`, `qa` or `staging` set using `-e` or `--environment`.
+* Argument `<headless>` must be  `-h` or `--headless` no value required.
+* Argument `<Visible>` must be  `-v` or `--visible` or `--headed` no value required.
 
 #### Run visible Chrome browser in QA environment
 ```
