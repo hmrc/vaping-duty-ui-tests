@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.pages.VapingDutyLocatorsPage._
+import uk.gov.hmrc.ui.pages.VapingDutyLocators._
 
 object VapingDutyPage extends BasePage {
 
