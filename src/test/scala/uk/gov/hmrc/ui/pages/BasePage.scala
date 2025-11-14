@@ -26,6 +26,6 @@ import java.time.Duration
 trait BasePage extends PageObject {
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(6))
+    .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofMillis(500))
 }

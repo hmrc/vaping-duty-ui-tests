@@ -20,8 +20,8 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     -h|--headless)
-      HEADLESS="$2"
-      shift 2
+      HEADLESS="true"
+      shift 1
       ;;
     -v|--visible|--headed)
           HEADLESS="false"
@@ -30,7 +30,7 @@ while [[ $# -gt 0 ]]; do
     --help)
       echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless <true|false>]"
       echo "Examples:"
-      echo "  $0 -b chrome -e local -h true"
+      echo "  $0 -b chrome -e local -h"           # run with a headless browser (sets headless=true)"
       echo "  $0 -v, --visible, --headed          # run with a visible browser (sets headless=false)"
       echo "  $0 staging                          # auto detects environment"
       echo "  $0 firefox qa false                 # positional fallbacks (browser env headless)"
@@ -53,17 +53,6 @@ if ((${#POSITIONAL_ARGS[@]:-0})); then
 else
   set --
 fi
-
-# ---- Optional positional fallback ----
-for arg in "${POSITIONAL_ARGS[@]-}"; do
-  if [[ "$arg" =~ ^(chrome|firefox|edge)$ ]]; then
-    BROWSER="$arg"
-  elif [[ "$arg" =~ ^(local|qa|staging)$ ]]; then
-    ENVIRONMENT="$arg"
-  elif [[ "$arg" =~ ^(true|false)$ ]]; then
-    HEADLESS="$arg"
-  fi
-done
 
 # ---- Summary ----
 echo "----------------------------------------"
