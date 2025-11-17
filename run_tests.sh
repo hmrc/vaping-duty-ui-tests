@@ -50,7 +50,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # ---- Restore positionals ----
-if ((${#POSITIONAL_ARGS[@]:-0})); then
+if ((${#POSITIONAL_ARGS[@]})); then
   set -- "${POSITIONAL_ARGS[@]}"
 else
   set --
