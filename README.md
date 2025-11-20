@@ -37,6 +37,23 @@ To run the full set of UI tests:
 ```
 ./run_tests.sh -b chrome -e qa -v
 ```
+### Accessibility Tests
+
+This project uses the HMRC ui-test-runner, which automatically executes accessibility checks.
+
+### Accessibility Report Output
+
+When tests complete, an accessibility assessment report is generated automatically.
+A typical console output may look like:
+```
+[info] Accessibility assessment: 0 violations found
+[warn] Accessibility assessment: filtered out 4 violations
+[success] Wrote accessibility assessment report to file:///.../target/test-reports/accessibility-assessment/html-report/index.html
+```
+The full report (HTML format) is saved in:
+```
+target/test-reports/accessibility-assessment/html-report/index.html
+```
 
 ## Scalafmt
 
