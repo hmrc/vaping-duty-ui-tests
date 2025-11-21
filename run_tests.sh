@@ -69,5 +69,6 @@ sbt clean \
   -Dbrowser="${BROWSER}" \
   -Denvironment="${ENVIRONMENT}" \
   -Dbrowser.option.headless="${HEADLESS}" \
-  -Dsecurity.assessment=false \
+  -Dzap.proxy=true \
+  -Dsecurity.assessment=true \
   test testReport

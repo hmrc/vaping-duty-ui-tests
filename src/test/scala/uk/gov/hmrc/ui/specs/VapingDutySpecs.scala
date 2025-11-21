@@ -17,13 +17,13 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages.VapingDutyPage
-import uk.gov.hmrc.ui.specs.tags.VapingDutyTaggedTest
+import uk.gov.hmrc.ui.specs.tags.{VapingDutyTaggedTest, ZapAccessibility}
 
 class VapingDutySpecs extends BaseSpec {
 
   Feature("Vaping duty page access") {
 
-    Scenario("User can access vaping duty page", VapingDutyTaggedTest) {
+    Scenario("User can access vaping duty page", VapingDutyTaggedTest, ZapAccessibility) {
 
       Given("I am on the sign in page")
       VapingDutyPage.goToUrl()
