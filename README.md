@@ -54,8 +54,18 @@ The full report (HTML format) is saved in:
 ```
 target/test-reports/accessibility-assessment/html-report/index.html
 ```
+### Security (DAST) Tests
+This project also supports Dynamic Application Security Testing (DAST) using the HMRC dast-config-manager, which runs an automated ZAP security assessment during the UI tests.
+
+### Running Tests with ZAP Enabled
+Example:
+```
+./run_tests.sh -e qa -s
+```
+
 
 ## Scalafmt
+
 
 Check all project files are formatted as expected as follows:
 
