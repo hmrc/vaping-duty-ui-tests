@@ -58,11 +58,29 @@ target/test-reports/accessibility-assessment/html-report/index.html
 This project also supports Dynamic Application Security Testing (DAST) using the HMRC dast-config-manager, which runs an automated ZAP security assessment during the UI tests.
 
 ### Running Tests with ZAP Enabled
+To start DAST / ZAP setup:
+open a new terminal and run this command
+```
+cd dast-config-manager
+make local-zap-running
+```
+
+To stop local ZAP container (run from root of `dast-config manager` repository)
+
+   ```bash
+   make local-zap-stop
+   ```
+
 Example:
 ```
 ./run_tests.sh -e qa -s
 ```
 
+
+#### Running ZAP Tests locally
+```
+./run_zap_tests.sh
+```
 
 ## Scalafmt
 
