@@ -77,7 +77,7 @@ if [[ "${SECURITY_ASSESSMENT}" == "true" ]]; then
 
   export ZAP_FAIL_ON_SEVERITY="Low"
   export ZAP_FORWARD_ENABLE="true"
-  export ZAP_FORWARD_PORTS="9949"
+  export ZAP_FORWARD_PORTS=$(sm2 -s --format-plain | grep -E 'PASS|BOOT' | awk '{ print $3 }'| tr "\n" " ")
 
   printf 'ZAP_FORWARD_PORTS=[%s]\n' "$ZAP_FORWARD_PORTS"
 
