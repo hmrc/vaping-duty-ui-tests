@@ -18,16 +18,19 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.pages.VapingDutyLocators._
+import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
 
-  def goToUrl(): Unit = {
+  def goToUrl(url: String): Unit = {
     get(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
   def signIntoAuth(): Unit = {
+    get(loginUrl)
+    fluentWait.until(ExpectedConditions.urlContains(loginUrl))
+
     sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, "Organisation")
     sendKeys(enrolmentKey, "HMRC-VPD-ORG")
@@ -35,9 +38,13 @@ object VapingDutyPage extends BasePage {
     click(SubmitButton)
   }
 
-  def confirmation(): Boolean = {
+  def confirmation(url: String): Boolean = {
     val currentUrl = Driver.instance.getCurrentUrl
     fluentWait.until(ExpectedConditions.urlContains(currentUrl))
-    currentUrl != null && currentUrl.contains(redirectUrl)
+    currentUrl != null && currentUrl.contains(url)
   }
+
+  def SelectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
+    click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
+    click(continueButton);
 }

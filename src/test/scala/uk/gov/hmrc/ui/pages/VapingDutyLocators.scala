@@ -21,7 +21,7 @@ import uk.gov.hmrc.configuration.TestEnvironment
 
 object VapingDutyLocators {
 
-  val url: String             = TestEnvironment.url("auth-login-stub")
+  val loginUrl: String        = TestEnvironment.url("auth-login-stub")
   val redirectUrl: String     = TestEnvironment.url("vaping-duty-frontend")
   val continueButton: By      = By.className("govuk-button")
   val GgSignInButton: By      = By.id("vpd-gg-logon-1")
@@ -30,4 +30,7 @@ object VapingDutyLocators {
   val enrolmentKey: By        = By.id("enrolment[0].name")
   val identifierName: By      = By.id("input-0-0-name")
   val SubmitButton: By        = By.cssSelector("#inputForm > input:nth-child(37)")
+  val yesRadioButton: By      = By.id("value")
+  val noRadioButton: By       = By.id("value-no")
+  val ContinueButton: By      = By.cssSelector("#main-content > div > div > form > button")
 }

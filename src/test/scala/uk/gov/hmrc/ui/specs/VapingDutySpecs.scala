@@ -21,18 +21,46 @@ import uk.gov.hmrc.ui.specs.tags.{VapingDutyTaggedTest, ZapAccessibility}
 
 class VapingDutySpecs extends BaseSpec {
 
-  Feature("Vaping duty page access") {
+  Feature("VapingDuty Tests") {
 
-    Scenario("User can access vaping duty page", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Access VPD without an organisation account", VapingDutyTaggedTest, ZapAccessibility) {
 
-      Given("I am on the sign in page")
-      VapingDutyPage.goToUrl()
-
-      When("I authenticate using Government Gateway")
+      Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth()
 
-      Then("I should be on vaping duty page")
-      assert(VapingDutyPage.confirmation(), "Expected to be on the vaping duty page")
+      When("User is on the VPMA page")
+      VapingDutyPage.goToUrl("http://localhost:8140/vaping-duty/enrolment/approval-id")
+
+      When("User selects no on VPMA page")
+      VapingDutyPage.SelectVapingDutyProductsIdRadio(false)
+
+      Then("I should be on enrolment organisation page")
+      assert(
+        VapingDutyPage.confirmation(
+          "http://localhost:8140/vaping-duty/enrolment/organisation-sign-in"
+        ),
+        "Expected to be on the organisation sign-in page"
+      )
+    }
+
+    Scenario("Access VPD with an organisation account", VapingDutyTaggedTest, ZapAccessibility) {
+
+      Given("I authenticate using Government Gateway")
+      VapingDutyPage.signIntoAuth()
+
+      When("User is on the VPMA page")
+      VapingDutyPage.goToUrl("http://localhost:8140/vaping-duty/enrolment/approval-id")
+
+      When("User selects yes on VPMA page")
+      VapingDutyPage.SelectVapingDutyProductsIdRadio(true)
+
+//      Then("I should be on enrolment request access page")
+//      assert(
+//        VapingDutyPage.confirmation(
+//          "http://localhost:8140/vaping-duty/enrolment/enrolment-access"
+//        ),
+//        "Expected to be on the request enrolment access page"
+//      )
     }
   }
 }
