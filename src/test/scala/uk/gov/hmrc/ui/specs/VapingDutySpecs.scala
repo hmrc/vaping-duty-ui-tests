@@ -23,10 +23,10 @@ class VapingDutySpecs extends BaseSpec {
 
   Feature("VapingDuty Tests") {
 
-    Scenario("Access VPD without an organisation account", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
 
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth()
+      VapingDutyPage.signIntoAuth("VPPAIX")
 
       When("User is on the VPMA page")
       VapingDutyPage.goToUrl("http://localhost:8140/vaping-duty/enrolment/approval-id")
@@ -43,10 +43,10 @@ class VapingDutySpecs extends BaseSpec {
       )
     }
 
-    Scenario("Access VPD with an organisation account", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
 
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth()
+      VapingDutyPage.signIntoAuth("VPPAIX")
 
       When("User is on the VPMA page")
       VapingDutyPage.goToUrl("http://localhost:8140/vaping-duty/enrolment/approval-id")
@@ -61,6 +61,14 @@ class VapingDutySpecs extends BaseSpec {
 //        ),
 //        "Expected to be on the request enrolment access page"
 //      )
+    }
+
+    Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
+
+      Given("I authenticate using Government Gateway")
+      VapingDutyPage.signIntoAuth("VPPAID")
+
+      // land on frontend until page is added
     }
   }
 }

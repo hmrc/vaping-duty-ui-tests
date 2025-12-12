@@ -27,14 +27,13 @@ object VapingDutyPage extends BasePage {
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(): Unit = {
+  def signIntoAuth(enromentName: String): Unit = {
     get(loginUrl)
-    fluentWait.until(ExpectedConditions.urlContains(loginUrl))
 
     sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, "Organisation")
     sendKeys(enrolmentKey, "HMRC-VPD-ORG")
-    sendKeys(identifierName, "VPPAID")
+    sendKeys(identifierName, enromentName)
     click(SubmitButton)
   }
 
