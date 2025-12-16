@@ -25,7 +25,11 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth("VPPAIX", "Organisation", "http://localhost:8140/vaping-duty/enrolment/approval-id")
+      VapingDutyPage.signIntoAuth(
+        "Invalid_Enrolment",
+        "Organisation",
+        "http://localhost:8140/vaping-duty/enrolment/approval-id"
+      )
 
       When("User selects no on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(false)
@@ -41,7 +45,11 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth("VPPAIX", "Organisation", "http://localhost:8140/vaping-duty/enrolment/approval-id")
+      VapingDutyPage.signIntoAuth(
+        "Invalid_Enrolment",
+        "Organisation",
+        "http://localhost:8140/vaping-duty/enrolment/approval-id"
+      )
 
       When("User selects yes on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(true)
