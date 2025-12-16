@@ -27,20 +27,19 @@ object VapingDutyPage extends BasePage {
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(): Unit = {
+  def signIntoAuth(enrolmentName: String, affinityGroup: String, redirectUrl: String): Unit = {
     get(loginUrl)
-    fluentWait.until(ExpectedConditions.urlContains(loginUrl))
 
     sendKeys(redirectionUrlField, redirectUrl)
-    selectByValue(affinityGroupSelect, "Organisation")
+    selectByValue(affinityGroupSelect, affinityGroup)
     sendKeys(enrolmentKey, "HMRC-VPD-ORG")
-    sendKeys(identifierName, "VPPAID")
+    sendKeys(identifierName, enrolmentName)
     click(SubmitButton)
   }
 
   def confirmation(url: String): Boolean = {
+    fluentWait.until(ExpectedConditions.urlContains(url))
     val currentUrl = Driver.instance.getCurrentUrl
-    fluentWait.until(ExpectedConditions.urlContains(currentUrl))
     currentUrl != null && currentUrl.contains(url)
   }
 
