@@ -38,8 +38,8 @@ object VapingDutyPage extends BasePage {
   }
 
   def confirmation(url: String): Boolean = {
+    fluentWait.until(ExpectedConditions.urlContains(url))
     val currentUrl = Driver.instance.getCurrentUrl
-    fluentWait.until(ExpectedConditions.urlContains(currentUrl))
     currentUrl != null && currentUrl.contains(url)
   }
 
