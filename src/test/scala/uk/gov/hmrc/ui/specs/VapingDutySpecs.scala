@@ -21,12 +21,15 @@ import uk.gov.hmrc.ui.specs.tags.{VapingDutyTaggedTest, ZapAccessibility}
 
 class VapingDutySpecs extends BaseSpec {
 
+  val invalidEnrolment = "Invalid_Enrolment"
+  val validEnrolment   = "VPPAID"
+
   Feature("VapingDuty Tests") {
 
     Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth(
-        "Invalid_Enrolment",
+        invalidEnrolment,
         "Organisation",
         "http://localhost:8140/vaping-duty/enrolment/approval-id"
       )
@@ -36,7 +39,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on apply for approval page")
       assert(
-        VapingDutyPage.confirmation(
+        VapingDutyPage.urlConfirmation(
           "http://localhost:8140/vaping-duty/enrolment/no-approval-id"
         ),
         "Expected to be on the apply for approval page"
@@ -46,7 +49,7 @@ class VapingDutySpecs extends BaseSpec {
     Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth(
-        "Invalid_Enrolment",
+        invalidEnrolment,
         "Organisation",
         "http://localhost:8140/vaping-duty/enrolment/approval-id"
       )
@@ -56,7 +59,7 @@ class VapingDutySpecs extends BaseSpec {
 
 //      Then("I should be on enrolment request access page")
 //      assert(
-//        VapingDutyPage.confirmation(
+//        VapingDutyPage.urlConfirmation(
 //          "http://localhost:8140/vaping-duty/enrolment/enrolment-access"
 //        ),
 //        "Expected to be on the request enrolment access page"
@@ -65,25 +68,28 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth("VPPAID", "Organisation", "http://localhost:8140/vaping-duty/enrolment/approval-id")
+      VapingDutyPage.signIntoAuth(
+        validEnrolment,
+        "Organisation",
+        "http://localhost:8140/vaping-duty/enrolment/approval-id"
+      )
 
-      // This page will be implemented in the next sprint (url below will be changed)
-      Then("I should be on interrupt page")
+      Then("I should be on already enrolled page")
       assert(
-        VapingDutyPage.confirmation(
-          "http://localhost:8140/vaping-duty/there-is-a-problem"
+        VapingDutyPage.urlConfirmation(
+          "http://localhost:8140/vaping-duty/enrolment/already-enrolled"
         ),
-        "Expected to be on the interrupt page"
+        "Expected to be on the already enrolled"
       )
     }
 
     Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth("VPPAID", "Agent", "http://localhost:8140/vaping-duty/enrolment/approval-id")
+      VapingDutyPage.signIntoAuth(validEnrolment, "Agent", "http://localhost:8140/vaping-duty/enrolment/approval-id")
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.confirmation(
+        VapingDutyPage.urlConfirmation(
           "http://localhost:8140/vaping-duty/enrolment/organisation-sign-in"
         ),
         "Expected to be on the organisation sign in page"
@@ -93,16 +99,19 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth("VPPAID", "Individual", "http://localhost:8140/vaping-duty/enrolment/approval-id")
+      VapingDutyPage.signIntoAuth(
+        validEnrolment,
+        "Individual",
+        "http://localhost:8140/vaping-duty/enrolment/approval-id"
+      )
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.confirmation(
+        VapingDutyPage.urlConfirmation(
           "http://localhost:8140/vaping-duty/enrolment/organisation-sign-in"
         ),
         "Expected to be on the organisation sign in page"
       )
-
       // Implement when user clicks on Sign in as organisation
     }
   }

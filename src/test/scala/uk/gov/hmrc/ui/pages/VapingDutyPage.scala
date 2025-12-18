@@ -37,11 +37,10 @@ object VapingDutyPage extends BasePage {
     click(SubmitButton)
   }
 
-  def confirmation(url: String): Boolean = {
-    fluentWait.until(ExpectedConditions.urlContains(url))
-    val currentUrl = Driver.instance.getCurrentUrl
-    currentUrl != null && currentUrl.contains(url)
-  }
+  def urlConfirmation(expectedUrl: String): Boolean =
+    fluentWait.until { driver =>
+      driver.getCurrentUrl.contains(expectedUrl)
+    }
 
   def SelectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
