@@ -16,28 +16,18 @@
 
 package uk.gov.hmrc.ui.models
 
-final case class AuthUser(
-  affinityGroup: String,
-  enrolment: Option[Enrolment] = None
+final case class Enrolment(
+  enrolmentKey: String,
+  identifierName: String,
+  identifierValue: String
 )
 
-object AuthUser {
+object Enrolment {
 
-  def user(
-    affinityGroup: String,
-    enrolment: Option[Enrolment] = None
-  ): AuthUser =
-    AuthUser(
-      affinityGroup = affinityGroup,
-      enrolment = enrolment
+  val Vpd: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "VPPAID",
+      identifierValue = "X"
     )
-
-  def organisation(enrolment: Option[Enrolment] = None): AuthUser =
-    user("Organisation", enrolment)
-
-  def agent(enrolment: Option[Enrolment] = None): AuthUser =
-    user("Agent", enrolment)
-
-  def individual(enrolment: Option[Enrolment] = None): AuthUser =
-    user("Individual", enrolment)
 }

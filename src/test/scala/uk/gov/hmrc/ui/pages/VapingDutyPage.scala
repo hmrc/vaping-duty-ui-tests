@@ -39,9 +39,13 @@ object VapingDutyPage extends BasePage {
     get(loginUrl)
     sendKeys(redirectionUrlField, approvalIdUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
-    user.enrolmentKey.foreach(sendKeys(enrolmentKey, _))
-    user.identifierName.foreach(sendKeys(identifierName, _))
-    user.identifierValue.foreach(sendKeys(identifierValue, _))
+
+    user.enrolment.foreach { e =>
+      sendKeys(enrolmentKey, e.enrolmentKey)
+      sendKeys(identifierName, e.identifierName)
+      sendKeys(identifierValue, e.identifierValue)
+    }
+
     click(SubmitButton)
   }
 
@@ -50,7 +54,7 @@ object VapingDutyPage extends BasePage {
       driver.getCurrentUrl.contains(expectedUrl)
     }
 
-  def SelectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
+  def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
     click(continueButton);
 }
