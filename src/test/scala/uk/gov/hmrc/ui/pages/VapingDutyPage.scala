@@ -17,23 +17,31 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.models.VpdUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
+
+  private val base = redirectUrl.stripSuffix("/")
+
+  val approvalIdUrl: String      = s"$base/enrolment/approval-id"
+  val noApprovalIdUrl: String    = s"$base/enrolment/no-approval-id"
+  val alreadyEnrolledUrl: String = s"$base/enrolment/already-enrolled"
+  val orgSignInUrl: String       = s"$base/enrolment/organisation-sign-in"
+  val enrolmentAccessUrl: String = s"$base/enrolment/enrolment-access"
 
   def goToUrl(url: String): Unit = {
     get(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(enrolmentName: String, affinityGroup: String, redirectUrl: String): Unit = {
+  def signIntoAuth(user: VpdUser): Unit = {
     get(loginUrl)
-
-    sendKeys(redirectionUrlField, redirectUrl)
-    selectByValue(affinityGroupSelect, affinityGroup)
-    sendKeys(enrolmentKey, "HMRC-VPD-ORG")
-    sendKeys(identifierName, enrolmentName)
+    sendKeys(redirectionUrlField, approvalIdUrl)
+    selectByValue(affinityGroupSelect, user.affinityGroup)
+    user.enrolmentKey.foreach(sendKeys(enrolmentKey, _))
+    user.identifierName.foreach(sendKeys(identifierName, _))
+    user.identifierValue.foreach(sendKeys(identifierValue, _))
     click(SubmitButton)
   }
 

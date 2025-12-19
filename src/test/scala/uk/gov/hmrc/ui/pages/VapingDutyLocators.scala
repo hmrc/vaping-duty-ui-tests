@@ -29,6 +29,7 @@ object VapingDutyLocators {
   val affinityGroupSelect: By = By.id("affinityGroupSelect")
   val enrolmentKey: By        = By.id("enrolment[0].name")
   val identifierName: By      = By.id("input-0-0-name")
+  val identifierValue: By     = By.id("input-0-0-value")
   val SubmitButton: By        = By.cssSelector("#inputForm > input:nth-child(37)")
   val yesRadioButton: By      = By.id("value")
   val noRadioButton: By       = By.id("value-no")
