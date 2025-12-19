@@ -26,15 +26,15 @@ final case class VpdUser(
 
 object VpdUsers {
 
-  val VPD_Enrolled_User: VpdUser =
+  val VPDEnrolledOrganisation: VpdUser =
     VpdUser("VPD_Enrolled_User", "Organisation", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 
-  val VPD_Non_Enrolled_User: VpdUser =
+  val VPDNonEnrolledOrganisation: VpdUser =
     VpdUser("VPD_Non_Enrolled_User", "Organisation")
 
-  val Agent_User: VpdUser =
+  val AgentUser: VpdUser =
     VpdUser("Agent_User", "Agent", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 
-  val Individual_User: VpdUser =
+  val IndividualUser: VpdUser =
     VpdUser("Individual_User", "Individual", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 }

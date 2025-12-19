@@ -26,7 +26,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPD_Non_Enrolled_User)
+      VapingDutyPage.signIntoAuth(VPDNonEnrolledOrganisation)
 
       When("User selects no on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(false)
@@ -40,7 +40,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPD_Non_Enrolled_User)
+      VapingDutyPage.signIntoAuth(VPDNonEnrolledOrganisation)
 
       When("User selects yes on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(true)
@@ -54,7 +54,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPD_Enrolled_User)
+      VapingDutyPage.signIntoAuth(VPDEnrolledOrganisation)
 
       Then("I should be on already enrolled page")
       assert(
@@ -65,7 +65,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(Agent_User)
+      VapingDutyPage.signIntoAuth(AgentUser)
 
       Then("I should be on the organisation sign in page")
       assert(
@@ -77,7 +77,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(Individual_User)
+      VapingDutyPage.signIntoAuth(IndividualUser)
 
       Then("I should be on the organisation sign in page")
       assert(
