@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.models.VpdUsers.*
+import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyPage
 import uk.gov.hmrc.ui.specs.tags.{VapingDutyTaggedTest, ZapAccessibility}
 
@@ -26,7 +26,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPDNonEnrolledOrganisation)
+      VapingDutyPage.signIntoAuth(AuthUser.nonEnrolled("Organisation"))
 
       When("User selects no on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(false)
@@ -40,7 +40,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPDNonEnrolledOrganisation)
+      VapingDutyPage.signIntoAuth(AuthUser.nonEnrolled("Organisation"))
 
       When("User selects yes on VPMA page")
       VapingDutyPage.SelectVapingDutyProductsIdRadio(true)
@@ -54,7 +54,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(VPDEnrolledOrganisation)
+      VapingDutyPage.signIntoAuth(AuthUser.enrolled("Organisation"))
 
       Then("I should be on already enrolled page")
       assert(
@@ -65,7 +65,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AgentUser)
+      VapingDutyPage.signIntoAuth(AuthUser.enrolled("Agent"))
 
       Then("I should be on the organisation sign in page")
       assert(
@@ -77,7 +77,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(IndividualUser)
+      VapingDutyPage.signIntoAuth(AuthUser.enrolled("Individual"))
 
       Then("I should be on the organisation sign in page")
       assert(

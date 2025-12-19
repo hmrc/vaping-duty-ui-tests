@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.ui.models.VpdUser
+import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
@@ -35,7 +35,7 @@ object VapingDutyPage extends BasePage {
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(user: VpdUser): Unit = {
+  def signIntoAuth(user: AuthUser): Unit = {
     get(loginUrl)
     sendKeys(redirectionUrlField, approvalIdUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
