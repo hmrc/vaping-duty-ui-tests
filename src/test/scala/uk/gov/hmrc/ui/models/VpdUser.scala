@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.models
 
 final case class VpdUser(
-  name: String,
   affinityGroup: String,
   enrolmentKey: Option[String] = None,
   identifierName: Option[String] = None,
@@ -27,14 +26,14 @@ final case class VpdUser(
 object VpdUsers {
 
   val VPDEnrolledOrganisation: VpdUser =
-    VpdUser("VPD_Enrolled_User", "Organisation", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
+    VpdUser("Organisation", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 
   val VPDNonEnrolledOrganisation: VpdUser =
-    VpdUser("VPD_Non_Enrolled_User", "Organisation")
+    VpdUser("Organisation")
 
   val AgentUser: VpdUser =
-    VpdUser("Agent_User", "Agent", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
+    VpdUser("Agent", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 
   val IndividualUser: VpdUser =
-    VpdUser("Individual_User", "Individual", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
+    VpdUser("Individual", Some("HMRC-VPD-ORG"), Some("VPPAID"), Some("X"))
 }
