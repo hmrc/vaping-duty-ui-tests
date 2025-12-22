@@ -17,33 +17,44 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
+
+  private val base = redirectUrl.stripSuffix("/")
+
+  val approvalIdUrl: String      = s"$base/enrolment/approval-id"
+  val noApprovalIdUrl: String    = s"$base/enrolment/no-approval-id"
+  val alreadyEnrolledUrl: String = s"$base/enrolment/already-enrolled"
+  val orgSignInUrl: String       = s"$base/enrolment/organisation-sign-in"
+  val enrolmentAccessUrl: String = s"$base/enrolment/enrolment-access"
 
   def goToUrl(url: String): Unit = {
     get(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(enrolmentName: String, affinityGroup: String, redirectUrl: String): Unit = {
+  def signIntoAuth(user: AuthUser): Unit = {
     get(loginUrl)
+    sendKeys(redirectionUrlField, approvalIdUrl)
+    selectByValue(affinityGroupSelect, user.affinityGroup)
 
-    sendKeys(redirectionUrlField, redirectUrl)
-    selectByValue(affinityGroupSelect, affinityGroup)
-    sendKeys(enrolmentKey, "HMRC-VPD-ORG")
-    sendKeys(identifierName, enrolmentName)
+    user.enrolment.foreach { e =>
+      sendKeys(enrolmentKey, e.enrolmentKey)
+      sendKeys(identifierName, e.identifierName)
+      sendKeys(identifierValue, e.identifierValue)
+    }
+
     click(SubmitButton)
   }
 
-  def confirmation(url: String): Boolean = {
-    fluentWait.until(ExpectedConditions.urlContains(url))
-    val currentUrl = Driver.instance.getCurrentUrl
-    currentUrl != null && currentUrl.contains(url)
-  }
+  def urlConfirmation(expectedUrl: String): Boolean =
+    fluentWait.until { driver =>
+      driver.getCurrentUrl.contains(expectedUrl)
+    }
 
-  def SelectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
+  def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
     click(continueButton);
 }
