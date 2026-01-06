@@ -1,0 +1,8 @@
+{
+  "exclusions": [
+    {
+      "path": "/business-account",
+      "reason": "Business Account pages are not owned by the ADR team"
+    }
+  ]
+}

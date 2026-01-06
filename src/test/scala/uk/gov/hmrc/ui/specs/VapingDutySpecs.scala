@@ -73,7 +73,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.agent(Some(Enrolment.Vpd)))
+      VapingDutyPage.signIntoAuth(AuthUser.agent())
 
       Then("I should be on the organisation sign in page")
       assert(
@@ -84,7 +84,7 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.individual(Some(Enrolment.Vpd)))
+      VapingDutyPage.signIntoAuth(AuthUser.individual())
 
       Then("I should be on the organisation sign in page")
       assert(
