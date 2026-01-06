@@ -29,6 +29,7 @@ object VapingDutyPage extends BasePage {
   val alreadyEnrolledUrl: String = s"$base/enrolment/already-enrolled"
   val orgSignInUrl: String       = s"$base/enrolment/organisation-sign-in"
   val enrolmentAccessUrl: String = s"$base/enrolment/enrolment-access"
+  val businessAccountUrl: String = s"business-account"
 
   def goToUrl(url: String): Unit = {
     get(url)
@@ -46,7 +47,7 @@ object VapingDutyPage extends BasePage {
       sendKeys(identifierValue, e.identifierValue)
     }
 
-    click(SubmitButton)
+    click(submitButton)
   }
 
   def urlConfirmation(expectedUrl: String): Boolean =
@@ -56,5 +57,8 @@ object VapingDutyPage extends BasePage {
 
   def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
-    click(continueButton);
+    click(continueButton)
+
+  def clickContinueToBusinessTaxAccount(): Unit =
+    click(continueToBTAButton)
 }

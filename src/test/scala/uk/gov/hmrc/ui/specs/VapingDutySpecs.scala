@@ -61,30 +61,36 @@ class VapingDutySpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.alreadyEnrolledUrl),
         "Expected to be on the already enrolled"
       )
+      When("I click on continue to your business tax account button")
+      VapingDutyPage.clickContinueToBusinessTaxAccount()
+
+      Then("I should be on the BTA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountUrl),
+        "Expected to be on the BTA page"
+      )
     }
 
     Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.agent(Some(Enrolment.Vpd)))
+      VapingDutyPage.signIntoAuth(AuthUser.agent())
 
       Then("I should be on the organisation sign in page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.orgSignInUrl),
         "Expected to be on the organisation sign in page"
       )
-      // Implement when user clicks on Sign in as organisation
     }
 
     Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.individual(Some(Enrolment.Vpd)))
+      VapingDutyPage.signIntoAuth(AuthUser.individual())
 
       Then("I should be on the organisation sign in page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.orgSignInUrl),
         "Expected to be on the organisation sign in page"
       )
-      // Implement when user clicks on Sign in as organisation
     }
   }
 }
