@@ -33,7 +33,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on apply for approval page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.noApprovalIdUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.youNeedAnApprovalIdUrl),
         "Expected to be on the apply for approval page"
       )
     }
@@ -77,7 +77,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.orgSignInUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentSignInUrl),
         "Expected to be on the organisation sign in page"
       )
     }
@@ -88,7 +88,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.orgSignInUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentSignInUrl),
         "Expected to be on the organisation sign in page"
       )
     }
