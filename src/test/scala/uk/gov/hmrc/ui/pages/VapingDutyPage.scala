@@ -24,12 +24,12 @@ object VapingDutyPage extends BasePage {
 
   private val base = redirectUrl.stripSuffix("/")
 
-  val approvalIdUrl: String      = s"$base/enrolment/approval-id"
-  val noApprovalIdUrl: String    = s"$base/enrolment/no-approval-id"
-  val alreadyEnrolledUrl: String = s"$base/enrolment/already-enrolled"
-  val orgSignInUrl: String       = s"$base/enrolment/organisation-sign-in"
-  val enrolmentAccessUrl: String = s"$base/enrolment/enrolment-access"
-  val businessAccountUrl: String = s"business-account"
+  val doYouHaveApprovalIdUrl: String = s"$base/enrolment/do-you-have-an-approval-id"
+  val youNeedAnApprovalIdUrl: String = s"$base/enrolment/you-need-an-approval-id"
+  val alreadyEnrolledUrl: String     = s"$base/enrolment/already-enrolled"
+  val enrolmentSignInUrl: String     = s"$base/enrolment/sign-in"
+  val enrolmentAccessUrl: String     = s"$base/enrolment/enrolment-access"
+  val businessAccountUrl: String     = s"business-account"
 
   def goToUrl(url: String): Unit = {
     get(url)
@@ -38,7 +38,7 @@ object VapingDutyPage extends BasePage {
 
   def signIntoAuth(user: AuthUser): Unit = {
     get(loginUrl)
-    sendKeys(redirectionUrlField, approvalIdUrl)
+    sendKeys(redirectionUrlField, doYouHaveApprovalIdUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
 
     user.enrolment.foreach { e =>
