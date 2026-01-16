@@ -27,7 +27,7 @@ object Enrolment {
   val Vpd: Enrolment =
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
-      identifierName = "VPPAID",
+      identifierName = "ZVPD",
       identifierValue = "X"
     )
 }
