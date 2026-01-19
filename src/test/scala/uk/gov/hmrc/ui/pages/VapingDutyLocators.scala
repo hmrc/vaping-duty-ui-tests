@@ -23,6 +23,7 @@ object VapingDutyLocators {
 
   val loginUrl: String        = TestEnvironment.url("auth-login-stub")
   val redirectUrl: String     = TestEnvironment.url("vaping-duty-frontend")
+  val enrolmentUrl: String    = TestEnvironment.url("enrolment-management-frontend")
   val continueButton: By      = By.className("govuk-button")
   val ggSignInButton: By      = By.id("vpd-gg-logon-1")
   val redirectionUrlField: By = By.id("redirectionUrl")
@@ -32,6 +33,6 @@ object VapingDutyLocators {
   val identifierValue: By     = By.id("input-0-0-value")
   val submitButton: By        = By.cssSelector("#inputForm > input:nth-child(37)")
   val yesRadioButton: By      = By.id("value")
-  val noRadioButton: By       = By.id("value-no")
+  val noRadioButton: By       = By.cssSelector("#value-no")
   val continueToBTAButton: By = By.cssSelector("#main-content > div > div > a")
 }

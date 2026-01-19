@@ -22,13 +22,15 @@ import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
 
-  private val base = redirectUrl.stripSuffix("/")
+  private val base              = redirectUrl.stripSuffix("/")
+  private val enrolmentFrontend = enrolmentUrl.stripSuffix("/")
 
   val doYouHaveApprovalIdUrl: String = s"$base/enrolment/do-you-have-an-approval-id"
   val youNeedAnApprovalIdUrl: String = s"$base/enrolment/you-need-an-approval-id"
   val alreadyEnrolledUrl: String     = s"$base/enrolment/already-enrolled"
   val enrolmentSignInUrl: String     = s"$base/enrolment/sign-in"
-  val enrolmentAccessUrl: String     = s"$base/enrolment/enrolment-access"
+  val enrolmentAccessUrl: String     =
+    s"$enrolmentFrontend/HMRC-VPD-ORG/request-access-tax-scheme?continue=/business-account"
   val businessAccountUrl: String     = s"business-account"
 
   def goToUrl(url: String): Unit = {

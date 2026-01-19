@@ -45,11 +45,11 @@ class VapingDutySpecs extends BaseSpec {
       When("User selects yes on VPMA page")
       VapingDutyPage.selectVapingDutyProductsIdRadio(true)
 
-//      Then("I should be on enrolment request access page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(enrolmentAccessUrl),
-//        "Expected to be on the request enrolment access page"
-//      )
+      Then("I should be on enrolment request access page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentAccessUrl),
+        "Expected to be on the request enrolment access page"
+      )
     }
 
     Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
