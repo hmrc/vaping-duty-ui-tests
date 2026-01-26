@@ -22,7 +22,7 @@ import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 object VapingDutyPage extends BasePage {
 
-  private val base               = redirectUrl.stripSuffix("/")
+  val base: String               = redirectUrl.stripSuffix("/")
   private val enrolmentFrontend  = enrolmentUrl.stripSuffix("/")
   private val businessTaxAccount = businessTaxAccountUrl.stripSuffix("/")
 
@@ -39,9 +39,9 @@ object VapingDutyPage extends BasePage {
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def signIntoAuth(user: AuthUser): Unit = {
+  def signIntoAuth(user: AuthUser, redirectUrl: String = doYouHaveApprovalIdUrl): Unit = {
     get(loginUrl)
-    sendKeys(redirectionUrlField, doYouHaveApprovalIdUrl)
+    sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
 
     user.enrolment.foreach { e =>
