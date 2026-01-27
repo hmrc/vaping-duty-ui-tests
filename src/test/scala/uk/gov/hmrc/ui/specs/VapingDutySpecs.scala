@@ -46,7 +46,7 @@ class VapingDutySpecs extends BaseSpec {
       Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.base)
 
-      Then("I should be on apply for approval page")
+      Then("I should be on the vaping duty index page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.base),
         "Expected to be on the vaping duty index page"
