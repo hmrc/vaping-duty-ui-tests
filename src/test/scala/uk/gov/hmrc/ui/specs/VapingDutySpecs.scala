@@ -107,5 +107,41 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the organisation sign in page"
       )
     }
+
+    Scenario(
+      "Vaping Duty Journey User updates contact preference to post",
+      VapingDutyTaggedTest,
+      ZapAccessibility
+    ) {
+      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferencePost)),
+        VapingDutyPage.howDoYouWantToBeContactedUrl
+      )
+
+      Then("I should be on the vaping duty tell us how we should contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        "Expected to be on the tell us how we should contact you page"
+      )
+
+      When("I click on the post radio button")
+      VapingDutyPage.selectContactPreference("Post")
+
+      Then("I should be on the confirm your postal address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmYourPostalAddressUrl),
+        "Expected to be on the confirm your postal address page"
+      )
+
+      When("I click on the confirm address button")
+      VapingDutyPage.clickConfirmAddress()
+
+      Then("I should be on the your contact preference has been updated page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.postalAddressConfirmationUrl),
+        "Expected to be on the your contact preference has been updated page"
+      )
+    }
   }
 }

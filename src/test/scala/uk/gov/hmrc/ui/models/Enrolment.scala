@@ -30,4 +30,18 @@ object Enrolment {
       identifierName = "ZVPD",
       identifierValue = "X"
     )
+
+  val contactPreferencePost: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = "XMADP1000100211"
+    )
+
+  val contactPreferenceEmail: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = "XMADP0000100211"
+    )
 }
