@@ -17,25 +17,77 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
+import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.helper.{AuthLoginStubSessionClient, TestOnlyPasscodeClient}
 import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 object VapingDutyPage extends BasePage {
 
-  val base: String               = redirectUrl.stripSuffix("/")
-  private val enrolmentFrontend  = enrolmentUrl.stripSuffix("/")
-  private val businessTaxAccount = businessTaxAccountUrl.stripSuffix("/")
+  // ---------- Base URLs ----------
+  val vapingDutyBaseUrl: String          = redirectUrl.stripSuffix("/")
+  val emailVerificationBaseUrl: String   = emailVerificationUrl.stripSuffix("/")
+  private val enrolmentFrontend: String  = enrolmentUrl.stripSuffix("/")
+  private val businessTaxAccount: String = businessTaxAccountUrl.stripSuffix("/")
 
-  val doYouHaveApprovalIdUrl: String       = s"$base/enrolment/do-you-have-an-approval-id"
-  val youNeedAnApprovalIdUrl: String       = s"$base/enrolment/you-need-an-approval-id"
-  val alreadyEnrolledUrl: String           = s"$base/enrolment/already-enrolled"
-  val enrolmentSignInUrl: String           = s"$base/enrolment/sign-in"
-  val enrolmentAccessUrl: String           =
+  // ---------- Test data ----------
+  val emailAddressToVerify: String = randomTestEmail()
+
+  // ---------- Clients ----------
+  private val passcodeClient    = new TestOnlyPasscodeClient()
+  private val authSessionClient = new AuthLoginStubSessionClient()
+
+  // ---------- Enrolment URLs ----------
+  val doYouHaveApprovalIdUrl: String = s"$vapingDutyBaseUrl/enrolment/do-you-have-an-approval-id"
+  val youNeedAnApprovalIdUrl: String = s"$vapingDutyBaseUrl/enrolment/you-need-an-approval-id"
+  val alreadyEnrolledUrl: String     = s"$vapingDutyBaseUrl/enrolment/already-enrolled"
+  val enrolmentSignInUrl: String     = s"$vapingDutyBaseUrl/enrolment/sign-in"
+  val businessAccountUrl: String     = "business-account"
+  val enrolmentAccessUrl: String     =
     s"$enrolmentFrontend/HMRC-VPD-ORG/request-access-tax-scheme?continue=$businessTaxAccount"
-  val businessAccountUrl: String           = s"business-account"
-  val howDoYouWantToBeContactedUrl: String = s"$base/contact-preferences/how-do-you-want-to-be-contacted"
-  val confirmYourPostalAddressUrl: String  = s"$base/contact-preferences/review-confirm-address"
-  val postalAddressConfirmationUrl: String = s"$base/contact-preferences/postal-address-confirmation"
+
+  // ---------- Contact preference URLs ----------
+  private val contactPreferencesBase = s"$vapingDutyBaseUrl/contact-preferences"
+
+  val howDoYouWantToBeContactedUrl: String =
+    s"$contactPreferencesBase/how-do-you-want-to-be-contacted"
+
+  val confirmYourPostalAddressUrl: String =
+    s"$contactPreferencesBase/review-confirm-address"
+
+  val enterEmailAddressUrl: String =
+    s"$contactPreferencesBase/enter-email-address"
+
+  val postalAddressConfirmationUrl: String =
+    s"$contactPreferencesBase/postal-address-confirmation"
+
+  val emailContactPreferenceConfirmationUrl: String =
+    s"$contactPreferencesBase/email-confirmation"
+
+  val enterToConfirmCodeUrl: String =
+    s"$emailContactPreferenceConfirmationUrl&origin=Vaping+Products+Duty"
+
+  def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
+    authSessionClient.getSession(Driver.instance)
+
+  def latestEmailPasscode(email: String): String = {
+    val authStub = authStubSession()
+    passcodeClient.getLatestPasscode(
+      baseUrl = emailVerificationBaseUrl,
+      email = email,
+      authorization = authStub.bearerToken,
+      sessionId = authStub.sessionId
+    )
+  }
+
+  def randomTestEmail(): String = {
+    val formatter = DateTimeFormatter.ofPattern("ddMMmmss")
+    val timestamp = LocalDateTime.now().format(formatter)
+    s"autotest$timestamp@example.com"
+  }
 
   def goToUrl(url: String): Unit = {
     get(url)
@@ -74,4 +126,14 @@ object VapingDutyPage extends BasePage {
 
   def clickConfirmAddress(): Unit =
     click(confirmAddressButton)
+
+  def submitEmailAddress(emailAddress: String): Unit =
+    sendKeys(emailContactField, emailAddress)
+    click(continueContactPreference)
+
+  def submitConfirmationCode(email: String): Unit = {
+    val code = latestEmailPasscode(email)
+    sendKeys(emailConfirmationCodeField, code)
+    click(emailConfirmationCodeConfirmButton)
+  }
 }
