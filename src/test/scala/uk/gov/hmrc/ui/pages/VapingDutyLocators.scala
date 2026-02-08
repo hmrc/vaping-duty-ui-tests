@@ -21,7 +21,7 @@ import uk.gov.hmrc.configuration.TestEnvironment
 
 object VapingDutyLocators {
 
-  val loginUrl: String                       = TestEnvironment.url("auth-login-stub")
+  val authLoginStubBaseUrl: String           = TestEnvironment.url("auth-login-stub")
   val redirectUrl: String                    = TestEnvironment.url("vaping-duty-frontend")
   val enrolmentUrl: String                   = TestEnvironment.url("enrolment-management-frontend")
   val businessTaxAccountUrl: String          = TestEnvironment.url("business-tax-account")

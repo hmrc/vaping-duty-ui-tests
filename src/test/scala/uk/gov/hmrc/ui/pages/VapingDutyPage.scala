@@ -28,10 +28,15 @@ import java.time.format.DateTimeFormatter
 object VapingDutyPage extends BasePage {
 
   // ---------- Base URLs ----------
-  val vapingDutyBaseUrl: String          = redirectUrl.stripSuffix("/")
-  val emailVerificationBaseUrl: String   = emailVerificationUrl.stripSuffix("/")
-  private val enrolmentFrontend: String  = enrolmentUrl.stripSuffix("/")
-  private val businessTaxAccount: String = businessTaxAccountUrl.stripSuffix("/")
+  val vapingDutyBase: String                = redirectUrl.stripSuffix("/")
+  private val authStubBase: String          = authLoginStubBaseUrl.stripSuffix("/")
+  private val emailVerificationBase: String = emailVerificationUrl.stripSuffix("/")
+  private val enrolmentFrontendBase: String = enrolmentUrl.stripSuffix("/")
+  private val btaBase: String               = businessTaxAccountUrl.stripSuffix("/")
+
+  // Auth-login-stub endpoints
+  val ggSignInUrl: String = s"$authStubBase/gg-sign-in"
+  val sessionUrl: String  = s"$authStubBase/session"
 
   // ---------- Test data ----------
   val emailAddressToVerify: String = randomTestEmail()
@@ -40,34 +45,29 @@ object VapingDutyPage extends BasePage {
   private val passcodeClient    = new TestOnlyPasscodeClient()
   private val authSessionClient = new AuthLoginStubSessionClient()
 
+  // ---------- Common route bases ----------
+  private val enrolmentBase: String   = s"$vapingDutyBase/enrolment"
+  private val contactPrefBase: String = s"$vapingDutyBase/contact-preferences"
+
   // ---------- Enrolment URLs ----------
-  val doYouHaveApprovalIdUrl: String = s"$vapingDutyBaseUrl/enrolment/do-you-have-an-approval-id"
-  val youNeedAnApprovalIdUrl: String = s"$vapingDutyBaseUrl/enrolment/you-need-an-approval-id"
-  val alreadyEnrolledUrl: String     = s"$vapingDutyBaseUrl/enrolment/already-enrolled"
-  val enrolmentSignInUrl: String     = s"$vapingDutyBaseUrl/enrolment/sign-in"
-  val businessAccountUrl: String     = "business-account"
-  val enrolmentAccessUrl: String     =
-    s"$enrolmentFrontend/HMRC-VPD-ORG/request-access-tax-scheme?continue=$businessTaxAccount"
+  val doYouHaveApprovalIdUrl: String = s"$enrolmentBase/do-you-have-an-approval-id"
+  val youNeedAnApprovalIdUrl: String = s"$enrolmentBase/you-need-an-approval-id"
+  val alreadyEnrolledUrl: String     = s"$enrolmentBase/already-enrolled"
+  val enrolmentSignInUrl: String     = s"$enrolmentBase/sign-in"
+
+  val enrolmentAccessUrl: String =
+    s"$enrolmentFrontendBase/HMRC-VPD-ORG/request-access-tax-scheme?continue=$btaBase"
+
+  val businessAccountRoute: String = "business-account"
 
   // ---------- Contact preference URLs ----------
-  private val contactPreferencesBase = s"$vapingDutyBaseUrl/contact-preferences"
+  val howDoYouWantToBeContactedUrl: String = s"$contactPrefBase/how-do-you-want-to-be-contacted"
+  val confirmYourPostalAddressUrl: String  = s"$contactPrefBase/review-confirm-address"
+  val enterEmailAddressUrl: String         = s"$contactPrefBase/enter-email-address"
+  val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
 
-  val howDoYouWantToBeContactedUrl: String =
-    s"$contactPreferencesBase/how-do-you-want-to-be-contacted"
-
-  val confirmYourPostalAddressUrl: String =
-    s"$contactPreferencesBase/review-confirm-address"
-
-  val enterEmailAddressUrl: String =
-    s"$contactPreferencesBase/enter-email-address"
-
-  val postalAddressConfirmationUrl: String =
-    s"$contactPreferencesBase/postal-address-confirmation"
-
-  val emailContactPreferenceConfirmationUrl: String =
-    s"$contactPreferencesBase/email-confirmation"
-
-  val enterToConfirmCodeUrl: String =
+  val emailContactPreferenceConfirmationUrl: String = s"$contactPrefBase/email-confirmation"
+  val enterToConfirmCodeUrl: String                 =
     s"$emailContactPreferenceConfirmationUrl&origin=Vaping+Products+Duty"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
@@ -76,7 +76,7 @@ object VapingDutyPage extends BasePage {
   def latestEmailPasscode(email: String): String = {
     val authStub = authStubSession()
     passcodeClient.getLatestPasscode(
-      baseUrl = emailVerificationBaseUrl,
+      baseUrl = emailVerificationBase,
       email = email,
       authorization = authStub.bearerToken,
       sessionId = authStub.sessionId
@@ -95,7 +95,7 @@ object VapingDutyPage extends BasePage {
   }
 
   def signIntoAuth(user: AuthUser, redirectUrl: String = doYouHaveApprovalIdUrl): Unit = {
-    get(loginUrl)
+    get(ggSignInUrl)
     sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
 

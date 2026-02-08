@@ -18,22 +18,26 @@ package uk.gov.hmrc.ui.helper
 
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.remote.http.{ClientConfig, HttpClient, HttpMethod, HttpRequest}
+import uk.gov.hmrc.configuration.TestEnvironment
 
-import java.net.URL
+import java.net.URI
 import java.nio.charset.StandardCharsets
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 final case class AuthStubSession(sessionId: String, bearerToken: String)
 
 class AuthLoginStubSessionClient {
 
+  private val AuthLoginStubSessionPath = "/session"
+
   def getSession(
     driver: WebDriver,
-    authLoginStubBaseUrl: String = "http://localhost:9949"
+    authLoginStubBaseUrl: String = TestEnvironment.url("auth-login-stub")
   ): AuthStubSession = {
 
     val currentUrl = driver.getCurrentUrl
-    driver.navigate().to(s"$authLoginStubBaseUrl/auth-login-stub/session")
+
+    driver.navigate().to(s"${authLoginStubBaseUrl.stripSuffix("/")}$AuthLoginStubSessionPath")
 
     val cookieHeader = driver
       .manage()
@@ -47,10 +51,14 @@ class AuthLoginStubSessionClient {
     val client =
       HttpClient.Factory
         .createDefault()
-        .createClient(ClientConfig.defaultConfig().baseUrl(new URL(authLoginStubBaseUrl)))
+        .createClient(
+          ClientConfig
+            .defaultConfig()
+            .baseUrl(URI.create(authLoginStubBaseUrl).toURL)
+        )
 
     try {
-      val request = new HttpRequest(HttpMethod.GET, "/auth-login-stub/session")
+      val request = new HttpRequest(HttpMethod.GET, AuthLoginStubSessionPath)
       request.addHeader("accept", "text/html")
       if (cookieHeader.nonEmpty) request.addHeader("cookie", cookieHeader)
 
@@ -58,7 +66,9 @@ class AuthLoginStubSessionClient {
       val body     = new String(response.getContent.get().readAllBytes(), StandardCharsets.UTF_8)
 
       if (response.getStatus != 200) {
-        throw new RuntimeException(s"Auth-login-stub /session returned ${response.getStatus}. Body:\n$body")
+        throw new RuntimeException(
+          s"auth-login-stub $AuthLoginStubSessionPath returned ${response.getStatus}. Body:\n$body"
+        )
       }
 
       val sessionId =

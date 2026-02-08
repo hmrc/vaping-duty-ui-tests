@@ -44,11 +44,11 @@ class VapingDutySpecs extends BaseSpec {
       ZapAccessibility
     ) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.vapingDutyBaseUrl)
+      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.vapingDutyBase)
 
       Then("I should be on the vaping duty index page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.vapingDutyBaseUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.vapingDutyBase),
         "Expected to be on the vaping duty index page"
       )
     }
@@ -81,7 +81,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the BTA page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountRoute),
         "Expected to be on the BTA page"
       )
     }
