@@ -17,25 +17,77 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.support.ui.ExpectedConditions
+import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.helper.{AuthLoginStubSessionClient, TestOnlyPasscodeClient}
 import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 object VapingDutyPage extends BasePage {
 
-  val base: String               = redirectUrl.stripSuffix("/")
-  private val enrolmentFrontend  = enrolmentUrl.stripSuffix("/")
-  private val businessTaxAccount = businessTaxAccountUrl.stripSuffix("/")
+  // ---------- Base URLs ----------
+  val vapingDutyBase: String                = redirectUrl.stripSuffix("/")
+  private val authStubBase: String          = authLoginStubBaseUrl.stripSuffix("/")
+  private val emailVerificationBase: String = emailVerificationUrl.stripSuffix("/")
+  private val enrolmentFrontendBase: String = enrolmentUrl.stripSuffix("/")
+  private val btaBase: String               = businessTaxAccountUrl.stripSuffix("/")
 
-  val doYouHaveApprovalIdUrl: String       = s"$base/enrolment/do-you-have-an-approval-id"
-  val youNeedAnApprovalIdUrl: String       = s"$base/enrolment/you-need-an-approval-id"
-  val alreadyEnrolledUrl: String           = s"$base/enrolment/already-enrolled"
-  val enrolmentSignInUrl: String           = s"$base/enrolment/sign-in"
-  val enrolmentAccessUrl: String           =
-    s"$enrolmentFrontend/HMRC-VPD-ORG/request-access-tax-scheme?continue=$businessTaxAccount"
-  val businessAccountUrl: String           = s"business-account"
-  val howDoYouWantToBeContactedUrl: String = s"$base/contact-preferences/how-do-you-want-to-be-contacted"
-  val confirmYourPostalAddressUrl: String  = s"$base/contact-preferences/review-confirm-address"
-  val postalAddressConfirmationUrl: String = s"$base/contact-preferences/postal-address-confirmation"
+  // Auth-login-stub endpoints
+  val ggSignInUrl: String = s"$authStubBase/gg-sign-in"
+  val sessionUrl: String  = s"$authStubBase/session"
+
+  // ---------- Test data ----------
+  val emailAddressToVerify: String = randomTestEmail()
+
+  // ---------- Clients ----------
+  private val passcodeClient    = new TestOnlyPasscodeClient()
+  private val authSessionClient = new AuthLoginStubSessionClient()
+
+  // ---------- Common route bases ----------
+  private val enrolmentBase: String   = s"$vapingDutyBase/enrolment"
+  private val contactPrefBase: String = s"$vapingDutyBase/contact-preferences"
+
+  // ---------- Enrolment URLs ----------
+  val doYouHaveApprovalIdUrl: String = s"$enrolmentBase/do-you-have-an-approval-id"
+  val youNeedAnApprovalIdUrl: String = s"$enrolmentBase/you-need-an-approval-id"
+  val alreadyEnrolledUrl: String     = s"$enrolmentBase/already-enrolled"
+  val enrolmentSignInUrl: String     = s"$enrolmentBase/sign-in"
+
+  val enrolmentAccessUrl: String =
+    s"$enrolmentFrontendBase/HMRC-VPD-ORG/request-access-tax-scheme?continue=$btaBase"
+
+  val businessAccountRoute: String = "business-account"
+
+  // ---------- Contact preference URLs ----------
+  val howDoYouWantToBeContactedUrl: String = s"$contactPrefBase/how-do-you-want-to-be-contacted"
+  val confirmYourPostalAddressUrl: String  = s"$contactPrefBase/review-confirm-address"
+  val enterEmailAddressUrl: String         = s"$contactPrefBase/enter-email-address"
+  val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
+
+  val emailContactPreferenceConfirmationUrl: String = s"$contactPrefBase/email-confirmation"
+  val enterToConfirmCodeUrl: String                 =
+    s"$emailContactPreferenceConfirmationUrl&origin=Vaping+Products+Duty"
+
+  def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
+    authSessionClient.getSession(Driver.instance)
+
+  def latestEmailPasscode(email: String): String = {
+    val authStub = authStubSession()
+    passcodeClient.getLatestPasscode(
+      baseUrl = emailVerificationBase,
+      email = email,
+      authorization = authStub.bearerToken,
+      sessionId = authStub.sessionId
+    )
+  }
+
+  def randomTestEmail(): String = {
+    val formatter = DateTimeFormatter.ofPattern("ddMMmmss")
+    val timestamp = LocalDateTime.now().format(formatter)
+    s"autotest$timestamp@example.com"
+  }
 
   def goToUrl(url: String): Unit = {
     get(url)
@@ -43,7 +95,7 @@ object VapingDutyPage extends BasePage {
   }
 
   def signIntoAuth(user: AuthUser, redirectUrl: String = doYouHaveApprovalIdUrl): Unit = {
-    get(loginUrl)
+    get(ggSignInUrl)
     sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
 
@@ -74,4 +126,14 @@ object VapingDutyPage extends BasePage {
 
   def clickConfirmAddress(): Unit =
     click(confirmAddressButton)
+
+  def submitEmailAddress(emailAddress: String): Unit =
+    sendKeys(emailContactField, emailAddress)
+    click(continueContactPreference)
+
+  def submitConfirmationCode(email: String): Unit = {
+    val code = latestEmailPasscode(email)
+    sendKeys(emailConfirmationCodeField, code)
+    click(emailConfirmationCodeConfirmButton)
+  }
 }

@@ -44,11 +44,11 @@ class VapingDutySpecs extends BaseSpec {
       ZapAccessibility
     ) {
       Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.base)
+      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.vapingDutyBase)
 
       Then("I should be on the vaping duty index page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.base),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.vapingDutyBase),
         "Expected to be on the vaping duty index page"
       )
     }
@@ -81,7 +81,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the BTA page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountRoute),
         "Expected to be on the BTA page"
       )
     }
@@ -143,5 +143,51 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the your contact preference has been updated page"
       )
     }
+
+    Scenario(
+      "Vaping Duty Journey User updates contact preference to email",
+      VapingDutyTaggedTest,
+      ZapAccessibility
+    ) {
+      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+        VapingDutyPage.howDoYouWantToBeContactedUrl
+      )
+
+      Then("I should be on the vaping duty tell us how we should contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        "Expected to be on the tell us how we should contact you page"
+      )
+
+      When("I click on the post radio button")
+      VapingDutyPage.selectContactPreference("Email")
+
+      Then("I should be on the what email address should we use to contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+        "Expected to be on the what email address should we use to contact you page"
+      )
+
+      When("I enter a valid email address and click continue")
+      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+
+      Then("I should be on the enter code to confirm your email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
+        "Expected to be on the enter code to confirm your email address"
+      )
+
+      When("I get and submit the confirmation code")
+      VapingDutyPage.submitConfirmationCode(VapingDutyPage.emailAddressToVerify)
+
+      Then("I should be on the your contact preference has been updated page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+        "Expected to be on the your contact preference has been updated page"
+      )
+    }
+
   }
 }
