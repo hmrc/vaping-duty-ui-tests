@@ -2,7 +2,11 @@
   "exclusions": [
     {
       "path": "/business-account",
-      "reason": "Business Account pages are not owned by the ADR team"
+      "reason": "Business Account pages are not owned by the VPD team"
+    },
+    {
+      "path": "/auth-login-stub",
+      "reason": "Auth Login stub pages are not owned by the VPD team"
     }
   ]
 }

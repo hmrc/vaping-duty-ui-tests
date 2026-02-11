@@ -50,10 +50,10 @@ object VapingDutyPage extends BasePage {
   private val contactPrefBase: String = s"$vapingDutyBase/contact-preferences"
 
   // ---------- Enrolment URLs ----------
-  val doYouHaveApprovalIdUrl: String = s"$enrolmentBase/do-you-have-an-approval-id"
-  val youNeedAnApprovalIdUrl: String = s"$enrolmentBase/you-need-an-approval-id"
-  val alreadyEnrolledUrl: String     = s"$enrolmentBase/already-enrolled"
-  val enrolmentSignInUrl: String     = s"$enrolmentBase/sign-in"
+  val doYouHaveApprovalIdUrl: String   = s"$enrolmentBase/do-you-have-an-approval-id"
+  val youNeedAnApprovalIdUrl: String   = s"$enrolmentBase/you-need-an-approval-id"
+  val alreadyEnrolledUrl: String       = s"$enrolmentBase/already-enrolled"
+  val administratorRequiredUrl: String = s"$enrolmentBase/organisation-administrator-required"
 
   val enrolmentAccessUrl: String =
     s"$enrolmentFrontendBase/HMRC-VPD-ORG/request-access-tax-scheme?continue=$btaBase"
