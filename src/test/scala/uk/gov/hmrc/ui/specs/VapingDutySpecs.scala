@@ -92,7 +92,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentSignInUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
         "Expected to be on the organisation sign in page"
       )
     }
@@ -103,7 +103,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the organisation sign in page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentSignInUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
         "Expected to be on the organisation sign in page"
       )
     }
