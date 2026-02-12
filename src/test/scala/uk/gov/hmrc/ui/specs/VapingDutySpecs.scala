@@ -182,6 +182,15 @@ class VapingDutySpecs extends BaseSpec {
       When("I get and submit the confirmation code")
       VapingDutyPage.submitConfirmationCode(VapingDutyPage.emailAddressToVerify)
 
+      Then("I should be on the your confirmation code has been received and approved")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.submitEmailUrl),
+        "Expected to be on the your confirmation code has been received and approved"
+      )
+
+      When("I click submit on your confirmation code has been received and approved")
+      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
+
       Then("I should be on the your contact preference has been updated page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
@@ -211,6 +220,15 @@ class VapingDutySpecs extends BaseSpec {
 
       When("I enter a valid email address and click continue")
       VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+
+      Then("I should be on the you have asked us to use the email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.submitEmailPreviouslyVerifiedUrl),
+        "Expected to be on the you have asked us to use the email address page"
+      )
+
+      When("I click submit on your confirmation code has been received and approved")
+      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
 
       Then("I should be on the your contact preference has been updated page")
       assert(
