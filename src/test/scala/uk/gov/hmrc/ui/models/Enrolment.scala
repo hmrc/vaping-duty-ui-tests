@@ -16,13 +16,26 @@
 
 package uk.gov.hmrc.ui.models
 
+import java.security.SecureRandom
+
 final case class Enrolment(
   enrolmentKey: String,
   identifierName: String,
-  identifierValue: String
+  identifierValue: String,
+  credId: Option[String] = None
 )
 
 object Enrolment {
+
+  private val secureRandom = new SecureRandom()
+
+  private def randomNumericId(length: Int = 16): String = {
+    val firstDigit = secureRandom.nextInt(9) + 1
+    val remaining  = (1 until length).map(_ => secureRandom.nextInt(10)).mkString
+    firstDigit.toString + remaining
+  }
+
+  private lazy val emailCredId: String = randomNumericId(16)
 
   val Vpd: Enrolment =
     Enrolment(
@@ -42,6 +55,7 @@ object Enrolment {
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
-      identifierValue = "XMADP4000100211"
+      identifierValue = "XMADP4000100211",
+      credId = Some(emailCredId)
     )
 }
