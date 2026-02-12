@@ -161,7 +161,7 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the tell us how we should contact you page"
       )
 
-      When("I click on the post radio button")
+      When("I click on the email radio button")
       VapingDutyPage.selectContactPreference("Email")
 
       Then("I should be on the what email address should we use to contact you page")
@@ -181,6 +181,36 @@ class VapingDutySpecs extends BaseSpec {
 
       When("I get and submit the confirmation code")
       VapingDutyPage.submitConfirmationCode(VapingDutyPage.emailAddressToVerify)
+
+      Then("I should be on the your contact preference has been updated page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+        "Expected to be on the your contact preference has been updated page"
+      )
+
+      When("I log in again as the same user")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+        VapingDutyPage.howDoYouWantToBeContactedUrl
+      )
+
+      Then("I should be on the vaping duty tell us how we should contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        "Expected to be on the tell us how we should contact you page"
+      )
+
+      When("I click on the email radio button")
+      VapingDutyPage.selectContactPreference("Email")
+
+      Then("I should be on the what email address should we use to contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+        "Expected to be on the what email address should we use to contact you page"
+      )
+
+      When("I enter a valid email address and click continue")
+      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
 
       Then("I should be on the your contact preference has been updated page")
       assert(

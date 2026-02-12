@@ -95,6 +95,7 @@ object VapingDutyPage extends BasePage {
   }
 
   def signIntoAuth(user: AuthUser, redirectUrl: String = doYouHaveApprovalIdUrl): Unit = {
+    Driver.instance.manage().deleteAllCookies()
     get(ggSignInUrl)
     sendKeys(redirectionUrlField, redirectUrl)
     selectByValue(affinityGroupSelect, user.affinityGroup)
@@ -103,6 +104,7 @@ object VapingDutyPage extends BasePage {
       sendKeys(enrolmentKey, e.enrolmentKey)
       sendKeys(identifierName, e.identifierName)
       sendKeys(identifierValue, e.identifierValue)
+      sendKeys(credIdField, e.credId.getOrElse(""))
     }
 
     click(submitButton)
