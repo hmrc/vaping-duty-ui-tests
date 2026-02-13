@@ -44,5 +44,6 @@ object VapingDutyLocators {
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
   val emailConfirmationCodeConfirmButton: By = By.cssSelector("#main-content > div > div > form:nth-child(4) > button")
   val continueContactPreference: By          = By.cssSelector("#main-content > div > div > form > button")
-  val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > a")
+  val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
+  val submitButtonEmailCodeReceived: By      = By.cssSelector("#main-content > div > div > form > button")
 }

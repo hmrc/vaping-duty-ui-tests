@@ -67,8 +67,9 @@ object VapingDutyPage extends BasePage {
   val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
 
   val emailContactPreferenceConfirmationUrl: String = s"$contactPrefBase/email-confirmation"
-  val enterToConfirmCodeUrl: String                 =
-    s"$emailContactPreferenceConfirmationUrl&origin=Vaping+Products+Duty"
+  val enterToConfirmCodeUrl: String                 = s"$contactPrefBase/submit-email&origin=Vaping+Products+Duty"
+  val submitEmailUrl: String                        = s"$contactPrefBase/submit-email"
+  val submitEmailPreviouslyVerifiedUrl: String      = s"$contactPrefBase/submit-previously-verified-email"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -138,4 +139,7 @@ object VapingDutyPage extends BasePage {
     sendKeys(emailConfirmationCodeField, code)
     click(emailConfirmationCodeConfirmButton)
   }
+
+  def confirmCodeHasBeenReceivedAndApproved(): Unit =
+    click(submitButtonEmailCodeReceived)
 }
