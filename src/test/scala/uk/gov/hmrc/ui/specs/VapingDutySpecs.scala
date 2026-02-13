@@ -237,5 +237,51 @@ class VapingDutySpecs extends BaseSpec {
       )
     }
 
+    Scenario(
+      "Vaping Duty Journey User updates contact preference to email",
+      VapingDutyTaggedTest,
+      ZapAccessibility
+    ) {
+      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+        VapingDutyPage.howDoYouWantToBeContactedUrl
+      )
+
+      Then("I should be on the vaping duty tell us how we should contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        "Expected to be on the tell us how we should contact you page"
+      )
+
+      When("I click on the email radio button")
+      VapingDutyPage.selectContactPreference("Email")
+
+      Then("I should be on the what email address should we use to contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+        "Expected to be on the what email address should we use to contact you page"
+      )
+
+      When("I enter a valid email address and click continue")
+      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+
+      Then("I should be on the enter code to confirm your email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
+        "Expected to be on the enter code to confirm your email address"
+      )
+
+      When("I get and submit the wrong confirmation code 5 times")
+      VapingDutyPage.submitIncorrectConfirmationCodeFiveTimes(VapingDutyPage.wrongConfirmationCode)
+
+      Then("I should be on the you have reached the maximum number of attempts to enter a confirmation code")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.accountLockOutUrl),
+        "Expected to be on the you have reached the maximum number of attempts to enter a confirmation code"
+      )
+
+    }
+
   }
 }
