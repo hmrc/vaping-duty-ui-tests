@@ -152,6 +152,7 @@ object VapingDutyPage extends BasePage {
 
   def submitIncorrectConfirmationCodeFiveTimes(wrongCode: String): Unit =
     (1 to 5).foreach { _ =>
+      fluentWait.until(ExpectedConditions.elementToBeClickable(emailConfirmationCodeField))
       sendKeys(emailConfirmationCodeField, wrongCode)
       click(emailConfirmationCodeConfirmButton)
     }

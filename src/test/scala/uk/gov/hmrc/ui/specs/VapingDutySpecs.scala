@@ -238,7 +238,7 @@ class VapingDutySpecs extends BaseSpec {
     }
 
     Scenario(
-      "Vaping Duty Journey User updates contact preference to email",
+      "Vaping Duty Journey User attempts confirmation code 5 times",
       VapingDutyTaggedTest,
       ZapAccessibility
     ) {
