@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.WebDriver
+import org.openqa.selenium.{StaleElementReferenceException, WebDriver}
 import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
@@ -28,4 +28,5 @@ trait BasePage extends PageObject {
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofMillis(500))
+    .ignoring(classOf[StaleElementReferenceException])
 }
