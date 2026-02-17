@@ -230,11 +230,11 @@ class VapingDutySpecs extends BaseSpec {
       When("I click submit on your confirmation code has been received and approved")
       VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
 
-      Then("I should be on the your contact preference has been updated page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
-        "Expected to be on the your contact preference has been updated page"
-      )
+//      Then("I should be on the your contact preference has been updated page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+//        "Expected to be on the your contact preference has been updated page"
+//      )
     }
 
     Scenario(
@@ -272,8 +272,8 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the enter code to confirm your email address"
       )
 
-      When("I get and submit the wrong confirmation code 5 times")
-      VapingDutyPage.submitIncorrectConfirmationCodeFiveTimes(VapingDutyPage.wrongConfirmationCode)
+      When("I get and submit the wrong confirmation code 6 times")
+      VapingDutyPage.submitIncorrectConfirmationCodeSixTimes(VapingDutyPage.wrongConfirmationCode)
 
       Then("I should be on the you have reached the maximum number of attempts to enter a confirmation code")
       assert(

@@ -41,7 +41,7 @@ object VapingDutyPage extends BasePage {
 
   // ---------- Test data ----------
   val emailAddressToVerify: String  = randomTestEmail()
-  val wrongConfirmationCode: String = randomConsonantCode()
+  val wrongConfirmationCode: String = "DNCLRK"
 
   // ---------- Clients ----------
   private val passcodeClient    = new TestOnlyPasscodeClient()
@@ -94,7 +94,7 @@ object VapingDutyPage extends BasePage {
   }
 
   def randomConsonantCode(): String = {
-    val consonants = "BCDFGHJKLMNPQRSTVWXYZ"
+    val consonants = "DNCLRK"
     (1 to 5)
       .map(_ => consonants(Random.nextInt(consonants.length)))
       .mkString
@@ -150,11 +150,13 @@ object VapingDutyPage extends BasePage {
     click(emailConfirmationCodeConfirmButton)
   }
 
-  def submitIncorrectConfirmationCodeFiveTimes(wrongCode: String): Unit =
-    (1 to 5).foreach { _ =>
+  def submitIncorrectConfirmationCodeSixTimes(wrongCode: String): Unit =
+    (1 to 6).foreach { _ =>
+      fluentWait.until(ExpectedConditions.visibilityOf(Driver.instance.findElement(emailConfirmationCodeField)))
       fluentWait.until(ExpectedConditions.elementToBeClickable(emailConfirmationCodeField))
       sendKeys(emailConfirmationCodeField, wrongCode)
       click(emailConfirmationCodeConfirmButton)
+      Thread.sleep(200)
     }
 
   def confirmCodeHasBeenReceivedAndApproved(): Unit =
