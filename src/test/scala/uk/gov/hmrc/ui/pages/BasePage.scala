@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{StaleElementReferenceException, WebDriver}
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
+import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver}
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 
@@ -29,4 +29,9 @@ trait BasePage extends PageObject {
     .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofMillis(500))
     .ignoring(classOf[StaleElementReferenceException])
+
+  def waitForElementToBeVisible(element: By): Unit =
+    fluentWait.until(
+      ExpectedConditions.visibilityOfElementLocated(element)
+    )
 }

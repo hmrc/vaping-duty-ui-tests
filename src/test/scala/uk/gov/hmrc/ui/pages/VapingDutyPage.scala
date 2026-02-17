@@ -40,8 +40,9 @@ object VapingDutyPage extends BasePage {
   val sessionUrl: String  = s"$authStubBase/session"
 
   // ---------- Test data ----------
-  val emailAddressToVerify: String  = randomTestEmail()
-  val wrongConfirmationCode: String = "DNCLRK"
+  val emailAddressToVerify: String     = randomTestEmail()
+  val emailAddressForWrongCode: String = randomTestEmail("IncorrectCode")
+  val wrongConfirmationCode: String    = "DNCLRK"
 
   // ---------- Clients ----------
   private val passcodeClient    = new TestOnlyPasscodeClient()
@@ -87,10 +88,10 @@ object VapingDutyPage extends BasePage {
     )
   }
 
-  def randomTestEmail(): String = {
+  def randomTestEmail(email: String = "autotest"): String = {
     val formatter = DateTimeFormatter.ofPattern("ddMMmmss")
     val timestamp = LocalDateTime.now().format(formatter)
-    s"autotest$timestamp@example.com"
+    s"$email$timestamp@example.com"
   }
 
   def randomConsonantCode(): String = {
@@ -141,12 +142,18 @@ object VapingDutyPage extends BasePage {
     click(confirmAddressButton)
 
   def submitEmailAddress(emailAddress: String): Unit =
+    waitForElementToBeVisible(emailContactField)
     sendKeys(emailContactField, emailAddress)
+
+    waitForElementToBeVisible(continueContactPreference)
     click(continueContactPreference)
 
   def submitConfirmationCode(email: String): Unit = {
     val code = latestEmailPasscode(email)
+    waitForElementToBeVisible(emailConfirmationCodeField)
     sendKeys(emailConfirmationCodeField, code)
+
+    waitForElementToBeVisible(emailConfirmationCodeConfirmButton)
     click(emailConfirmationCodeConfirmButton)
   }
 
@@ -160,5 +167,6 @@ object VapingDutyPage extends BasePage {
     }
 
   def confirmCodeHasBeenReceivedAndApproved(): Unit =
+    waitForElementToBeVisible(submitButtonEmailCodeReceived)
     click(submitButtonEmailCodeReceived)
 }

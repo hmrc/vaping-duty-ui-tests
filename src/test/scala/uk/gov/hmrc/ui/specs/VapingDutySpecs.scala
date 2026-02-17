@@ -151,7 +151,7 @@ class VapingDutySpecs extends BaseSpec {
     ) {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailAlreadyVerified)),
         VapingDutyPage.howDoYouWantToBeContactedUrl
       )
 
@@ -197,11 +197,8 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the your contact preference has been updated page"
       )
 
-      When("I log in again as the same user")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
-        VapingDutyPage.howDoYouWantToBeContactedUrl
-      )
+      When("I redirected to how would you like to be contacted page")
+      VapingDutyPage.goToUrl(VapingDutyPage.howDoYouWantToBeContactedUrl)
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
@@ -264,7 +261,7 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("I enter a valid email address and click continue")
-      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressForWrongCode)
 
       Then("I should be on the enter code to confirm your email address page")
       assert(
