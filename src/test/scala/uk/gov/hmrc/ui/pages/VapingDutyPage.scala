@@ -24,6 +24,7 @@ import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import scala.util.Random
 
 object VapingDutyPage extends BasePage {
 
@@ -39,7 +40,9 @@ object VapingDutyPage extends BasePage {
   val sessionUrl: String  = s"$authStubBase/session"
 
   // ---------- Test data ----------
-  val emailAddressToVerify: String = randomTestEmail()
+  val emailAddressToVerify: String     = randomTestEmail()
+  val emailAddressForWrongCode: String = randomTestEmail("IncorrectCode")
+  val wrongConfirmationCode: String    = "DNCLRK"
 
   // ---------- Clients ----------
   private val passcodeClient    = new TestOnlyPasscodeClient()
@@ -70,6 +73,7 @@ object VapingDutyPage extends BasePage {
   val enterToConfirmCodeUrl: String                 = s"$contactPrefBase/submit-email&origin=Vaping+Products+Duty"
   val submitEmailUrl: String                        = s"$contactPrefBase/submit-email"
   val submitEmailPreviouslyVerifiedUrl: String      = s"$contactPrefBase/submit-previously-verified-email"
+  val accountLockOutUrl: String                     = s"$contactPrefBase/account-lock-out"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -84,10 +88,17 @@ object VapingDutyPage extends BasePage {
     )
   }
 
-  def randomTestEmail(): String = {
+  def randomTestEmail(email: String = "autotest"): String = {
     val formatter = DateTimeFormatter.ofPattern("ddMMmmss")
     val timestamp = LocalDateTime.now().format(formatter)
-    s"autotest$timestamp@example.com"
+    s"$email$timestamp@example.com"
+  }
+
+  def randomConsonantCode(): String = {
+    val consonants = "DNCLRK"
+    (1 to 5)
+      .map(_ => consonants(Random.nextInt(consonants.length)))
+      .mkString
   }
 
   def goToUrl(url: String): Unit = {
@@ -131,15 +142,31 @@ object VapingDutyPage extends BasePage {
     click(confirmAddressButton)
 
   def submitEmailAddress(emailAddress: String): Unit =
+    waitForElementToBeVisible(emailContactField)
     sendKeys(emailContactField, emailAddress)
+
+    waitForElementToBeVisible(continueContactPreference)
     click(continueContactPreference)
 
   def submitConfirmationCode(email: String): Unit = {
     val code = latestEmailPasscode(email)
+    waitForElementToBeVisible(emailConfirmationCodeField)
     sendKeys(emailConfirmationCodeField, code)
+
+    waitForElementToBeVisible(emailConfirmationCodeConfirmButton)
     click(emailConfirmationCodeConfirmButton)
   }
 
+  def submitIncorrectConfirmationCodeSixTimes(wrongCode: String): Unit =
+    (1 to 6).foreach { _ =>
+      fluentWait.until(ExpectedConditions.visibilityOf(Driver.instance.findElement(emailConfirmationCodeField)))
+      fluentWait.until(ExpectedConditions.elementToBeClickable(emailConfirmationCodeField))
+      sendKeys(emailConfirmationCodeField, wrongCode)
+      click(emailConfirmationCodeConfirmButton)
+      Thread.sleep(200)
+    }
+
   def confirmCodeHasBeenReceivedAndApproved(): Unit =
+    waitForElementToBeVisible(submitButtonEmailCodeReceived)
     click(submitButtonEmailCodeReceived)
 }

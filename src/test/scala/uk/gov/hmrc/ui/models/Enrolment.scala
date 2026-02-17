@@ -51,11 +51,18 @@ object Enrolment {
       identifierValue = "XMADP1000100211"
     )
 
-  val contactPreferenceEmail: Enrolment =
+  val contactPreferenceEmailAlreadyVerified: Enrolment =
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
       identifierValue = "XMADP4000100211",
       credId = Some(emailCredId)
+    )
+
+  val contactPreferenceEmail: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = "XMADP4000100211"
     )
 }
