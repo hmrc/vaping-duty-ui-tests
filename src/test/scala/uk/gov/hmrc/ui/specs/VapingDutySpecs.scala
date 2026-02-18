@@ -109,13 +109,13 @@ class VapingDutySpecs extends BaseSpec {
     }
 
     Scenario(
-      "Vaping Duty Journey User updates contact preference to post",
+      "Vaping Duty Journey User updates contact preference from email to post",
       VapingDutyTaggedTest,
       ZapAccessibility
     ) {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferencePost)),
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
         VapingDutyPage.howDoYouWantToBeContactedUrl
       )
 
@@ -141,6 +141,33 @@ class VapingDutySpecs extends BaseSpec {
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.postalAddressConfirmationUrl),
         "Expected to be on the your contact preference has been updated page"
+      )
+    }
+
+    Scenario(
+      "Vaping Duty Journey User updates contact preference from post to post",
+      VapingDutyTaggedTest,
+      ZapAccessibility
+    ) {
+      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
+        VapingDutyPage.howDoYouWantToBeContactedUrl
+      )
+
+      Then("I should be on the vaping duty tell us how we should contact you page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        "Expected to be on the tell us how we should contact you page"
+      )
+
+      When("I click on the post radio button")
+      VapingDutyPage.selectContactPreference("Post")
+
+      Then("I should be on the confirm your postal address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.changeYourPostalAddressUrl),
+        "Expected to be on the confirm your postal address page"
       )
     }
 
@@ -227,11 +254,11 @@ class VapingDutySpecs extends BaseSpec {
       When("I click submit on your confirmation code has been received and approved")
       VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
 
-//      Then("I should be on the your contact preference has been updated page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
-//        "Expected to be on the your contact preference has been updated page"
-//      )
+      Then("I should be on the your contact preference has been updated page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+        "Expected to be on the your contact preference has been updated page"
+      )
     }
 
     Scenario(
@@ -279,6 +306,5 @@ class VapingDutySpecs extends BaseSpec {
       )
 
     }
-
   }
 }

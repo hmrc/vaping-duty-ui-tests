@@ -44,7 +44,14 @@ object Enrolment {
       identifierValue = "X"
     )
 
-  val contactPreferencePost: Enrolment =
+  val contactPreferenceEmailToPost: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = "XMADP0000100211"
+    )
+
+  val contactPreferencePostToPost: Enrolment =
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",

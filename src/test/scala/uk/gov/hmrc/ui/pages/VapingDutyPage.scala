@@ -66,6 +66,7 @@ object VapingDutyPage extends BasePage {
   // ---------- Contact preference URLs ----------
   val howDoYouWantToBeContactedUrl: String = s"$contactPrefBase/how-do-you-want-to-be-contacted"
   val confirmYourPostalAddressUrl: String  = s"$contactPrefBase/review-confirm-address"
+  val changeYourPostalAddressUrl: String   = s"$contactPrefBase/post-continue"
   val enterEmailAddressUrl: String         = s"$contactPrefBase/enter-email-address"
   val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
 
