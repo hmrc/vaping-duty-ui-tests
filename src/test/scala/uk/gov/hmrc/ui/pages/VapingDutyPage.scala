@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.helper.{AuthLoginStubSessionClient, TestOnlyPasscodeClient}
@@ -66,6 +67,7 @@ object VapingDutyPage extends BasePage {
   // ---------- Contact preference URLs ----------
   val howDoYouWantToBeContactedUrl: String = s"$contactPrefBase/how-do-you-want-to-be-contacted"
   val confirmYourPostalAddressUrl: String  = s"$contactPrefBase/review-confirm-address"
+  val changeYourPostalAddressUrl: String   = s"$contactPrefBase/post-continue"
   val enterEmailAddressUrl: String         = s"$contactPrefBase/enter-email-address"
   val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
 
@@ -157,16 +159,36 @@ object VapingDutyPage extends BasePage {
     click(emailConfirmationCodeConfirmButton)
   }
 
+  private def timeOrigin(): Double =
+    Driver.instance
+      .asInstanceOf[JavascriptExecutor]
+      .executeScript("return performance.timeOrigin;")
+      .asInstanceOf[Number]
+      .doubleValue()
+
+  private def waitForReload(previousTimeOrigin: Double): Unit = {
+    fluentWait.until(_ => timeOrigin() != previousTimeOrigin)
+
+    fluentWait.until { _ =>
+      Driver.instance
+        .asInstanceOf[JavascriptExecutor]
+        .executeScript("return document.readyState;")
+        .toString == "complete"
+    }
+  }
+
   def submitIncorrectConfirmationCodeSixTimes(wrongCode: String): Unit =
     (1 to 6).foreach { _ =>
-      fluentWait.until(ExpectedConditions.visibilityOf(Driver.instance.findElement(emailConfirmationCodeField)))
       fluentWait.until(ExpectedConditions.elementToBeClickable(emailConfirmationCodeField))
+
+      val before = timeOrigin()
+
       sendKeys(emailConfirmationCodeField, wrongCode)
       click(emailConfirmationCodeConfirmButton)
-      Thread.sleep(200)
-    }
 
-  def confirmCodeHasBeenReceivedAndApproved(): Unit =
+      waitForReload(before)
+    }
+  def confirmCodeHasBeenReceivedAndApproved(): Unit                    =
     waitForElementToBeVisible(submitButtonEmailCodeReceived)
     click(submitButtonEmailCodeReceived)
 }
