@@ -45,5 +45,5 @@ object VapingDutyLocators {
   val emailConfirmationCodeConfirmButton: By = By.xpath("//button[contains(normalize-space(),'Confirm')]")
   val continueContactPreference: By          = By.xpath("//button[contains(normalize-space(),'Continue')]")
   val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
-  val submitButtonEmailCodeReceived: By      = By.xpath("//button[contains(normalize-space(),'Submit')]")
+  val saveAndContinueButton: By              = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
 }

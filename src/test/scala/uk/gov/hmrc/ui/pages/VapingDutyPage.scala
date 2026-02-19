@@ -65,17 +65,15 @@ object VapingDutyPage extends BasePage {
   val businessAccountRoute: String = "business-account"
 
   // ---------- Contact preference URLs ----------
-  val howDoYouWantToBeContactedUrl: String = s"$contactPrefBase/how-do-you-want-to-be-contacted"
-  val confirmYourPostalAddressUrl: String  = s"$contactPrefBase/review-confirm-address"
-  val changeYourPostalAddressUrl: String   = s"$contactPrefBase/post-continue"
-  val enterEmailAddressUrl: String         = s"$contactPrefBase/enter-email-address"
-  val postalAddressConfirmationUrl: String = s"$contactPrefBase/postal-address-confirmation"
+  val howShouldWeContactedYouUrl: String = s"$contactPrefBase/how-should-we-contact-you"
+  val checkYourPostalAddressUrl: String  = s"$contactPrefBase/check-your-postal-address"
+  val changeYourPostalAddressUrl: String = s"$contactPrefBase/post-continue"
+  val enterEmailAddressUrl: String       = s"$contactPrefBase/enter-email-address"
 
-  val emailContactPreferenceConfirmationUrl: String = s"$contactPrefBase/email-confirmation"
-  val enterToConfirmCodeUrl: String                 = s"$contactPrefBase/submit-email&origin=Vaping+Products+Duty"
-  val submitEmailUrl: String                        = s"$contactPrefBase/submit-email"
-  val submitEmailPreviouslyVerifiedUrl: String      = s"$contactPrefBase/submit-previously-verified-email"
-  val accountLockOutUrl: String                     = s"$contactPrefBase/account-lock-out"
+  val emailContactPreferenceConfirmationUrl: String = s"$contactPrefBase/contact-preference-updated"
+  val enterToConfirmCodeUrl: String                 = s"$contactPrefBase/confirm-email-address&origin=Vaping+Products+Duty"
+  val confirmEmailAddressUrl: String                = s"$contactPrefBase/confirm-email-address"
+  val tooManyAttemptsUrl: String                    = s"$contactPrefBase/too-many-attempts"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -189,6 +187,6 @@ object VapingDutyPage extends BasePage {
       waitForReload(before)
     }
   def confirmCodeHasBeenReceivedAndApproved(): Unit                    =
-    waitForElementToBeVisible(submitButtonEmailCodeReceived)
-    click(submitButtonEmailCodeReceived)
+    waitForElementToBeVisible(saveAndContinueButton)
+    click(saveAndContinueButton)
 }
