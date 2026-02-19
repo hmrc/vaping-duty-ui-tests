@@ -116,12 +116,12 @@ class VapingDutySpecs extends BaseSpec {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
         AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
-        VapingDutyPage.howDoYouWantToBeContactedUrl
+        VapingDutyPage.howShouldWeContactedYouUrl
       )
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
         "Expected to be on the tell us how we should contact you page"
       )
 
@@ -130,7 +130,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the confirm your postal address page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmYourPostalAddressUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourPostalAddressUrl),
         "Expected to be on the confirm your postal address page"
       )
 
@@ -139,7 +139,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the your contact preference has been updated page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.postalAddressConfirmationUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
         "Expected to be on the your contact preference has been updated page"
       )
     }
@@ -152,12 +152,12 @@ class VapingDutySpecs extends BaseSpec {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
         AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
-        VapingDutyPage.howDoYouWantToBeContactedUrl
+        VapingDutyPage.howShouldWeContactedYouUrl
       )
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
         "Expected to be on the tell us how we should contact you page"
       )
 
@@ -179,12 +179,12 @@ class VapingDutySpecs extends BaseSpec {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
         AuthUser.organisation(Some(Enrolment.contactPreferenceEmailAlreadyVerified)),
-        VapingDutyPage.howDoYouWantToBeContactedUrl
+        VapingDutyPage.howShouldWeContactedYouUrl
       )
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
         "Expected to be on the tell us how we should contact you page"
       )
 
@@ -211,11 +211,11 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the your confirmation code has been received and approved")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.submitEmailUrl),
-        "Expected to be on the your confirmation code has been received and approved"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
+        "Expected to be on the confirm your email address page"
       )
 
-      When("I click submit on your confirmation code has been received and approved")
+      When("I click save and continue on confirm your email address page")
       VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
 
       Then("I should be on the your contact preference has been updated page")
@@ -225,11 +225,11 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("I redirected to how would you like to be contacted page")
-      VapingDutyPage.goToUrl(VapingDutyPage.howDoYouWantToBeContactedUrl)
+      VapingDutyPage.goToUrl(VapingDutyPage.howShouldWeContactedYouUrl)
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
         "Expected to be on the tell us how we should contact you page"
       )
 
@@ -247,11 +247,11 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the you have asked us to use the email address page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.submitEmailPreviouslyVerifiedUrl),
-        "Expected to be on the you have asked us to use the email address page"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
+        "Expected to be on the confirm your email address page"
       )
 
-      When("I click submit on your confirmation code has been received and approved")
+      When("I click save and continue on your confirmation code has been received and approved")
       VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
 
       Then("I should be on the your contact preference has been updated page")
@@ -269,12 +269,12 @@ class VapingDutySpecs extends BaseSpec {
       Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
       VapingDutyPage.signIntoAuth(
         AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
-        VapingDutyPage.howDoYouWantToBeContactedUrl
+        VapingDutyPage.howShouldWeContactedYouUrl
       )
 
       Then("I should be on the vaping duty tell us how we should contact you page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howDoYouWantToBeContactedUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
         "Expected to be on the tell us how we should contact you page"
       )
 
@@ -301,7 +301,7 @@ class VapingDutySpecs extends BaseSpec {
 
       Then("I should be on the you have reached the maximum number of attempts to enter a confirmation code")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.accountLockOutUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.tooManyAttemptsUrl),
         "Expected to be on the you have reached the maximum number of attempts to enter a confirmation code"
       )
 
