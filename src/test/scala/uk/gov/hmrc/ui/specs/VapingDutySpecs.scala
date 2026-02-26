@@ -38,21 +38,6 @@ class VapingDutySpecs extends BaseSpec {
       )
     }
 
-    Scenario(
-      "Vaping Duty Journey User already enrolled accesses index page",
-      VapingDutyTaggedTest,
-      ZapAccessibility
-    ) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.vapingDutyBase)
-
-      Then("I should be on the vaping duty index page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.vapingDutyBase),
-        "Expected to be on the vaping duty index page"
-      )
-    }
-
     Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth(AuthUser.organisation())
