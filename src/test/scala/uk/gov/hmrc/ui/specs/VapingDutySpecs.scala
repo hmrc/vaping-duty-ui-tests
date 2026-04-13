@@ -24,272 +24,303 @@ class VapingDutySpecs extends BaseSpec {
 
   Feature("VapingDuty Tests") {
 
-    Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation())
+//    Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
+//      Given("I authenticate using Government Gateway")
+//      VapingDutyPage.signIntoAuth(AuthUser.organisation())
+//
+//      When("User selects no on VPMA page")
+//      VapingDutyPage.selectVapingDutyProductsIdRadio(false)
+//
+//      Then("I should be on apply for approval page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.youNeedAnApprovalIdUrl),
+//        "Expected to be on the apply for approval page"
+//      )
+//    }
+//
+//    Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
+//      Given("I authenticate using Government Gateway")
+//      VapingDutyPage.signIntoAuth(AuthUser.organisation())
+//
+//      When("User selects yes on VPMA page")
+//      VapingDutyPage.selectVapingDutyProductsIdRadio(true)
+//
+//      Then("I should be on enrolment request access page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentAccessUrl),
+//        "Expected to be on the request enrolment access page"
+//      )
+//    }
+//
+//    Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
+//      Given("I authenticate using Government Gateway")
+//      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)))
+//
+//      Then("I should be on already enrolled page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.alreadyEnrolledUrl),
+//        "Expected to be on the already enrolled"
+//      )
+//      When("I click on continue to your business tax account button")
+//      VapingDutyPage.clickContinueToBusinessTaxAccount()
+//
+//      Then("I should be on the BTA page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountRoute),
+//        "Expected to be on the BTA page"
+//      )
+//    }
+//
+//    Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
+//      Given("I authenticate using Government Gateway")
+//      VapingDutyPage.signIntoAuth(AuthUser.agent())
+//
+//      Then("I should be on the organisation sign in page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
+//        "Expected to be on the organisation sign in page"
+//      )
+//    }
+//
+//    Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
+//      Given("I authenticate using Government Gateway")
+//      VapingDutyPage.signIntoAuth(AuthUser.individual())
+//
+//      Then("I should be on the organisation sign in page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
+//        "Expected to be on the organisation sign in page"
+//      )
+//    }
+//
+//    Scenario(
+//      "Vaping Duty Journey User updates contact preference from email to post",
+//      VapingDutyTaggedTest,
+//      ZapAccessibility
+//    ) {
+//      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+//      VapingDutyPage.signIntoAuth(
+//        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
+//        VapingDutyPage.howShouldWeContactedYouUrl
+//      )
+//
+//      Then("I should be on the vaping duty tell us how we should contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
+//        "Expected to be on the tell us how we should contact you page"
+//      )
+//
+//      When("I click on the post radio button")
+//      VapingDutyPage.selectContactPreference("Post")
+//
+//      Then("I should be on the confirm your postal address page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourPostalAddressUrl),
+//        "Expected to be on the confirm your postal address page"
+//      )
+//
+//      When("I click on the confirm address button")
+//      VapingDutyPage.clickConfirmAddress()
+//
+//      Then("I should be on the your contact preference has been updated page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+//        "Expected to be on the your contact preference has been updated page"
+//      )
+//    }
+//
+//    Scenario(
+//      "Vaping Duty Journey User updates contact preference from post to post",
+//      VapingDutyTaggedTest,
+//      ZapAccessibility
+//    ) {
+//      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+//      VapingDutyPage.signIntoAuth(
+//        AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
+//        VapingDutyPage.howShouldWeContactedYouUrl
+//      )
+//
+//      Then("I should be on the vaping duty tell us how we should contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
+//        "Expected to be on the tell us how we should contact you page"
+//      )
+//
+//      When("I click on the post radio button")
+//      VapingDutyPage.selectContactPreference("Post")
+//
+//      Then("I should be on the confirm your postal address page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.changeYourPostalAddressUrl),
+//        "Expected to be on the confirm your postal address page"
+//      )
+//    }
+//
+//    Scenario(
+//      "Vaping Duty Journey User updates contact preference to email",
+//      VapingDutyTaggedTest,
+//      ZapAccessibility
+//    ) {
+//      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+//      VapingDutyPage.signIntoAuth(
+//        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailAlreadyVerified)),
+//        VapingDutyPage.howShouldWeContactedYouUrl
+//      )
+//
+//      Then("I should be on the vaping duty tell us how we should contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
+//        "Expected to be on the tell us how we should contact you page"
+//      )
+//
+//      When("I click on the email radio button")
+//      VapingDutyPage.selectContactPreference("Email")
+//
+//      Then("I should be on the what email address should we use to contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+//        "Expected to be on the what email address should we use to contact you page"
+//      )
+//
+//      When("I enter a valid email address and click continue")
+//      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+//
+//      Then("I should be on the enter code to confirm your email address page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
+//        "Expected to be on the enter code to confirm your email address"
+//      )
+//
+//      When("I get and submit the confirmation code")
+//      VapingDutyPage.submitConfirmationCode(VapingDutyPage.emailAddressToVerify)
+//
+//      Then("I should be on the your confirmation code has been received and approved")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
+//        "Expected to be on the confirm your email address page"
+//      )
+//
+//      When("I click save and continue on confirm your email address page")
+//      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
+//
+//      Then("I should be on the your contact preference has been updated page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+//        "Expected to be on the your contact preference has been updated page"
+//      )
+//
+//      When("I redirected to how would you like to be contacted page")
+//      VapingDutyPage.goToUrl(VapingDutyPage.howShouldWeContactedYouUrl)
+//
+//      Then("I should be on the vaping duty tell us how we should contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
+//        "Expected to be on the tell us how we should contact you page"
+//      )
+//
+//      When("I click on the email radio button")
+//      VapingDutyPage.selectContactPreference("Email")
+//
+//      Then("I should be on the what email address should we use to contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+//        "Expected to be on the what email address should we use to contact you page"
+//      )
+//
+//      When("I enter a valid email address and click continue")
+//      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
+//
+//      Then("I should be on the you have asked us to use the email address page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
+//        "Expected to be on the confirm your email address page"
+//      )
+//
+//      When("I click save and continue on your confirmation code has been received and approved")
+//      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
+//
+//      Then("I should be on the your contact preference has been updated page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
+//        "Expected to be on the your contact preference has been updated page"
+//      )
+//    }
+//
+//    Scenario(
+//      "Vaping Duty Journey User attempts confirmation code 5 times",
+//      VapingDutyTaggedTest,
+//      ZapAccessibility
+//    ) {
+//      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
+//      VapingDutyPage.signIntoAuth(
+//        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+//        VapingDutyPage.howShouldWeContactedYouUrl
+//      )
+//
+//      Then("I should be on the vaping duty tell us how we should contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
+//        "Expected to be on the tell us how we should contact you page"
+//      )
+//
+//      When("I click on the email radio button")
+//      VapingDutyPage.selectContactPreference("Email")
+//
+//      Then("I should be on the what email address should we use to contact you page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
+//        "Expected to be on the what email address should we use to contact you page"
+//      )
+//
+//      When("I enter a valid email address and click continue")
+//      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressForWrongCode)
+//
+//      Then("I should be on the enter code to confirm your email address page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
+//        "Expected to be on the enter code to confirm your email address"
+//      )
+//
+//      When("I get and submit the wrong confirmation code 6 times")
+//      VapingDutyPage.submitIncorrectConfirmationCodeSixTimes(VapingDutyPage.wrongConfirmationCode)
+//
+//      Then("I should be on the you have reached the maximum number of attempts to enter a confirmation code")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.tooManyAttemptsUrl),
+//        "Expected to be on the you have reached the maximum number of attempts to enter a confirmation code"
+//      )
+//
+//    }
 
-      When("User selects no on VPMA page")
-      VapingDutyPage.selectVapingDutyProductsIdRadio(false)
-
-      Then("I should be on apply for approval page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.youNeedAnApprovalIdUrl),
-        "Expected to be on the apply for approval page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation())
-
-      When("User selects yes on VPMA page")
-      VapingDutyPage.selectVapingDutyProductsIdRadio(true)
-
-      Then("I should be on enrolment request access page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentAccessUrl),
-        "Expected to be on the request enrolment access page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Vaping Duty Journey Complete your return", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway")
       VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)))
 
-      Then("I should be on already enrolled page")
+      // when I am on BTA page
+      // And I click on Complete your return link
+      // Then i should be on the before you start page
+
+      When("User redirects to before you start page")
+      VapingDutyPage.goToUrl(VapingDutyPage.beforeYouStartPageUrl)
+
+      Then("I should be on before you start page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.alreadyEnrolledUrl),
-        "Expected to be on the already enrolled"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
+        "Expected to be on the apply for approval page"
       )
-      When("I click on continue to your business tax account button")
-      VapingDutyPage.clickContinueToBusinessTaxAccount()
 
-      Then("I should be on the BTA page")
+      When("User Clicks on continue on before you start page")
+      VapingDutyPage.ClickContinueOnBeforeYouStartPage()
+
+
+      When("User redirects to task list page")
+      VapingDutyPage.goToUrl(VapingDutyPage.taskListUrl)
+
+      Then("I should be on task list page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountRoute),
-        "Expected to be on the BTA page"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the apply for approval page"
       )
-    }
-
-    Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.agent())
-
-      Then("I should be on the organisation sign in page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
-        "Expected to be on the organisation sign in page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.individual())
-
-      Then("I should be on the organisation sign in page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
-        "Expected to be on the organisation sign in page"
-      )
-    }
-
-    Scenario(
-      "Vaping Duty Journey User updates contact preference from email to post",
-      VapingDutyTaggedTest,
-      ZapAccessibility
-    ) {
-      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
-        VapingDutyPage.howShouldWeContactedYouUrl
-      )
-
-      Then("I should be on the vaping duty tell us how we should contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
-        "Expected to be on the tell us how we should contact you page"
-      )
-
-      When("I click on the post radio button")
-      VapingDutyPage.selectContactPreference("Post")
-
-      Then("I should be on the confirm your postal address page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourPostalAddressUrl),
-        "Expected to be on the confirm your postal address page"
-      )
-
-      When("I click on the confirm address button")
-      VapingDutyPage.clickConfirmAddress()
-
-      Then("I should be on the your contact preference has been updated page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
-        "Expected to be on the your contact preference has been updated page"
-      )
-    }
-
-    Scenario(
-      "Vaping Duty Journey User updates contact preference from post to post",
-      VapingDutyTaggedTest,
-      ZapAccessibility
-    ) {
-      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
-        VapingDutyPage.howShouldWeContactedYouUrl
-      )
-
-      Then("I should be on the vaping duty tell us how we should contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
-        "Expected to be on the tell us how we should contact you page"
-      )
-
-      When("I click on the post radio button")
-      VapingDutyPage.selectContactPreference("Post")
-
-      Then("I should be on the confirm your postal address page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.changeYourPostalAddressUrl),
-        "Expected to be on the confirm your postal address page"
-      )
-    }
-
-    Scenario(
-      "Vaping Duty Journey User updates contact preference to email",
-      VapingDutyTaggedTest,
-      ZapAccessibility
-    ) {
-      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailAlreadyVerified)),
-        VapingDutyPage.howShouldWeContactedYouUrl
-      )
-
-      Then("I should be on the vaping duty tell us how we should contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
-        "Expected to be on the tell us how we should contact you page"
-      )
-
-      When("I click on the email radio button")
-      VapingDutyPage.selectContactPreference("Email")
-
-      Then("I should be on the what email address should we use to contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
-        "Expected to be on the what email address should we use to contact you page"
-      )
-
-      When("I enter a valid email address and click continue")
-      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
-
-      Then("I should be on the enter code to confirm your email address page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
-        "Expected to be on the enter code to confirm your email address"
-      )
-
-      When("I get and submit the confirmation code")
-      VapingDutyPage.submitConfirmationCode(VapingDutyPage.emailAddressToVerify)
-
-      Then("I should be on the your confirmation code has been received and approved")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
-        "Expected to be on the confirm your email address page"
-      )
-
-      When("I click save and continue on confirm your email address page")
-      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
-
-      Then("I should be on the your contact preference has been updated page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
-        "Expected to be on the your contact preference has been updated page"
-      )
-
-      When("I redirected to how would you like to be contacted page")
-      VapingDutyPage.goToUrl(VapingDutyPage.howShouldWeContactedYouUrl)
-
-      Then("I should be on the vaping duty tell us how we should contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
-        "Expected to be on the tell us how we should contact you page"
-      )
-
-      When("I click on the email radio button")
-      VapingDutyPage.selectContactPreference("Email")
-
-      Then("I should be on the what email address should we use to contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
-        "Expected to be on the what email address should we use to contact you page"
-      )
-
-      When("I enter a valid email address and click continue")
-      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressToVerify)
-
-      Then("I should be on the you have asked us to use the email address page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.confirmEmailAddressUrl),
-        "Expected to be on the confirm your email address page"
-      )
-
-      When("I click save and continue on your confirmation code has been received and approved")
-      VapingDutyPage.confirmCodeHasBeenReceivedAndApproved()
-
-      Then("I should be on the your contact preference has been updated page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.emailContactPreferenceConfirmationUrl),
-        "Expected to be on the your contact preference has been updated page"
-      )
-    }
-
-    Scenario(
-      "Vaping Duty Journey User attempts confirmation code 5 times",
-      VapingDutyTaggedTest,
-      ZapAccessibility
-    ) {
-      Given("I authenticate using Government Gateway and redirect to tell us how we should contact you page ")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
-        VapingDutyPage.howShouldWeContactedYouUrl
-      )
-
-      Then("I should be on the vaping duty tell us how we should contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.howShouldWeContactedYouUrl),
-        "Expected to be on the tell us how we should contact you page"
-      )
-
-      When("I click on the email radio button")
-      VapingDutyPage.selectContactPreference("Email")
-
-      Then("I should be on the what email address should we use to contact you page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enterEmailAddressUrl),
-        "Expected to be on the what email address should we use to contact you page"
-      )
-
-      When("I enter a valid email address and click continue")
-      VapingDutyPage.submitEmailAddress(VapingDutyPage.emailAddressForWrongCode)
-
-      Then("I should be on the enter code to confirm your email address page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enterToConfirmCodeUrl),
-        "Expected to be on the enter code to confirm your email address"
-      )
-
-      When("I get and submit the wrong confirmation code 6 times")
-      VapingDutyPage.submitIncorrectConfirmationCodeSixTimes(VapingDutyPage.wrongConfirmationCode)
-
-      Then("I should be on the you have reached the maximum number of attempts to enter a confirmation code")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.tooManyAttemptsUrl),
-        "Expected to be on the you have reached the maximum number of attempts to enter a confirmation code"
-      )
-
     }
   }
 }

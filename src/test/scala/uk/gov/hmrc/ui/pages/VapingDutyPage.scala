@@ -50,8 +50,9 @@ object VapingDutyPage extends BasePage {
   private val authSessionClient = new AuthLoginStubSessionClient()
 
   // ---------- Common route bases ----------
-  private val enrolmentBase: String   = s"$vapingDutyBase/enrolment"
-  private val contactPrefBase: String = s"$vapingDutyBase/contact-preferences"
+  private val enrolmentBase: String      = s"$vapingDutyBase/enrolment"
+  private val contactPrefBase: String    = s"$vapingDutyBase/contact-preferences"
+  private val completeReturnBase: String = s"$vapingDutyBase/complete-return"
 
   // ---------- Enrolment URLs ----------
   val doYouHaveApprovalIdUrl: String   = s"$enrolmentBase/do-you-have-an-approval-id"
@@ -74,6 +75,10 @@ object VapingDutyPage extends BasePage {
   val enterToConfirmCodeUrl: String                 = s"$contactPrefBase/confirm-email-address&origin=Vaping+Products+Duty"
   val confirmEmailAddressUrl: String                = s"$contactPrefBase/confirm-email-address"
   val tooManyAttemptsUrl: String                    = s"$contactPrefBase/too-many-attempts"
+
+  // ---------- Complete return URLs ----------
+  val beforeYouStartPageUrl: String = s"$completeReturnBase/before-you-start"
+  val taskListUrl: String = s"$completeReturnBase/task-list"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -133,6 +138,9 @@ object VapingDutyPage extends BasePage {
 
   def clickContinueToBusinessTaxAccount(): Unit =
     click(continueToBTAButton)
+
+  def ClickContinueOnBeforeYouStartPage(): Unit =
+    click(continueBeforeYouStart)
 
   def selectContactPreference(contactPreference: String): Unit =
     click(if (contactPreference == "Post") postContactPreferenceRadioButton else emailContactPreferenceRadioButton)

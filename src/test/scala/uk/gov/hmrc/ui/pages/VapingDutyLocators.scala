@@ -38,6 +38,7 @@ object VapingDutyLocators {
   val yesRadioButton: By                     = By.id("value")
   val noRadioButton: By                      = By.cssSelector("#value-no")
   val continueToBTAButton: By                = By.cssSelector("#main-content > div > div > a")
+  val continueBeforeYouStart: By             = By.cssSelector("#main-content > div > div > a")
   val postContactPreferenceRadioButton: By   = By.cssSelector("#value_1")
   val emailContactPreferenceRadioButton: By  = By.cssSelector("#value_0")
   val emailContactField: By                  = By.cssSelector("#value")
