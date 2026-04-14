@@ -78,7 +78,7 @@ object VapingDutyPage extends BasePage {
 
   // ---------- Complete return URLs ----------
   val beforeYouStartPageUrl: String = s"$completeReturnBase/before-you-start"
-  val taskListUrl: String = s"$completeReturnBase/task-list"
+  val taskListUrl: String           = s"$completeReturnBase/task-list"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)

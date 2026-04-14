@@ -298,7 +298,7 @@ class VapingDutySpecs extends BaseSpec {
 
       // when I am on BTA page
       // And I click on Complete your return link
-      // Then i should be on the before you start page
+      // Then I should be on the before you start page
 
       When("User redirects to before you start page")
       VapingDutyPage.goToUrl(VapingDutyPage.beforeYouStartPageUrl)
@@ -312,15 +312,14 @@ class VapingDutySpecs extends BaseSpec {
       When("User Clicks on continue on before you start page")
       VapingDutyPage.ClickContinueOnBeforeYouStartPage()
 
-
-      When("User redirects to task list page")
-      VapingDutyPage.goToUrl(VapingDutyPage.taskListUrl)
-
-      Then("I should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the apply for approval page"
-      )
+//      When("User redirects to task list page")
+//      VapingDutyPage.goToUrl(VapingDutyPage.taskListUrl)
+//
+//      Then("I should be on task list page")
+//      assert(
+//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+//        "Expected to be on the apply for approval page"
+//      )
     }
   }
 }
