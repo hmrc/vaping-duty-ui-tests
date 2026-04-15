@@ -312,14 +312,11 @@ class VapingDutySpecs extends BaseSpec {
       When("User Clicks on continue on before you start page")
       VapingDutyPage.ClickContinueOnBeforeYouStartPage()
 
-//      When("User redirects to task list page")
-//      VapingDutyPage.goToUrl(VapingDutyPage.taskListUrl)
-//
-//      Then("I should be on task list page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-//        "Expected to be on the apply for approval page"
-//      )
+      Then("I should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the apply for approval page"
+      )
     }
   }
 }
