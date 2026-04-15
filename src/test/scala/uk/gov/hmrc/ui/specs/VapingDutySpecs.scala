@@ -293,15 +293,8 @@ class VapingDutySpecs extends BaseSpec {
     }
 
     Scenario("Vaping Duty Journey Complete your return", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("I authenticate using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)))
-
-      // when I am on BTA page
-      // And I click on Complete your return link
-      // Then I should be on the before you start page
-
-      When("User redirects to before you start page")
-      VapingDutyPage.goToUrl(VapingDutyPage.beforeYouStartPageUrl)
+      Given("I authenticate using Government Gateway and user redirects to before you start page")
+      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
 
       Then("I should be on before you start page")
       assert(
@@ -312,14 +305,11 @@ class VapingDutySpecs extends BaseSpec {
       When("User Clicks on continue on before you start page")
       VapingDutyPage.ClickContinueOnBeforeYouStartPage()
 
-//      When("User redirects to task list page")
-//      VapingDutyPage.goToUrl(VapingDutyPage.taskListUrl)
-//
-//      Then("I should be on task list page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-//        "Expected to be on the apply for approval page"
-//      )
+      Then("I should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the apply for approval page"
+      )
     }
   }
 }
