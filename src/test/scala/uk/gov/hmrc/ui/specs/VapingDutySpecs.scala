@@ -292,14 +292,14 @@ class VapingDutySpecs extends BaseSpec {
 
     }
 
-    Scenario("Vaping Duty Journey Complete your return", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Vaping Duty Journey user with no duty to declare", VapingDutyTaggedTest, ZapAccessibility) {
       Given("I authenticate using Government Gateway and user redirects to before you start page")
       VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
 
       Then("I should be on before you start page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
-        "Expected to be on the apply for approval page"
+        "Expected to be on the before you start page"
       )
 
       When("User Clicks on continue on before you start page")
@@ -308,7 +308,72 @@ class VapingDutySpecs extends BaseSpec {
       Then("I should be on task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the apply for approval page"
+        "Expected to be on the task list page"
+      )
+
+      When("User click on Tell us if you need to declare duty")
+      VapingDutyPage.ClickLinkFromTaskList()
+
+      Then("I should be on Do you need to declare vaping products for duty page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
+        "Expected to be on the declare duty question page"
+      )
+
+      When("User selects yes on do you need to declare vaping products for duty page")
+      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(false)
+
+      Then("I should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+    }
+
+    Scenario("Vaping Duty Journey user with duty to declare", VapingDutyTaggedTest, ZapAccessibility) {
+      Given("I authenticate using Government Gateway and user redirects to before you start page")
+      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
+
+      Then("I should be on before you start page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
+        "Expected to be on the before you start page"
+      )
+
+      When("User Clicks on continue on before you start page")
+      VapingDutyPage.ClickContinueOnBeforeYouStartPage()
+
+      Then("I should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User click on Tell us if you need to declare duty")
+      VapingDutyPage.ClickLinkFromTaskList()
+
+      Then("I should be on Do you need to declare vaping products for duty page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
+        "Expected to be on the declare duty question page"
+      )
+
+      When("User selects yes on do you need to declare vaping products for duty page")
+      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(true)
+
+      Then("I should be on the how much vaping products released do you need to declare?")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.amountOfVapingProductsReleasedUrl),
+        "Expected to be on the How much vaping products released do you need to declare?"
+      )
+
+      When("I enter a valid email address and click continue")
+      VapingDutyPage.submitTotalMillilitresOfVapingLiquid("1000")
+
+      Then("I should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
       )
     }
   }
