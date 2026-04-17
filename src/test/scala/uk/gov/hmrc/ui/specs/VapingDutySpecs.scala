@@ -303,7 +303,7 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("User Clicks on continue on before you start page")
-      VapingDutyPage.ClickContinueOnBeforeYouStartPage()
+      VapingDutyPage.clickContinueOnBeforeYouStartPage()
 
       Then("I should be on task list page")
       assert(
@@ -312,7 +312,7 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("User click on Tell us if you need to declare duty")
-      VapingDutyPage.ClickLinkFromTaskList()
+      VapingDutyPage.clickLinkFromTaskList("declareDuty")
 
       Then("I should be on Do you need to declare vaping products for duty page")
       assert(
@@ -341,7 +341,7 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("User Clicks on continue on before you start page")
-      VapingDutyPage.ClickContinueOnBeforeYouStartPage()
+      VapingDutyPage.clickContinueOnBeforeYouStartPage()
 
       Then("I should be on task list page")
       assert(
@@ -350,7 +350,7 @@ class VapingDutySpecs extends BaseSpec {
       )
 
       When("User click on Tell us if you need to declare duty")
-      VapingDutyPage.ClickLinkFromTaskList()
+      VapingDutyPage.clickLinkFromTaskList("declareDuty")
 
       Then("I should be on Do you need to declare vaping products for duty page")
       assert(
