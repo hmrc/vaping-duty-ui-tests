@@ -140,7 +140,7 @@ object VapingDutyPage extends BasePage {
 
   def selectDeclareVapingProductsForDutyRadio(declareVapingProductsForDuty: Boolean): Unit =
     click(if (declareVapingProductsForDuty) yesRadioButton else noRadioButton)
-    click(continueButton)
+    click(saveAndContinueButton)
 
   def clickContinueToBusinessTaxAccount(): Unit =
     click(continueToBTAButton)
@@ -225,5 +225,5 @@ object VapingDutyPage extends BasePage {
   def submitTotalMillilitresOfVapingLiquid(amount: String): Unit =
     waitForElementToBeVisible(vapingLiquidField)
     sendKeys(vapingLiquidField, amount)
-    click(continueButton)
+    click(saveAndContinueButton)
 }
