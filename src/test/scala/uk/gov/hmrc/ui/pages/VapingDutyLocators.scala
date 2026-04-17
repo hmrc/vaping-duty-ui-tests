@@ -48,5 +48,5 @@ object VapingDutyLocators {
   val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
   val saveAndContinueButton: By              = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
   val declareDutyLink: By                    = By.xpath("//a[@href='/vaping-duty/complete-return/declare-duty']")
-  val vapingLiquidField: By                  = By.id("volume-of-vaping-liquid")
+  val vapingLiquidField: By                  = By.id("value")
 }

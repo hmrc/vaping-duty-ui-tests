@@ -225,5 +225,5 @@ object VapingDutyPage extends BasePage {
   def submitTotalMillilitresOfVapingLiquid(amount: String): Unit =
     waitForElementToBeVisible(vapingLiquidField)
     sendKeys(vapingLiquidField, amount)
-    click(saveAndContinueButton)
+    click(continueButton)
 }
