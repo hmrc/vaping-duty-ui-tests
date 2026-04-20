@@ -77,8 +77,10 @@ object VapingDutyPage extends BasePage {
   val tooManyAttemptsUrl: String                    = s"$contactPrefBase/too-many-attempts"
 
   // ---------- Complete return URLs ----------
-  val beforeYouStartPageUrl: String = s"$completeReturnBase/before-you-start"
-  val taskListUrl: String           = s"$completeReturnBase/task-list"
+  val beforeYouStartPageUrl: String             = s"$completeReturnBase/before-you-start"
+  val taskListUrl: String                       = s"$completeReturnBase/task-list"
+  val declareDutyUrl: String                    = s"$completeReturnBase/declare-duty"
+  val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -136,11 +138,33 @@ object VapingDutyPage extends BasePage {
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
     click(continueButton)
 
+  def selectDeclareVapingProductsForDutyRadio(declareVapingProductsForDuty: Boolean): Unit =
+    click(if (declareVapingProductsForDuty) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+
   def clickContinueToBusinessTaxAccount(): Unit =
     click(continueToBTAButton)
 
-  def ClickContinueOnBeforeYouStartPage(): Unit =
+  def clickContinueOnBeforeYouStartPage(): Unit =
     click(continueBeforeYouStart)
+
+  def clickLinkFromTaskList(task: String): Unit =
+    task match {
+      case "declareDuty" =>
+        click(declareDutyLink)
+
+//      case "spoiltAdjustments" =>
+//        click(spoiltAdjustmentsLink)
+//
+//      case "overUnderAdjustments" =>
+//        click(overUnderAdjustmentsLink)
+//
+//      case "dutySuspended" =>
+//        click(dutySuspendedLink)
+
+      case _ =>
+        throw new IllegalArgumentException(s"Unknown task link: $task")
+    }
 
   def selectContactPreference(contactPreference: String): Unit =
     click(if (contactPreference == "Post") postContactPreferenceRadioButton else emailContactPreferenceRadioButton)
@@ -196,5 +220,10 @@ object VapingDutyPage extends BasePage {
     }
   def confirmCodeHasBeenReceivedAndApproved(): Unit                    =
     waitForElementToBeVisible(saveAndContinueButton)
+    click(saveAndContinueButton)
+
+  def submitTotalMillilitresOfVapingLiquid(amount: String): Unit =
+    waitForElementToBeVisible(vapingLiquidField)
+    sendKeys(vapingLiquidField, amount)
     click(saveAndContinueButton)
 }
