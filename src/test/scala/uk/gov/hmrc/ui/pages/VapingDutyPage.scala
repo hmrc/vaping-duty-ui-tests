@@ -83,6 +83,8 @@ object VapingDutyPage extends BasePage {
   val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
+  val dutySuspendedUrl: String                  = s"$completeReturnBase/duty-suspended/suspended-products"
+  val receivedOrMovedAmountUrl: String          = s"$completeReturnBase/duty-suspended/enter-received-or-moved-amount"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -158,14 +160,14 @@ object VapingDutyPage extends BasePage {
       case "checkYourAnswers" =>
         click(checkYourAnswersLink)
 
-//      case "spoiltAdjustments" =>
-//        click(spoiltAdjustmentsLink)
-//
-//      case "overUnderAdjustments" =>
-//        click(overUnderAdjustmentsLink)
-//
-//      case "dutySuspended" =>
-//        click(dutySuspendedLink)
+      case "spoiltAdjustments" =>
+        click(spoiltAdjustmentsLink)
+
+      case "overUnderAdjustments" =>
+        click(overUnderAdjustmentsLink)
+
+      case "dutySuspended" =>
+        click(dutySuspendedLink)
 
       case _ =>
         throw new IllegalArgumentException(s"Unknown task link: $task")
@@ -218,12 +220,9 @@ object VapingDutyPage extends BasePage {
   def submitIncorrectConfirmationCodeSixTimes(wrongCode: String): Unit =
     (1 to 6).foreach { _ =>
       fluentWait.until(ExpectedConditions.elementToBeClickable(emailConfirmationCodeField))
-
       val before = timeOrigin()
-
       sendKeys(emailConfirmationCodeField, wrongCode)
       click(emailConfirmationCodeConfirmButton)
-
       waitForReload(before)
     }
   def confirmCodeHasBeenReceivedAndApproved(): Unit                    =

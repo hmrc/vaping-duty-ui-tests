@@ -330,9 +330,12 @@ class VapingDutySpecs extends BaseSpec {
       )
     }
 
-    Scenario("Vaping Duty Journey user with duty to declare", VapingDutyTaggedTest, ZapAccessibility) {
+    Scenario("Vaping Duty Journey submit return journey", VapingDutyTaggedTest, ZapAccessibility) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
+        VapingDutyPage.beforeYouStartPageUrl
+      )
 
       Then("User should be on before you start page")
       assert(
@@ -375,27 +378,6 @@ class VapingDutySpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
-    }
-
-    Scenario("Vaping Duty Journey submit return journey", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
-
-      Then("User should be on before you start page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
-        "Expected to be on the before you start page"
-      )
-
-      When("User Clicks on continue on before you start page")
-      VapingDutyPage.clickContinueOnBeforeYouStartPage()
-
-      Then("User should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the task list page"
-      )
-
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
 
