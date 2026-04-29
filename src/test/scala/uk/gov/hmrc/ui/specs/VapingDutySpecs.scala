@@ -333,7 +333,7 @@ class VapingDutySpecs extends BaseSpec {
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTaggedTest, ZapAccessibility) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferencePostToPost)),
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
         VapingDutyPage.beforeYouStartPageUrl
       )
 
