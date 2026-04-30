@@ -18,84 +18,16 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.models.{AuthUser, Enrolment}
 import uk.gov.hmrc.ui.pages.VapingDutyPage
-import uk.gov.hmrc.ui.specs.tags.{VapingDutyTaggedTest, ZapAccessibility}
+import uk.gov.hmrc.ui.specs.tags.{ContactPreference, VapingDutyTest, ZapAccessibility}
 
-class VapingDutySpecs extends BaseSpec {
+class ContactPreferenceSpecs extends BaseSpec {
 
-  Feature("VapingDuty Tests") {
-
-    Scenario("Vaping Duty Journey User Without Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation())
-
-      When("User selects no on VPMA page")
-      VapingDutyPage.selectVapingDutyProductsIdRadio(false)
-
-      Then("User should be on apply for approval page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.youNeedAnApprovalIdUrl),
-        "Expected to be on the apply for approval page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Enrolment To Claim", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation())
-
-      When("User selects yes on VPMA page")
-      VapingDutyPage.selectVapingDutyProductsIdRadio(true)
-
-      Then("User should be on enrolment request access page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.enrolmentAccessUrl),
-        "Expected to be on the request enrolment access page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Enrolment Already Claimed", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)))
-
-      Then("User should be on already enrolled page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.alreadyEnrolledUrl),
-        "Expected to be on the already enrolled"
-      )
-      When("User clicks on continue to your business tax account button")
-      VapingDutyPage.clickContinueToBusinessTaxAccount()
-
-      Then("User should be on the BTA page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.businessAccountRoute),
-        "Expected to be on the BTA page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Agent account", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.agent())
-
-      Then("User should be on the organisation sign in page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
-        "Expected to be on the organisation sign in page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey User With Individual account", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway")
-      VapingDutyPage.signIntoAuth(AuthUser.individual())
-
-      Then("User should be on the organisation sign in page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.administratorRequiredUrl),
-        "Expected to be on the organisation sign in page"
-      )
-    }
+  Feature("Vaping Duty Contact Preference Tests") {
 
     Scenario(
       "Vaping Duty Journey User updates contact preference from email to post",
-      VapingDutyTaggedTest,
+      ContactPreference,
+      VapingDutyTest,
       ZapAccessibility
     ) {
       Given("User authenticates using Government Gateway and redirect to tell us how we should contact you page ")
@@ -131,7 +63,8 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario(
       "Vaping Duty Journey User updates contact preference from post to post",
-      VapingDutyTaggedTest,
+      ContactPreference,
+      VapingDutyTest,
       ZapAccessibility
     ) {
       Given("User authenticates using Government Gateway and redirect to tell us how we should contact you page ")
@@ -158,7 +91,8 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario(
       "Vaping Duty Journey User updates contact preference to email",
-      VapingDutyTaggedTest,
+      ContactPreference,
+      VapingDutyTest,
       ZapAccessibility
     ) {
       Given("User authenticates using Government Gateway and redirect to tell us how we should contact you page ")
@@ -248,7 +182,8 @@ class VapingDutySpecs extends BaseSpec {
 
     Scenario(
       "Vaping Duty Journey User attempts confirmation code 5 times",
-      VapingDutyTaggedTest,
+      ContactPreference,
+      VapingDutyTest,
       ZapAccessibility
     ) {
       Given("User authenticates using Government Gateway and redirect to tell us how we should contact you page ")
@@ -290,111 +225,6 @@ class VapingDutySpecs extends BaseSpec {
         "Expected to be on the you have reached the maximum number of attempts to enter a confirmation code"
       )
 
-    }
-
-    Scenario("Vaping Duty Journey user with no duty to declare", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
-
-      Then("User should be on before you start page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
-        "Expected to be on the before you start page"
-      )
-
-      When("User Clicks on continue on before you start page")
-      VapingDutyPage.clickContinueOnBeforeYouStartPage()
-
-      Then("User should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the task list page"
-      )
-
-      When("User clicks on Tell us if you need to declare duty")
-      VapingDutyPage.clickLinkFromTaskList("declareDuty")
-
-      Then("User should be on Do you need to declare vaping products for duty page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
-        "Expected to be on the declare duty question page"
-      )
-
-      When("User selects no on do you need to declare vaping products for duty page")
-      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(false)
-
-      Then("User should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the task list page"
-      )
-    }
-
-    Scenario("Vaping Duty Journey submit return journey", VapingDutyTaggedTest, ZapAccessibility) {
-      Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
-        VapingDutyPage.beforeYouStartPageUrl
-      )
-
-      Then("User should be on before you start page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
-        "Expected to be on the before you start page"
-      )
-
-      When("User Clicks on continue on before you start page")
-      VapingDutyPage.clickContinueOnBeforeYouStartPage()
-
-      Then("User should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the task list page"
-      )
-
-      When("User clicks on Tell us if you need to declare duty")
-      VapingDutyPage.clickLinkFromTaskList("declareDuty")
-
-      Then("User should be on Do you need to declare vaping products for duty page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
-        "Expected to be on the declare duty question page"
-      )
-
-      When("User selects yes on do you need to declare vaping products for duty page")
-      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(true)
-
-      Then("User should be on the how much vaping products released do you need to declare?")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.amountOfVapingProductsReleasedUrl),
-        "Expected to be on the How much vaping products released do you need to declare?"
-      )
-
-      When("User enters an amount and click continue")
-      VapingDutyPage.submitTotalMillilitresOfVapingLiquid("1000")
-
-      Then("User should be on task list page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-        "Expected to be on the task list page"
-      )
-      When("User clicks on check your answers and submit return link")
-      VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
-
-      Then("User should be on the check your answers page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
-        "Expected to be on the check your answers page"
-      )
-
-      When("User clicks confirm and submit on the check your answers page")
-      VapingDutyPage.clickConfirmAndSubmit()
-
-      Then("User should be on the return submitted confirmation page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
-        "Expected to be on the return submitted confirmation page"
-      )
     }
   }
 }

@@ -7,6 +7,7 @@ BROWSER="chrome"
 ENVIRONMENT="local"
 HEADLESS="true"
 SECURITY_ASSESSMENT="false"
+TAGS=""
 
 POSITIONAL_ARGS=()
 
@@ -34,14 +35,23 @@ while [[ $# -gt 0 ]]; do
       SECURITY_ASSESSMENT="true"
       shift
       ;;
+    -t|--tags)
+      [[ -n "${2-}" && ! "${2}" =~ ^- ]] || { echo "Error: Missing value for $1. See --help"; exit 1; }
+      TAGS="$2"
+      shift 2
+      ;;
     --help)
-      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless] [-v|--visible]"
+      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless] [-v|--visible] [-t|--tags <tagName>]"
       echo "Examples:"
       echo "  $0 -b chrome -e local -h            # run with a headless browser (sets headless=true)"
       echo "  $0 -v, --visible, --headed          # run with a visible browser (sets headless=false)"
       echo "  $0 staging                          # auto detects environment"
       echo "  $0 firefox qa false                 # positional fallbacks (browser env headless)"
-      echo "  $0 -s true                          # enable security assessment"
+      echo "  $0 -s                               # enable security assessment"
+      echo "  $0 -t CR  | CompleteReturn          # run only complete return tests"
+      echo "  $0 -t CP  | ContactPreference       # run only contact preference tests"
+      echo "  $0 -t EC  | EnrolmentClaim          # run only enrolment claim tests"
+      echo "  $0 -t ALL | VapingDutyTest          # run all vaping duty tests"
       exit 0
       ;;
     -*|--*)
@@ -54,6 +64,14 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+# ----  tag shortcuts ----
+case $TAGS in
+  CR)  TAGS="CompleteReturn" ;;
+  CP)  TAGS="ContactPreference" ;;
+  EC)  TAGS="EnrolmentClaim" ;;
+  ALL) TAGS="VapingDutyTest" ;;
+esac
 
 # ---- Restore positionals ----
 if ((${#POSITIONAL_ARGS[@]})); then
@@ -70,7 +88,14 @@ echo "BROWSER     = ${BROWSER}"
 echo "ENVIRONMENT = ${ENVIRONMENT}"
 echo "HEADLESS    = ${HEADLESS}"
 echo "ZAP         = ${SECURITY_ASSESSMENT}"
+echo "TAGS        = ${TAGS:-none}"
 echo "----------------------------------------"
+
+if [[ -n "${TAGS}" ]]; then
+  TEST_CMD="testOnly * -- -n ${TAGS}"
+else
+  TEST_CMD="test"
+fi
 
 sbt clean \
   -Dbrowser="${BROWSER}" \
@@ -78,4 +103,4 @@ sbt clean \
   -Dbrowser.option.headless="${HEADLESS}" \
   -Dzap.proxy=true \
   -Dsecurity.assessment=${SECURITY_ASSESSMENT} \
-  test testReport
+  "${TEST_CMD}" testReport
