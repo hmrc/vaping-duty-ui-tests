@@ -36,9 +36,11 @@ object VapingDutyLocators {
   val identifierValue: By                    = By.id("input-0-0-value")
   val submitButton: By                       = By.cssSelector("#inputForm > input:nth-child(37)")
   val yesRadioButton: By                     = By.id("value")
+  val vapingLiquidField: By                  = By.id("value")
   val noRadioButton: By                      = By.cssSelector("#value-no")
   val continueToBTAButton: By                = By.cssSelector("#main-content > div > div > a")
   val continueBeforeYouStart: By             = By.cssSelector("#main-content > div > div > a")
+  val confirmAndSubmitButton: By             = By.xpath("//*[@type='submit']")
   val postContactPreferenceRadioButton: By   = By.cssSelector("#value_1")
   val emailContactPreferenceRadioButton: By  = By.cssSelector("#value_0")
   val emailContactField: By                  = By.cssSelector("#value")
@@ -48,5 +50,9 @@ object VapingDutyLocators {
   val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
   val saveAndContinueButton: By              = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
   val declareDutyLink: By                    = By.xpath("//a[@href='/vaping-duty/complete-return/declare-duty']")
-  val vapingLiquidField: By                  = By.id("value")
+  val checkYourAnswersLink: By               = By.xpath("//a[@href='/vaping-duty/complete-return/check-your-answers']")
+  val spoiltAdjustmentsLink: By              = By.xpath("//a[@href='/vaping-duty/complete-return/']")
+  val overUnderAdjustmentsLink: By           = By.xpath("//a[@href='/vaping-duty/complete-return/']")
+  val dutySuspendedLink: By                  = By.xpath("//a[@href='/vaping-duty/complete-return/duty-suspended/suspended-products']")
+
 }
