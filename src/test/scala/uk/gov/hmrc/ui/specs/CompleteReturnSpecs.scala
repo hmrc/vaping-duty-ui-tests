@@ -131,6 +131,19 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
         "Expected to be on the return submitted confirmation page"
       )
+
+//      When("User clicks view your return")
+//      VapingDutyPage.clickViewYourReturn()
+
+      When("User go to view your return url")
+      VapingDutyPage.goToUrl(VapingDutyPage.viewYourReturnsUrl)
+
+      Then("User should be on the view your return page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your return page"
+      )
+
     }
   }
 }

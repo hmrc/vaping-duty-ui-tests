@@ -85,6 +85,7 @@ object VapingDutyPage extends BasePage {
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val dutySuspendedUrl: String                  = s"$completeReturnBase/duty-suspended/suspended-products"
   val receivedOrMovedAmountUrl: String          = s"$completeReturnBase/duty-suspended/enter-received-or-moved-amount"
+  val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -182,6 +183,9 @@ object VapingDutyPage extends BasePage {
 
   def clickConfirmAndSubmit(): Unit =
     click(confirmAndSubmitButton)
+
+  def clickViewYourReturn(): Unit =
+    click(viewYourReturnLink)
 
   def submitEmailAddress(emailAddress: String): Unit =
     waitForElementToBeVisible(emailContactField)
