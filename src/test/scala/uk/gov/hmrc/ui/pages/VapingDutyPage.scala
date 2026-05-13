@@ -85,6 +85,7 @@ object VapingDutyPage extends BasePage {
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val dutySuspendedUrl: String                  = s"$completeReturnBase/duty-suspended/suspended-products"
   val receivedOrMovedAmountUrl: String          = s"$completeReturnBase/duty-suspended/enter-received-or-moved-amount"
+  val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -151,6 +152,12 @@ object VapingDutyPage extends BasePage {
 
   def clickContinueOnBeforeYouStartPage(): Unit =
     click(continueBeforeYouStart)
+
+  def clickSubmitReturnLink(): Unit =
+    click(submitReturnLink)
+
+  def clickViewReturnLink(): Unit =
+    click(viewReturnLink)
 
   def clickLinkFromTaskList(task: String): Unit =
     task match {
