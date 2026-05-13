@@ -31,7 +31,7 @@ class CompleteReturnSpecs extends BaseSpec {
     ) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmail)),
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
         VapingDutyPage.viewYourReturnsUrl
       )
 
@@ -81,7 +81,7 @@ class CompleteReturnSpecs extends BaseSpec {
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
         VapingDutyPage.viewYourReturnsUrl
       )
 
