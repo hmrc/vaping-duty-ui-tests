@@ -30,7 +30,19 @@ class CompleteReturnSpecs extends BaseSpec {
       ZapAccessibility
     ) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(AuthUser.organisation(Some(Enrolment.Vpd)), VapingDutyPage.beforeYouStartPageUrl)
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
+        VapingDutyPage.viewYourReturnsUrl
+      )
+
+      Then("User should be on the view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User Clicks on the submit return link")
+      VapingDutyPage.clickSubmitReturnLink()
 
       Then("User should be on before you start page")
       assert(
@@ -69,9 +81,18 @@ class CompleteReturnSpecs extends BaseSpec {
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
       Given("User authenticates using Government Gateway and user redirects to before you start page")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
-        VapingDutyPage.beforeYouStartPageUrl
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
+        VapingDutyPage.viewYourReturnsUrl
       )
+
+      Then("User should be on view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User Clicks on the submit return link")
+      VapingDutyPage.clickSubmitReturnLink()
 
       Then("User should be on before you start page")
       assert(
@@ -130,6 +151,29 @@ class CompleteReturnSpecs extends BaseSpec {
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
         "Expected to be on the return submitted confirmation page"
+      )
+    }
+
+    Scenario("Vaping Duty Journey view individual return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
+      Given("User authenticates using Government Gateway and user redirects to before you start page")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
+        VapingDutyPage.viewYourReturnsUrl
+      )
+
+      Then("User should be on view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User Clicks on the view return link")
+      VapingDutyPage.clickViewReturnLink()
+
+      Then("User should be on the view your return page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your return page"
       )
     }
   }

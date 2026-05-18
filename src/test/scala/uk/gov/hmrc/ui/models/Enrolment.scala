@@ -27,7 +27,8 @@ final case class Enrolment(
 
 object Enrolment {
 
-  private val secureRandom = new SecureRandom()
+  private val secureRandom             = new SecureRandom()
+  private lazy val emailCredId: String = randomNumericId(16)
 
   private def randomNumericId(length: Int = 16): String = {
     val firstDigit = secureRandom.nextInt(9) + 1
@@ -35,7 +36,14 @@ object Enrolment {
     firstDigit.toString + remaining
   }
 
-  private lazy val emailCredId: String = randomNumericId(16)
+  private def randomVpdId(
+    prefix: String = "XI",
+    emailFlag: String = "0",
+    suffix: String = "200"
+  ): String = {
+    val offFlags = (1 to 3).map(_ => secureRandom.nextInt(10)).mkString
+    s"${prefix}WK$emailFlag$offFlags${suffix}WK"
+  }
 
   val Vpd: Enrolment =
     Enrolment(
@@ -72,4 +80,12 @@ object Enrolment {
       identifierName = "ZVPD",
       identifierValue = "XIWK5004205WK" // verified email
     )
+
+  def RandomVpdId: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = randomVpdId(emailFlag = "5")
+    )
+
 }
