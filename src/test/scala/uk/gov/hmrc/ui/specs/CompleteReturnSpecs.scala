@@ -82,7 +82,7 @@ class CompleteReturnSpecs extends BaseSpec {
 
       Then("User should be on the Have you received or moved any finished vaping products in duty suspense page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutySuspenseUrl),
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedUrl),
         "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
       )
 
@@ -96,131 +96,131 @@ class CompleteReturnSpecs extends BaseSpec {
       )
     }
 
-//    Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
-//      Given("User authenticates using Government Gateway and user redirects to before you start page")
-//      VapingDutyPage.signIntoAuth(
-//        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
-//        VapingDutyPage.viewYourReturnsUrl
-//      )
-//
-//      Then("User should be on view your returns page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
-//        "Expected to be on the view your returns page"
-//      )
-//
-//      When("User Clicks on the submit return link")
-//      VapingDutyPage.clickSubmitReturnLink()
-//
-//      Then("User should be on before you start page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
-//        "Expected to be on the before you start page"
-//      )
-//
-//      When("User Clicks on continue on before you start page")
-//      VapingDutyPage.clickContinueOnBeforeYouStartPage()
-//
-//      Then("User should be on task list page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-//        "Expected to be on the task list page"
-//      )
-//
-//      When("User clicks on Tell us if you need to declare duty")
-//      VapingDutyPage.clickLinkFromTaskList("declareDuty")
-//
-//      Then("User should be on Do you need to declare vaping products for duty page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
-//        "Expected to be on the declare duty question page"
-//      )
-//
-//      When("User selects yes on do you need to declare vaping products for duty page")
-//      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(true)
-//
-//      Then("User should be on the how much vaping products released do you need to declare?")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.amountOfVapingProductsReleasedUrl),
-//        "Expected to be on the How much vaping products released do you need to declare?"
-//      )
-//
-//      When("User enters an amount and click continue")
-//      VapingDutyPage.submitTotalMillilitresOfVapingLiquid("1000")
-//
-//      Then("User should be on task list page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-//        "Expected to be on the task list page"
-//      )
-//
-//      When("User clicks on moved or received vpd duty suspense link")
-//      VapingDutyPage.clickLinkFromTaskList("dutySuspended")
-//
-//      Then("User should be on the Have you received or moved any finished vaping products in duty suspense page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutySuspenseUrl),
-//        "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
-//      )
-//
-//      When("User selects yes on Have you received or moved any finished vaping products in duty suspense page")
-//      VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(true)
-//
-//      Then("User should be on the how much duty suspension did you receive or move")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.enterDutySuspenseUrl),
-//        "Expected to be on the how much duty suspension did you receive or move"
-//      )
-//
-//      When("User enters an amount received and moved and click continue")
-//      VapingDutyPage.submitDutySuspenseMovedOrReceived("1000")
-//
-//      Then("User should be on task list page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
-//        "Expected to be on the task list page"
-//      )
-//
-//      When("User clicks on check your answers and submit return link")
-//      VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
-//
-//      Then("User should be on the check your answers page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
-//        "Expected to be on the check your answers page"
-//      )
-//
-//      When("User clicks confirm and submit on the check your answers page")
-//      VapingDutyPage.clickConfirmAndSubmit()
-//
-//      Then("User should be on the return submitted confirmation page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
-//        "Expected to be on the return submitted confirmation page"
-//      )
-//    }
+    Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
+      Given("User authenticates using Government Gateway and user redirects to before you start page")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
+        VapingDutyPage.viewYourReturnsUrl
+      )
 
-//    Scenario("Vaping Duty Journey view individual return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
-//      Given("User authenticates using Government Gateway and user redirects to before you start page")
-//      VapingDutyPage.signIntoAuth(
-//        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
-//        VapingDutyPage.viewYourReturnsUrl
-//      )
-//
-//      Then("User should be on view your returns page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
-//        "Expected to be on the view your returns page"
-//      )
-//
-//      When("User Clicks on the view return link")
-//      VapingDutyPage.clickViewReturnLink()
-//
-//      Then("User should be on the view your return page")
-//      assert(
-//        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
-//        "Expected to be on the view your return page"
-//      )
-//    }
+      Then("User should be on view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User Clicks on the submit return link")
+      VapingDutyPage.clickSubmitReturnLink()
+
+      Then("User should be on before you start page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.beforeYouStartPageUrl),
+        "Expected to be on the before you start page"
+      )
+
+      When("User Clicks on continue on before you start page")
+      VapingDutyPage.clickContinueOnBeforeYouStartPage()
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User clicks on Tell us if you need to declare duty")
+      VapingDutyPage.clickLinkFromTaskList("declareDuty")
+
+      Then("User should be on Do you need to declare vaping products for duty page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyUrl),
+        "Expected to be on the declare duty question page"
+      )
+
+      When("User selects yes on do you need to declare vaping products for duty page")
+      VapingDutyPage.selectDeclareVapingProductsForDutyRadio(true)
+
+      Then("User should be on the how much vaping products released do you need to declare?")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.amountOfVapingProductsReleasedUrl),
+        "Expected to be on the How much vaping products released do you need to declare?"
+      )
+
+      When("User enters an amount and click continue")
+      VapingDutyPage.submitTotalMillilitresOfVapingLiquid("1000")
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User clicks on moved or received vpd duty suspense link")
+      VapingDutyPage.clickLinkFromTaskList("dutySuspended")
+
+      Then("User should be on the Have you received or moved any finished vaping products in duty suspense page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedUrl),
+        "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
+      )
+
+      When("User selects yes on Have you received or moved any finished vaping products in duty suspense page")
+      VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(true)
+
+      Then("User should be on the how much duty suspension did you receive or move")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.receivedOrMovedAmountUrl),
+        "Expected to be on the how much duty suspension did you receive or move"
+      )
+
+      When("User enters an amount received and moved and click continue")
+      VapingDutyPage.submitDutySuspenseMovedOrReceived("1000")
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User clicks on check your answers and submit return link")
+      VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
+
+      Then("User should be on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be on the check your answers page"
+      )
+
+      When("User clicks confirm and submit on the check your answers page")
+      VapingDutyPage.clickConfirmAndSubmit()
+
+      Then("User should be on the return submitted confirmation page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
+        "Expected to be on the return submitted confirmation page"
+      )
+    }
+
+    Scenario("Vaping Duty Journey view individual return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
+      Given("User authenticates using Government Gateway and user redirects to before you start page")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
+        VapingDutyPage.viewYourReturnsUrl
+      )
+
+      Then("User should be on view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User Clicks on the view return link")
+      VapingDutyPage.clickViewReturnLink()
+
+      Then("User should be on the view your return page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your return page"
+      )
+    }
   }
 }

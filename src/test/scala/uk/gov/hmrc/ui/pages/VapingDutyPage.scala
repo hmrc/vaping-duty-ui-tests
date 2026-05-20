@@ -88,9 +88,6 @@ object VapingDutyPage extends BasePage {
   val viewYourReturnsUrl: String = s"$vapingDutyBase/view-your-returns"
 
   // ---------- Duty Suspended URLs ----------
-  val declareDutySuspenseUrl: String = s"$dutySuspendedBase/suspended-products"
-  val enterDutySuspenseUrl: String   = s"$dutySuspendedBase/enter-duty-suspense"
-
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
   val receivedOrMovedAmountUrl: String = s"$dutySuspendedBase/enter-received-or-moved-amount"
 
@@ -143,25 +140,23 @@ object VapingDutyPage extends BasePage {
 
   def urlConfirmation(expectedUrl: String): Boolean =
     fluentWait.until { driver =>
-      val currentUrl = driver.getCurrentUrl
-      assert(
-        currentUrl.contains(expectedUrl),
-        s"Expected URL to contain: '$expectedUrl' but found: '$currentUrl'"
-      )
-      currentUrl.contains(expectedUrl)
+      driver.getCurrentUrl.contains(expectedUrl)
     }
 
-  def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
+  def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit = {
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
     click(continueButton)
+  }
 
-  def selectDeclareVapingProductsForDutyRadio(declareVapingProductsForDuty: Boolean): Unit =
+  def selectDeclareVapingProductsForDutyRadio(declareVapingProductsForDuty: Boolean): Unit = {
     click(if (declareVapingProductsForDuty) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
+  }
 
-  def selectHaveYouReceivedDutySuspenseRadio(declareVapingProductsDutySuspense: Boolean): Unit =
+  def selectHaveYouReceivedDutySuspenseRadio(declareVapingProductsDutySuspense: Boolean): Unit = {
     click(if (declareVapingProductsDutySuspense) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
+  }
 
   def clickContinueToBusinessTaxAccount(): Unit =
     click(continueToBTAButton)
@@ -196,9 +191,10 @@ object VapingDutyPage extends BasePage {
         throw new IllegalArgumentException(s"Unknown task link: $task")
     }
 
-  def selectContactPreference(contactPreference: String): Unit =
+  def selectContactPreference(contactPreference: String): Unit = {
     click(if (contactPreference == "Post") postContactPreferenceRadioButton else emailContactPreferenceRadioButton)
     click(continueContactPreference)
+  }
 
   def clickConfirmAddress(): Unit =
     click(confirmAddressButton)
@@ -206,18 +202,17 @@ object VapingDutyPage extends BasePage {
   def clickConfirmAndSubmit(): Unit =
     click(confirmAndSubmitButton)
 
-  def submitEmailAddress(emailAddress: String): Unit =
+  def submitEmailAddress(emailAddress: String): Unit = {
     waitForElementToBeVisible(emailContactField)
     sendKeys(emailContactField, emailAddress)
-
     waitForElementToBeVisible(continueContactPreference)
     click(continueContactPreference)
+  }
 
   def submitConfirmationCode(email: String): Unit = {
     val code = latestEmailPasscode(email)
     waitForElementToBeVisible(emailConfirmationCodeField)
     sendKeys(emailConfirmationCodeField, code)
-
     waitForElementToBeVisible(emailConfirmationCodeConfirmButton)
     click(emailConfirmationCodeConfirmButton)
   }
@@ -248,22 +243,24 @@ object VapingDutyPage extends BasePage {
       click(emailConfirmationCodeConfirmButton)
       waitForReload(before)
     }
-  def confirmCodeHasBeenReceivedAndApproved(): Unit                    =
+
+  def confirmCodeHasBeenReceivedAndApproved(): Unit = {
     waitForElementToBeVisible(saveAndContinueButton)
     click(saveAndContinueButton)
+  }
 
-  def submitTotalMillilitresOfVapingLiquid(amount: String): Unit =
+  def submitTotalMillilitresOfVapingLiquid(amount: String): Unit = {
     waitForElementToBeVisible(vapingLiquidField)
     sendKeys(vapingLiquidField, amount)
     click(saveAndContinueButton)
+  }
 
-  def submitDutySuspenseMovedOrReceived(amount: String): Unit =
+  def submitDutySuspenseMovedOrReceived(amount: String): Unit = {
     waitForElementToBeVisible(vapingLiquidReceivedField)
     sendKeys(vapingLiquidReceivedField, amount)
-
     waitForElementToBeVisible(vapingLiquidMovedField)
     sendKeys(vapingLiquidMovedField, amount)
-
     click(saveAndContinueButton)
+  }
 
 }
