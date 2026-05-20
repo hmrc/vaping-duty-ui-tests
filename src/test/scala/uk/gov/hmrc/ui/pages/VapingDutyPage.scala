@@ -53,6 +53,7 @@ object VapingDutyPage extends BasePage {
   private val enrolmentBase: String      = s"$vapingDutyBase/enrolment"
   private val contactPrefBase: String    = s"$vapingDutyBase/contact-preferences"
   private val completeReturnBase: String = s"$vapingDutyBase/complete-return"
+  private val dutySuspendedBase: String  = s"$completeReturnBase/duty-suspended"
 
   // ---------- Enrolment URLs ----------
   val doYouHaveApprovalIdUrl: String   = s"$enrolmentBase/do-you-have-an-approval-id"
@@ -83,9 +84,15 @@ object VapingDutyPage extends BasePage {
   val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
-  val dutySuspendedUrl: String                  = s"$completeReturnBase/duty-suspended/suspended-products"
-  val receivedOrMovedAmountUrl: String          = s"$completeReturnBase/duty-suspended/enter-received-or-moved-amount"
-  val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
+
+  val viewYourReturnsUrl: String = s"$vapingDutyBase/view-your-returns"
+
+  // ---------- Duty Suspended URLs ----------
+  val declareDutySuspenseUrl: String = s"$dutySuspendedBase/suspended-products"
+  val enterDutySuspenseUrl: String   = s"$dutySuspendedBase/enter-duty-suspense"
+
+  val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
+  val receivedOrMovedAmountUrl: String = s"$dutySuspendedBase/enter-received-or-moved-amount"
 
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
@@ -136,7 +143,12 @@ object VapingDutyPage extends BasePage {
 
   def urlConfirmation(expectedUrl: String): Boolean =
     fluentWait.until { driver =>
-      driver.getCurrentUrl.contains(expectedUrl)
+      val currentUrl = driver.getCurrentUrl
+      assert(
+        currentUrl.contains(expectedUrl),
+        s"Expected URL to contain: '$expectedUrl' but found: '$currentUrl'"
+      )
+      currentUrl.contains(expectedUrl)
     }
 
   def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit =
@@ -145,6 +157,10 @@ object VapingDutyPage extends BasePage {
 
   def selectDeclareVapingProductsForDutyRadio(declareVapingProductsForDuty: Boolean): Unit =
     click(if (declareVapingProductsForDuty) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+
+  def selectHaveYouReceivedDutySuspenseRadio(declareVapingProductsDutySuspense: Boolean): Unit =
+    click(if (declareVapingProductsDutySuspense) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
 
   def clickContinueToBusinessTaxAccount(): Unit =
@@ -240,4 +256,14 @@ object VapingDutyPage extends BasePage {
     waitForElementToBeVisible(vapingLiquidField)
     sendKeys(vapingLiquidField, amount)
     click(saveAndContinueButton)
+
+  def submitDutySuspenseMovedOrReceived(amount: String): Unit =
+    waitForElementToBeVisible(vapingLiquidReceivedField)
+    sendKeys(vapingLiquidReceivedField, amount)
+
+    waitForElementToBeVisible(vapingLiquidMovedField)
+    sendKeys(vapingLiquidMovedField, amount)
+
+    click(saveAndContinueButton)
+
 }
