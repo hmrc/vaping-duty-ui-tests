@@ -37,6 +37,8 @@ object VapingDutyLocators {
   val submitButton: By                       = By.cssSelector("#inputForm > input:nth-child(37)")
   val yesRadioButton: By                     = By.id("value")
   val vapingLiquidField: By                  = By.id("value")
+  val vapingLiquidReceivedField: By          = By.id("volumeReceived")
+  val vapingLiquidMovedField: By             = By.id("volumeMoved")
   val noRadioButton: By                      = By.cssSelector("#value-no")
   val continueToBTAButton: By                = By.cssSelector("#main-content > div > div > a")
   val continueBeforeYouStart: By             = By.cssSelector("#main-content > div > div > a")

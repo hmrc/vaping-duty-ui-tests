@@ -76,6 +76,24 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
+
+      When("User clicks on moved or received vpd duty suspense link")
+      VapingDutyPage.clickLinkFromTaskList("dutySuspended")
+
+      Then("User should be on the Have you received or moved any finished vaping products in duty suspense page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedUrl),
+        "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
+      )
+
+      When("User selects yes on Have you received or moved any finished vaping products in duty suspense page")
+      VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(false)
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
     }
 
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
@@ -135,6 +153,34 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
+
+      When("User clicks on moved or received vpd duty suspense link")
+      VapingDutyPage.clickLinkFromTaskList("dutySuspended")
+
+      Then("User should be on the Have you received or moved any finished vaping products in duty suspense page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedUrl),
+        "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
+      )
+
+      When("User selects yes on Have you received or moved any finished vaping products in duty suspense page")
+      VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(true)
+
+      Then("User should be on the how much duty suspension did you receive or move")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.receivedOrMovedAmountUrl),
+        "Expected to be on the how much duty suspension did you receive or move"
+      )
+
+      When("User enters an amount received and moved and click continue")
+      VapingDutyPage.submitDutySuspenseMovedOrReceived("1000")
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
 
