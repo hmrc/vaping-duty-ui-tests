@@ -62,7 +62,7 @@ object VapingDutyPage extends BasePage {
   val administratorRequiredUrl: String = s"$enrolmentBase/organisation-administrator-required"
 
   val enrolmentAccessUrl: String =
-    s"$enrolmentFrontendBase/HMRC-VPD-ORG/request-access-tax-scheme?continue=$btaBase"
+    s"$enrolmentFrontendBase/HMRC-VPD-ORG/request-access-tax-scheme?useServiceNavigation&continue=$btaBase?useServiceNavigation"
 
   val businessAccountRoute: String = "business-account"
 
