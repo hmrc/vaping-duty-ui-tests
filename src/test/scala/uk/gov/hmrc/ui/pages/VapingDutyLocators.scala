@@ -52,9 +52,10 @@ object VapingDutyLocators {
   // ---------- Task List Links ----------
   val submitReturnLink: By         = By.id("submit-link")
   val viewReturnLink: By           = By.id("view-link")
-  val declareDutyLink: By          = By.xpath("//a[@href='/vaping-duty/complete-return/declare-duty']")
-  val checkYourAnswersLink: By     = By.xpath("//a[@href='/vaping-duty/complete-return/check-your-answers']")
-  val dutySuspendedLink: By        = By.xpath("//a[@href='/vaping-duty/complete-return/duty-suspended/suspended-products']")
+  val declareDutyLink: By          = By.xpath("//a[normalize-space(text())='Tell us if you need to declare duty']")
+  val checkYourAnswersLink: By     = By.xpath("//a[normalize-space(text())='Check your answers and submit return']")
+  val dutySuspendedLink: By        =
+    By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
   val spoiltAdjustmentsLink: By    = By.xpath("//a[contains(@href,'/complete-return/adjustment/declare-spoilt-products')]")
   val overUnderAdjustmentsLink: By = By.xpath("//a[@href='/vaping-duty/complete-return/']")
 
@@ -66,7 +67,7 @@ object VapingDutyLocators {
   val vapingLiquidMovedField: By    = By.id("volumeMoved")
 
   // ---------- Spoilt Adjustments ----------
-  val selectSpoiltPeriodLink: By = By.xpath("//a[contains(normalize-space(),'Select')]")
+  val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
   val spoiltAmountField: By      = By.id("value")
 
   // ---------- Contact Preferences ----------

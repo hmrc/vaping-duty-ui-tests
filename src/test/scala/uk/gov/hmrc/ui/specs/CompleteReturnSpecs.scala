@@ -94,8 +94,7 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
-      
-      
+
       When("User clicks on Tell us if you have any spoilt adjustments link")
       VapingDutyPage.clickLinkFromTaskList("spoiltAdjustments")
 
@@ -114,7 +113,6 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the task list page"
       )
 
-
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
 
@@ -132,7 +130,7 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
         "Expected to be on the return submitted confirmation page"
       )
-      
+
     }
 
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
@@ -220,14 +218,13 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the task list page"
       )
 
-
       When("User clicks on Tell us if you have any spoilt adjustments link")
       VapingDutyPage.clickLinkFromTaskList("spoiltAdjustments")
 
       Then("User should be on the declare spoilt products page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.declareSpoiltProductsUrl),
-        "Expected to be on the declare spoilt products page"
+        "Expected to be on the do you have any spoilt vaping products to declare page"
       )
 
       When("User selects yes on do you have any spoilt vaping products to declare page")
@@ -265,13 +262,6 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
-
-
-
-
-
-
-
 
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
