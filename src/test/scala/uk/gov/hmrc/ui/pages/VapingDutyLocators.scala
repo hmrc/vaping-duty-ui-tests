@@ -53,10 +53,11 @@ object VapingDutyLocators {
   val continueContactPreference: By          = By.xpath("//button[contains(normalize-space(),'Continue')]")
   val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
   val saveAndContinueButton: By              = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
-  val declareDutyLink: By                    = By.xpath("//a[@href='/vaping-duty/complete-return/declare-duty']")
-  val checkYourAnswersLink: By               = By.xpath("//a[@href='/vaping-duty/complete-return/check-your-answers']")
+  val declareDutyLink: By                    = By.xpath("//a[normalize-space(text())='Tell us if you need to declare duty']")
+  val checkYourAnswersLink: By               = By.xpath("//a[normalize-space(text())='Check your answers and submit return']")
   val spoiltAdjustmentsLink: By              = By.xpath("//a[@href='/vaping-duty/complete-return/']")
   val overUnderAdjustmentsLink: By           = By.xpath("//a[@href='/vaping-duty/complete-return/']")
-  val dutySuspendedLink: By                  = By.xpath("//a[@href='/vaping-duty/complete-return/duty-suspended/suspended-products']")
+  val dutySuspendedLink: By                  =
+    By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
 
 }
