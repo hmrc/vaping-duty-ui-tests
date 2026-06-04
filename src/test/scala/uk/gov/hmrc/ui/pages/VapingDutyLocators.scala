@@ -21,43 +21,64 @@ import uk.gov.hmrc.configuration.TestEnvironment
 
 object VapingDutyLocators {
 
-  val authLoginStubBaseUrl: String           = TestEnvironment.url("auth-login-stub")
-  val redirectUrl: String                    = TestEnvironment.url("vaping-duty-frontend")
-  val enrolmentUrl: String                   = TestEnvironment.url("enrolment-management-frontend")
-  val businessTaxAccountUrl: String          = TestEnvironment.url("business-tax-account")
-  val emailVerificationUrl: String           = TestEnvironment.url("email-verification")
-  val continueButton: By                     = By.className("govuk-button")
-  val credIdField: By                        = By.id("authorityId")
-  val ggSignInButton: By                     = By.id("vpd-gg-logon-1")
-  val redirectionUrlField: By                = By.id("redirectionUrl")
-  val affinityGroupSelect: By                = By.id("affinityGroupSelect")
-  val enrolmentKey: By                       = By.id("enrolment[0].name")
-  val identifierName: By                     = By.id("input-0-0-name")
-  val identifierValue: By                    = By.id("input-0-0-value")
-  val submitButton: By                       = By.cssSelector("#inputForm > input:nth-child(37)")
-  val yesRadioButton: By                     = By.id("value")
-  val vapingLiquidField: By                  = By.id("value")
-  val vapingLiquidReceivedField: By          = By.id("volumeReceived")
-  val vapingLiquidMovedField: By             = By.id("volumeMoved")
-  val noRadioButton: By                      = By.cssSelector("#value-no")
-  val continueToBTAButton: By                = By.cssSelector("#main-content > div > div > a")
-  val continueBeforeYouStart: By             = By.cssSelector("#main-content > div > div > a")
-  val submitReturnLink: By                   = By.id("submit-link")
-  val viewReturnLink: By                     = By.id("view-link")
-  val confirmAndSubmitButton: By             = By.xpath("//*[@type='submit']")
-  val postContactPreferenceRadioButton: By   = By.cssSelector("#value_1")
-  val emailContactPreferenceRadioButton: By  = By.cssSelector("#value_0")
-  val emailContactField: By                  = By.cssSelector("#value")
+  // ---------- Environment URLs ----------
+  val authLoginStubBaseUrl: String  = TestEnvironment.url("auth-login-stub")
+  val redirectUrl: String           = TestEnvironment.url("vaping-duty-frontend")
+  val enrolmentUrl: String          = TestEnvironment.url("enrolment-management-frontend")
+  val businessTaxAccountUrl: String = TestEnvironment.url("business-tax-account")
+  val emailVerificationUrl: String  = TestEnvironment.url("email-verification")
+
+  // ---------- Auth Login Stub ----------
+  val credIdField: By         = By.id("authorityId")
+  val redirectionUrlField: By = By.id("redirectionUrl")
+  val affinityGroupSelect: By = By.id("affinityGroupSelect")
+  val enrolmentKey: By        = By.id("enrolment[0].name")
+  val identifierName: By      = By.id("input-0-0-name")
+  val identifierValue: By     = By.id("input-0-0-value")
+  val submitButton: By        = By.cssSelector("#inputForm > input:nth-child(37)")
+  val ggSignInButton: By      = By.id("vpd-gg-logon-1")
+
+  // ---------- Common Buttons ----------
+  val continueButton: By         = By.className("govuk-button")
+  val saveAndContinueButton: By  = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
+  val confirmAndSubmitButton: By = By.xpath("//*[@type='submit']")
+  val continueToBTAButton: By    = By.cssSelector("#main-content > div > div > a")
+  val continueBeforeYouStart: By = By.cssSelector("#main-content > div > div > a")
+
+  // ---------- Radio Buttons ----------
+  val yesRadioButton: By = By.id("value")
+  val noRadioButton: By  = By.cssSelector("#value-no")
+
+  // ---------- Task List Links ----------
+  val submitReturnLink: By         = By.id("submit-link")
+  val viewReturnLink: By           = By.id("view-link")
+  val declareDutyLink: By          = By.xpath("//a[normalize-space(text())='Tell us if you need to declare duty']")
+  val checkYourAnswersLink: By     = By.xpath("//a[normalize-space(text())='Check your answers and submit return']")
+  val dutySuspendedLink: By        =
+    By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
+  val spoiltAdjustmentsLink: By    = By.xpath("//a[contains(@href,'/complete-return/adjustment/declare-spoilt-products')]")
+  val overUnderAdjustmentsLink: By = By.xpath("//a[@href='/vaping-duty/complete-return/']")
+
+  // ---------- Declare Duty ----------
+  val vapingLiquidField: By = By.id("value")
+
+  // ---------- Duty Suspended ----------
+  val vapingLiquidReceivedField: By = By.id("volumeReceived")
+  val vapingLiquidMovedField: By    = By.id("volumeMoved")
+
+  // ---------- Spoilt Adjustments ----------
+  val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
+  val spoiltAmountField: By      = By.id("value")
+
+  // ---------- Contact Preferences ----------
+  val postContactPreferenceRadioButton: By  = By.cssSelector("#value_1")
+  val emailContactPreferenceRadioButton: By = By.cssSelector("#value_0")
+  val continueContactPreference: By         = By.xpath("//button[contains(normalize-space(),'Continue')]")
+  val confirmAddressButton: By              = By.cssSelector("#main-content > div > div > form > button")
+  val emailContactField: By                 = By.cssSelector("#value")
+
+  // ---------- Email Verification ----------
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
   val emailConfirmationCodeConfirmButton: By = By.xpath("//button[contains(normalize-space(),'Confirm')]")
-  val continueContactPreference: By          = By.xpath("//button[contains(normalize-space(),'Continue')]")
-  val confirmAddressButton: By               = By.cssSelector("#main-content > div > div > form > button")
-  val saveAndContinueButton: By              = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
-  val declareDutyLink: By                    = By.xpath("//a[normalize-space(text())='Tell us if you need to declare duty']")
-  val checkYourAnswersLink: By               = By.xpath("//a[normalize-space(text())='Check your answers and submit return']")
-  val spoiltAdjustmentsLink: By              = By.xpath("//a[@href='/vaping-duty/complete-return/']")
-  val overUnderAdjustmentsLink: By           = By.xpath("//a[@href='/vaping-duty/complete-return/']")
-  val dutySuspendedLink: By                  =
-    By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
 
 }

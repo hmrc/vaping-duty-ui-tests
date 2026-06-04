@@ -94,6 +94,43 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
+
+      When("User clicks on Tell us if you have any spoilt adjustments link")
+      VapingDutyPage.clickLinkFromTaskList("spoiltAdjustments")
+
+      Then("User should be on the declare spoilt products page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareSpoiltProductsUrl),
+        "Expected to be on the declare spoilt products page"
+      )
+
+      When("User selects no on do you have any spoilt vaping products to declare page")
+      VapingDutyPage.selectHasSpoiltProductsRadio(false)
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User clicks on check your answers and submit return link")
+      VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
+
+      Then("User should be on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be on the check your answers page"
+      )
+
+      When("User clicks confirm and submit on the check your answers page")
+      VapingDutyPage.clickConfirmAndSubmit()
+
+      Then("User should be on the return submitted confirmation page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
+        "Expected to be on the return submitted confirmation page"
+      )
+
     }
 
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
@@ -176,6 +213,51 @@ class CompleteReturnSpecs extends BaseSpec {
       VapingDutyPage.submitDutySuspenseMovedOrReceived("1000")
 
       Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
+
+      When("User clicks on Tell us if you have any spoilt adjustments link")
+      VapingDutyPage.clickLinkFromTaskList("spoiltAdjustments")
+
+      Then("User should be on the declare spoilt products page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareSpoiltProductsUrl),
+        "Expected to be on the do you have any spoilt vaping products to declare page"
+      )
+
+      When("User selects yes on do you have any spoilt vaping products to declare page")
+      VapingDutyPage.selectHasSpoiltProductsRadio(true)
+
+      Then("User should be on the select spoilt period page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.selectSpoiltPeriodUrl),
+        "Expected to be on the select spoilt period page"
+      )
+
+      When("User selects a period to adjust")
+      VapingDutyPage.clickSelectSpoiltPeriod()
+
+      Then("User should be on the enter spoilt amount page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterSpoiltAmountUrl),
+        "Expected to be on the enter spoilt amount page"
+      )
+
+      When("User enters a spoilt amount and clicks save and continue")
+      VapingDutyPage.submitSpoiltAmount("5")
+
+      Then("User should be on the add another spoilt adjustment page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.addAnotherSpoiltAdjustmentUrl),
+        "Expected to be on the add another spoilt adjustment page"
+      )
+
+      When("User selects no to adding another spoilt adjustment")
+      VapingDutyPage.selectAddAnotherSpoiltAdjustment(false)
+
+      Then("User should be on the task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
