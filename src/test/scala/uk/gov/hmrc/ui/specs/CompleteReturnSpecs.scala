@@ -185,6 +185,15 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User enters an amount and click continue")
       VapingDutyPage.submitTotalMillilitresOfVapingLiquid("1000")
 
+      Then("User should be on the declare duty CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyCYAUrl),
+        "Expected to be on the declare duty CYA page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
       Then("User should be on task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),

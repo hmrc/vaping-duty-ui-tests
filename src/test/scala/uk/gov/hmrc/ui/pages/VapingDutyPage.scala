@@ -84,8 +84,8 @@ object VapingDutyPage extends BasePage {
   val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
-
-  val viewYourReturnsUrl: String = s"$vapingDutyBase/view-your-returns"
+  val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
+  val declareDutyCYAUrl: String                 = s"$completeReturnBase/declare-duty-check-answers"
 
   // ---------- Duty Suspended URLs ----------
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
@@ -172,6 +172,9 @@ object VapingDutyPage extends BasePage {
 
   def clickSubmitReturnLink(): Unit =
     click(submitReturnLink)
+
+  def clickSaveAndContinue(): Unit =
+    click(saveAndContinueButton)
 
   def clickViewReturnLink(): Unit =
     click(viewReturnLink)
