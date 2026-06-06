@@ -84,6 +84,8 @@ object VapingDutyPage extends BasePage {
   val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
+  val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
+  val declareDutyCYAUrl: String                 = s"$completeReturnBase/declare-duty-check-answers"
 
   val viewYourReturnsUrl: String   = s"$vapingDutyBase/view-your-returns"
   val returnDeclarationUrl: String = s"$completeReturnBase/return-declaration"
@@ -173,6 +175,9 @@ object VapingDutyPage extends BasePage {
 
   def clickSubmitReturnLink(): Unit =
     click(submitReturnLink)
+
+  def clickSaveAndContinue(): Unit =
+    click(saveAndContinueButton)
 
   def clickViewReturnLink(): Unit =
     click(viewReturnLink)
@@ -284,7 +289,7 @@ object VapingDutyPage extends BasePage {
     click(saveAndContinueButton)
   }
 
-  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit                      = {
+  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit = {
     click(if (addAnother) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
   }
