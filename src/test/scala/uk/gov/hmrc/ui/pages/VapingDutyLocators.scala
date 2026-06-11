@@ -60,11 +60,15 @@ object VapingDutyLocators {
   val overUnderAdjustmentsLink: By = By.xpath("//a[@href='/vaping-duty/complete-return/']")
 
   // ---------- Declare Duty ----------
-  val vapingLiquidField: By = By.id("value")
+  val vapingLiquidField: By     = By.id("value")
+  val changeDeclareDutyLink: By =
+    By.cssSelector("a.govuk-link[href*='enter-amount-released']")
 
   // ---------- Duty Suspended ----------
   val vapingLiquidReceivedField: By = By.id("volumeReceived")
   val vapingLiquidMovedField: By    = By.id("volumeMoved")
+  val changeDutySuspendedLink: By   =
+    By.xpath("(//dl[contains(@class,'govuk-summary-list')]//a[contains(normalize-space(),'Change')])[1]")
 
   // ---------- Spoilt Adjustments ----------
   val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
