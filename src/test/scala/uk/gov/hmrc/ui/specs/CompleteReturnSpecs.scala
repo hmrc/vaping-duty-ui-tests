@@ -86,7 +86,7 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the Have you received or moved any finished vaping products in duty suspense page"
       )
 
-      When("User selects yes on Have you received or moved any finished vaping products in duty suspense page")
+      When("User selects no on Have you received or moved any finished vaping products in duty suspense page")
       VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(false)
 
       Then("User should be on task list page")
@@ -124,6 +124,19 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User clicks confirm and submit on the check your answers page")
       VapingDutyPage.clickConfirmAndSubmit()
+
+      Then("User should be on the declaration page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
+        "Expected to be on the declaration page"
+      )
+
+      When("User completes the declaration and submits the return")
+      VapingDutyPage.submitReturnDeclaration(
+        fullName = "Auto Test",
+        capacity = "Director",
+        email = "autotest@example.com"
+      )
 
       Then("User should be on the return submitted confirmation page")
       assert(
@@ -274,6 +287,19 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User clicks confirm and submit on the check your answers page")
       VapingDutyPage.clickConfirmAndSubmit()
+
+      Then("User should be on the declaration page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
+        "Expected to be on the declaration page"
+      )
+
+      When("User completes the declaration and submits the return")
+      VapingDutyPage.submitReturnDeclaration(
+        fullName = "Auto Test",
+        capacity = "Director",
+        email = "autotest@example.com"
+      )
 
       Then("User should be on the return submitted confirmation page")
       assert(

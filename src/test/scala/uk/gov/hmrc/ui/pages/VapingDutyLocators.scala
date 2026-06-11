@@ -81,4 +81,9 @@ object VapingDutyLocators {
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
   val emailConfirmationCodeConfirmButton: By = By.xpath("//button[contains(normalize-space(),'Confirm')]")
 
+  // ---------- Return Declaration ----------
+  val declarationFullNameField: By = By.id("fullName")
+  val declarationCapacityField: By = By.id("capacityInWhichSigned")
+  val declarationEmailField: By    = By.id("signeesEmailAddress")
+
 }
