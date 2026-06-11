@@ -86,9 +86,7 @@ object VapingDutyPage extends BasePage {
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
   val declareDutyCYAUrl: String                 = s"$completeReturnBase/declare-duty-check-answers"
-
-  val viewYourReturnsUrl: String   = s"$vapingDutyBase/view-your-returns"
-  val returnDeclarationUrl: String = s"$completeReturnBase/return-declaration"
+  val returnDeclarationUrl: String              = s"$completeReturnBase/return-declaration"
 
   // ---------- Duty Suspended URLs ----------
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
@@ -289,7 +287,7 @@ object VapingDutyPage extends BasePage {
     click(saveAndContinueButton)
   }
 
-  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit = {
+  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit                      = {
     click(if (addAnother) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
   }
