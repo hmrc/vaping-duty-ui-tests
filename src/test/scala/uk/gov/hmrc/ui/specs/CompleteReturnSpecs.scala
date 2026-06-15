@@ -204,6 +204,24 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the declare duty CYA page"
       )
 
+      When("User clicks Change on the declare duty check your answers page")
+      VapingDutyPage.clickChangeDeclareDuty()
+
+      Then("User should be returned to the amount released page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.amountOfVapingProductsReleasedUrl),
+        "Expected to be on the amount released page"
+      )
+
+      When("User enters a new amount and clicks continue")
+      VapingDutyPage.submitTotalMillilitresOfVapingLiquid("2000")
+
+      Then("User should be back on the declare duty CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyCYAUrl),
+        "Expected to be on the declare duty CYA page"
+      )
+
       When("User clicks on save and continue button")
       VapingDutyPage.clickSaveAndContinue()
 
@@ -233,6 +251,33 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User enters an amount received and moved and click continue")
       VapingDutyPage.submitDutySuspenseMovedOrReceived("1000")
+
+      Then("User should be on the duty suspended check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedCYAUrl),
+        "Expected to be on the duty suspended check your answers page"
+      )
+
+      When("User clicks Change on the duty suspended check your answers page")
+      VapingDutyPage.clickChangeDutySuspended()
+
+      Then("User should be returned to the received or moved amount page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.receivedOrMovedAmountUrl),
+        "Expected to be on the received or moved amount page"
+      )
+
+      When("User enters a new amount received and moved and clicks continue")
+      VapingDutyPage.submitDutySuspenseMovedOrReceived("2000")
+
+      Then("User should be back on the duty suspended check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedCYAUrl),
+        "Expected to be on the duty suspended check your answers page"
+      )
+
+      When("User clicks save and continue on the duty suspended check your answers page")
+      VapingDutyPage.clickSaveAndContinue()
 
       Then("User should be on task list page")
       assert(

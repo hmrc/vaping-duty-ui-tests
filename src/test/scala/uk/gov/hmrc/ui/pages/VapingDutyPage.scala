@@ -91,6 +91,7 @@ object VapingDutyPage extends BasePage {
   // ---------- Duty Suspended URLs ----------
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
   val receivedOrMovedAmountUrl: String = s"$dutySuspendedBase/enter-received-or-moved-amount"
+  val dutySuspendedCYAUrl: String      = s"$dutySuspendedBase/duty-suspense-check-answers"
 
   // ---------- Spoilt adjustment URLs ----------
   val declareSpoiltProductsUrl: String      = s"$completeReturnBase/adjustment/declare-spoilt-products"
@@ -299,4 +300,9 @@ object VapingDutyPage extends BasePage {
     click(confirmAndSubmitButton)
   }
 
+  def clickChangeDutySuspended(): Unit =
+    click(changeDutySuspendedLink)
+
+  def clickChangeDeclareDuty(): Unit =
+    click(changeDeclareDutyLink)
 }

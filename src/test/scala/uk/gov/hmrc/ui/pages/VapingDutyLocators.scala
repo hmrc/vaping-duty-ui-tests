@@ -60,11 +60,15 @@ object VapingDutyLocators {
   val overUnderAdjustmentsLink: By = By.xpath("//a[@href='/vaping-duty/complete-return/']")
 
   // ---------- Declare Duty ----------
-  val vapingLiquidField: By = By.id("value")
+  val vapingLiquidField: By     = By.id("value")
+  val changeDeclareDutyLink: By =
+    By.cssSelector("a.govuk-link[href*='enter-amount-released']")
 
   // ---------- Duty Suspended ----------
   val vapingLiquidReceivedField: By = By.id("volumeReceived")
   val vapingLiquidMovedField: By    = By.id("volumeMoved")
+  val changeDutySuspendedLink: By   =
+    By.xpath("(//dl[contains(@class,'govuk-summary-list')]//a[contains(normalize-space(),'Change')])[1]")
 
   // ---------- Spoilt Adjustments ----------
   val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
@@ -75,7 +79,7 @@ object VapingDutyLocators {
   val emailContactPreferenceRadioButton: By = By.cssSelector("#value_0")
   val continueContactPreference: By         = By.xpath("//button[contains(normalize-space(),'Continue')]")
   val confirmAddressButton: By              = By.cssSelector("#main-content > div > div > form > button")
-  val emailContactField: By                 = By.cssSelector("#value")
+  val emailContactField: By                 = By.id("email")
 
   // ---------- Email Verification ----------
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
@@ -84,6 +88,6 @@ object VapingDutyLocators {
   // ---------- Return Declaration ----------
   val declarationFullNameField: By = By.id("fullName")
   val declarationCapacityField: By = By.id("capacityInWhichSigned")
-  val declarationEmailField: By    = By.id("signeesEmailAddress")
+  val declarationEmailField: By    = By.id("email")
 
 }
