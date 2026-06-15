@@ -79,7 +79,7 @@ object VapingDutyLocators {
   val emailContactPreferenceRadioButton: By = By.cssSelector("#value_0")
   val continueContactPreference: By         = By.xpath("//button[contains(normalize-space(),'Continue')]")
   val confirmAddressButton: By              = By.cssSelector("#main-content > div > div > form > button")
-  val emailContactField: By                 = By.cssSelector("#value")
+  val emailContactField: By                 = By.id("email")
 
   // ---------- Email Verification ----------
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
@@ -88,6 +88,6 @@ object VapingDutyLocators {
   // ---------- Return Declaration ----------
   val declarationFullNameField: By = By.id("fullName")
   val declarationCapacityField: By = By.id("capacityInWhichSigned")
-  val declarationEmailField: By    = By.id("signeesEmailAddress")
+  val declarationEmailField: By    = By.id("email")
 
 }
