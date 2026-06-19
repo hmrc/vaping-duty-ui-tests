@@ -67,7 +67,7 @@ object VapingDutyLocators {
   // ---------- Duty Suspended ----------
   val vapingLiquidReceivedField: By = By.id("volumeReceived")
   val vapingLiquidMovedField: By    = By.id("volumeMoved")
-  val changeDutySuspendedLink: By =
+  val changeDutySuspendedLink: By   =
     By.cssSelector("a.govuk-link[href*='/duty-suspended/enter-received-or-moved-amount']")
 
   // ---------- Spoilt Adjustments ----------

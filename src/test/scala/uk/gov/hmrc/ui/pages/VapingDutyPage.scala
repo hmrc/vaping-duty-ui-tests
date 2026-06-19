@@ -85,13 +85,13 @@ object VapingDutyPage extends BasePage {
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
-  val declareDutyCYAUrl: String                 = s"$completeReturnBase/declare-duty-check-answers"
+  val declareDutyCYAUrl: String                 = s"$completeReturnBase/duty-check-your-answers-summary"
   val returnDeclarationUrl: String              = s"$completeReturnBase/return-declaration"
 
   // ---------- Duty Suspended URLs ----------
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
   val receivedOrMovedAmountUrl: String = s"$dutySuspendedBase/enter-received-or-moved-amount"
-  val dutySuspendedCYAUrl: String      = s"$dutySuspendedBase/duty-suspense-check-answers"
+  val dutySuspendedCYAUrl: String      = s"$dutySuspendedBase/duty-suspense-check-your-answers-summary"
 
   // ---------- Spoilt adjustment URLs ----------
   val declareSpoiltProductsUrl: String      = s"$completeReturnBase/adjustment/declare-spoilt-products"
