@@ -71,6 +71,15 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User selects no on do you need to declare vaping products for duty page")
       VapingDutyPage.selectDeclareVapingProductsForDutyRadio(false)
 
+      Then("User should be on the declare duty CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.declareDutyCYAUrl),
+        "Expected to be on the declare duty CYA page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
       Then("User should be on task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
@@ -88,6 +97,15 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User selects no on Have you received or moved any finished vaping products in duty suspense page")
       VapingDutyPage.selectHaveYouReceivedDutySuspenseRadio(false)
+
+      Then("User should be on the duty suspended check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.dutySuspendedCYAUrl),
+        "Expected to be on the duty suspended check your answers page"
+      )
+
+      When("User clicks save and continue on the duty suspended check your answers page")
+      VapingDutyPage.clickSaveAndContinue()
 
       Then("User should be on task list page")
       assert(
