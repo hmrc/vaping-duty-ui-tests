@@ -68,7 +68,7 @@ object VapingDutyLocators {
   val vapingLiquidReceivedField: By = By.id("volumeReceived")
   val vapingLiquidMovedField: By    = By.id("volumeMoved")
   val changeDutySuspendedLink: By   =
-    By.xpath("(//dl[contains(@class,'govuk-summary-list')]//a[contains(normalize-space(),'Change')])[1]")
+    By.cssSelector("a.govuk-link[href*='/duty-suspended/enter-received-or-moved-amount']")
 
   // ---------- Spoilt Adjustments ----------
   val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
