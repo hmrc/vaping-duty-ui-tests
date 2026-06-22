@@ -41,8 +41,8 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the view your returns page"
       )
 
-      When("User Clicks on the submit return link")
-      VapingDutyPage.clickSubmitReturnLink()
+      When("User clicks on the first outstanding return link")
+      VapingDutyPage.clickFirstOutstandingReturnLink()
 
       Then("User should be on before you start page")
       assert(
@@ -177,8 +177,8 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the view your returns page"
       )
 
-      When("User Clicks on the submit return link")
-      VapingDutyPage.clickSubmitReturnLink()
+      When("User clicks on the first outstanding return link")
+      VapingDutyPage.clickFirstOutstandingReturnLink()
 
       Then("User should be on before you start page")
       assert(
@@ -393,8 +393,8 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the view your returns page"
       )
 
-      When("User Clicks on the view return link")
-      VapingDutyPage.clickViewReturnLink()
+      When("User clicks on the first completed return link")
+      VapingDutyPage.clickFirstCompletedReturnLink()
 
       Then("User should be on the view your return page")
       assert(
