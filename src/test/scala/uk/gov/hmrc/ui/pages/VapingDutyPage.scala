@@ -99,6 +99,9 @@ object VapingDutyPage extends BasePage {
   val enterSpoiltAmountUrl: String          = s"$completeReturnBase/adjustment/enter-spoilt-amount"
   val addAnotherSpoiltAdjustmentUrl: String = s"$completeReturnBase/adjustment/add-another-spoilt-adjustment"
 
+  // ---------- View Payments URL ----------
+  val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
+
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
 

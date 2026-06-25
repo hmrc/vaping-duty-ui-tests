@@ -51,6 +51,7 @@ while [[ $# -gt 0 ]]; do
       echo "  $0 -t CR  | CompleteReturn          # run only complete return tests"
       echo "  $0 -t CP  | ContactPreference       # run only contact preference tests"
       echo "  $0 -t EC  | EnrolmentClaim          # run only enrolment claim tests"
+      echo "  $0 -t VP  | ViewPayments          # run only view payments tests"
       echo "  $0 -t ALL | VapingDutyTest          # run all vaping duty tests"
       exit 0
       ;;
@@ -70,6 +71,7 @@ case $TAGS in
   CR)  TAGS="CompleteReturn" ;;
   CP)  TAGS="ContactPreference" ;;
   EC)  TAGS="EnrolmentClaim" ;;
+  VP)  TAGS="ViewPayments" ;;
   ALL) TAGS="VapingDutyTest" ;;
 esac
 

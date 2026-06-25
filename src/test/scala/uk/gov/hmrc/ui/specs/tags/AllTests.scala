@@ -26,4 +26,6 @@ object ContactPreference extends Tag("ContactPreference")
 
 object CompleteReturn extends Tag("CompleteReturn")
 
+object ViewPayments extends Tag("ViewPayments")
+
 object ZapAccessibility extends Tag("ZapAccessibility")
