@@ -305,4 +305,10 @@ object VapingDutyPage extends BasePage {
 
   def clickChangeDeclareDuty(): Unit =
     click(changeDeclareDutyLink)
+
+  def clickFirstOutstandingReturnLink(): Unit =
+    click(VapingDutyLocators.firstOutstandingReturnLink)
+
+  def clickFirstCompletedReturnLink(): Unit =
+    click(VapingDutyLocators.firstCompletedReturnLink)
 }

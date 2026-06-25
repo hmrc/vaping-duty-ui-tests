@@ -49,6 +49,13 @@ object VapingDutyLocators {
   val yesRadioButton: By = By.id("value")
   val noRadioButton: By  = By.cssSelector("#value-no")
 
+  // ---------- View Returns Links ----------
+  val firstOutstandingReturnLink: By =
+    By.cssSelector("ul.govuk-task-list a.govuk-task-list__link[href*='before-you-start']")
+
+  val firstCompletedReturnLink: By =
+    By.cssSelector("ul.govuk-task-list a.govuk-task-list__link[href*='view-your-returns/']")
+
   // ---------- Task List Links ----------
   val submitReturnLink: By         = By.id("submit-link")
   val viewReturnLink: By           = By.id("view-link")
