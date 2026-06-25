@@ -32,7 +32,7 @@ class ViewPaymentsSpecs extends BaseSpec {
     ) {
       Given("An approved vaping product manufacturer has submitted payments that have been processed")
       VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.contactPreferenceEmailToPost)),
+        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
         VapingDutyPage.viewPaymentsUrl
       )
 
