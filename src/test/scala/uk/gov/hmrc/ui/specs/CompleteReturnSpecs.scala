@@ -162,6 +162,24 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the return submitted confirmation page"
       )
 
+      When("User redirects to view your returns page")
+      VapingDutyPage.goToUrl(VapingDutyPage.viewYourReturnsUrl)
+
+      Then("User should be on the view your returns page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
+        "Expected to be on the view your returns page"
+      )
+
+      When("User selects the return period that was just completed")
+      VapingDutyPage.clickCompletedReturnLinkForSelectedPeriod()
+
+      Then("User should be on the completed return summary page for that period")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.completedReturnUrl),
+        s"Expected to be on the completed return page at ${VapingDutyPage.completedReturnUrl}"
+      )
+
     }
 
     Scenario("Vaping Duty Journey submit return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
