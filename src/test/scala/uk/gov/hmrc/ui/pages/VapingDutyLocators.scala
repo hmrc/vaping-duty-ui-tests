@@ -53,6 +53,12 @@ object VapingDutyLocators {
   val firstOutstandingReturnLink: By =
     By.cssSelector("ul.govuk-task-list a.govuk-task-list__link[href*='before-you-start']")
 
+  def completedReturnLinkByMonth(month: String): By =
+    By.xpath(
+      s"//ul[contains(@class,'govuk-task-list')]" +
+        s"//a[contains(@class,'govuk-task-list__link') and normalize-space()='$month']"
+    )
+
   val firstCompletedReturnLink: By =
     By.cssSelector("ul.govuk-task-list a.govuk-task-list__link[href*='view-your-returns/']")
 

@@ -29,6 +29,9 @@ import scala.util.Random
 
 object VapingDutyPage extends BasePage {
 
+  private var completedReturnMonth: Option[String] = None
+  private var completedReturnHref: Option[String]  = None
+
   // ---------- Base URLs ----------
   val vapingDutyBase: String                = redirectUrl.stripSuffix("/")
   private val authStubBase: String          = authLoginStubBaseUrl.stripSuffix("/")
@@ -309,9 +312,29 @@ object VapingDutyPage extends BasePage {
   def clickChangeDeclareDuty(): Unit =
     click(changeDeclareDutyLink)
 
-  def clickFirstOutstandingReturnLink(): Unit =
+  private def capturedReturnMonth: String =
+    completedReturnMonth.getOrElse(
+      throw new IllegalStateException("No outstanding return month was captured before clicking")
+    )
+
+  def completedReturnUrl: String =
+    completedReturnHref.getOrElse(
+      throw new IllegalStateException("No completed return URL was captured before clicking")
+    )
+
+  def clickFirstOutstandingReturnLink(): Unit = {
+    val link = Driver.instance.findElement(VapingDutyLocators.firstOutstandingReturnLink)
+    completedReturnMonth = Option(link.getText).map(_.trim.split("\\s+").head)
     click(VapingDutyLocators.firstOutstandingReturnLink)
+  }
 
   def clickFirstCompletedReturnLink(): Unit =
     click(VapingDutyLocators.firstCompletedReturnLink)
+
+  def clickCompletedReturnLinkForSelectedPeriod(): Unit = {
+    val completedPeriod = VapingDutyLocators.completedReturnLinkByMonth(capturedReturnMonth)
+    val link            = Driver.instance.findElement(completedPeriod)
+    completedReturnHref = Option(link.getAttribute("href")).map(_.trim)
+    click(completedPeriod)
+  }
 }
