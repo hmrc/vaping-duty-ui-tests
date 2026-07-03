@@ -57,6 +57,7 @@ object VapingDutyPage extends BasePage {
   private val contactPrefBase: String    = s"$vapingDutyBase/contact-preferences"
   private val completeReturnBase: String = s"$vapingDutyBase/complete-return"
   private val dutySuspendedBase: String  = s"$completeReturnBase/duty-suspended"
+  private val adjustmentBase: String     = s"$completeReturnBase/adjustment"
 
   // ---------- Enrolment URLs ----------
   val doYouHaveApprovalIdUrl: String   = s"$enrolmentBase/do-you-have-an-approval-id"
@@ -97,10 +98,16 @@ object VapingDutyPage extends BasePage {
   val dutySuspendedCYAUrl: String      = s"$dutySuspendedBase/duty-suspense-check-your-answers-summary"
 
   // ---------- Spoilt adjustment URLs ----------
-  val declareSpoiltProductsUrl: String      = s"$completeReturnBase/adjustment/declare-spoilt-products"
-  val selectSpoiltPeriodUrl: String         = s"$completeReturnBase/adjustment/select-spoilt-period"
-  val enterSpoiltAmountUrl: String          = s"$completeReturnBase/adjustment/enter-spoilt-amount"
-  val addAnotherSpoiltAdjustmentUrl: String = s"$completeReturnBase/adjustment/add-another-spoilt-adjustment"
+  val declareSpoiltProductsUrl: String      = s"$adjustmentBase/declare-spoilt-products"
+  val selectSpoiltPeriodUrl: String         = s"$adjustmentBase/select-spoilt-period"
+  val enterSpoiltAmountUrl: String          = s"$adjustmentBase/enter-spoilt-amount"
+  val addAnotherSpoiltAdjustmentUrl: String = s"$adjustmentBase/add-another-spoilt-adjustment"
+
+  // ---------- Over / Under adjustment URLs ----------
+  val declareAdjustmentsUrl: String                = s"$adjustmentBase/declare-adjustments"
+  val selectAdjustmentPeriodUrl: String            = s"$adjustmentBase/select-period"
+  val enterOverOrUnderDeclarationAmountUrl: String = s"$adjustmentBase/enter-over-or-under-declaration-amount"
+  val adjustmentCYAUrl: String                     = s"$adjustmentBase/check-your-answers"
 
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
@@ -311,6 +318,43 @@ object VapingDutyPage extends BasePage {
 
   def clickChangeDeclareDuty(): Unit =
     click(changeDeclareDutyLink)
+
+  // ---------- Over / Under adjustments ----------
+  def selectHasOverUnderAdjustmentsRadio(hasAdjustments: Boolean): Unit = {
+    click(if (hasAdjustments) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+  }
+
+  def clickSelectAdjustmentPeriod(): Unit =
+    click(firstAdjustmentPeriodLink)
+
+  def submitOverOrUnderAdjustment(adjustmentType: String, amount: String): Unit = {
+    adjustmentType match {
+      case "underDeclared" =>
+        click(underDeclaredAdjustmentRadio)
+        waitForElementToBeVisible(underDeclaredVolumeField)
+        sendKeys(underDeclaredVolumeField, amount)
+
+      case "overDeclared" =>
+        click(overDeclaredAdjustmentRadio)
+        waitForElementToBeVisible(overDeclaredVolumeField)
+        sendKeys(overDeclaredVolumeField, amount)
+
+      case _ =>
+        throw new IllegalArgumentException(
+          s"Unknown adjustment type: $adjustmentType (expected 'underDeclared' or 'overDeclared')"
+        )
+    }
+    click(saveAndContinueButton)
+  }
+
+  def selectAddAnotherAdjustment(addAnother: Boolean): Unit = {
+    click(if (addAnother) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+  }
+
+  def clickChangeAdjustmentVolume(): Unit =
+    click(changeAdjustmentVolumeLink)
 
   private def capturedReturnMonth: String =
     completedReturnMonth.getOrElse(

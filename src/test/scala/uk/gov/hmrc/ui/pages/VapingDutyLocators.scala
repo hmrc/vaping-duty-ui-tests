@@ -70,7 +70,8 @@ object VapingDutyLocators {
   val dutySuspendedLink: By        =
     By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
   val spoiltAdjustmentsLink: By    = By.xpath("//a[contains(@href,'/complete-return/adjustment/declare-spoilt-products')]")
-  val overUnderAdjustmentsLink: By = By.xpath("//a[@href='/vaping-duty/complete-return/']")
+  val overUnderAdjustmentsLink: By =
+    By.xpath("//a[contains(@href,'/complete-return/adjustment/declare-adjustments')]")
 
   // ---------- Declare Duty ----------
   val vapingLiquidField: By     = By.id("value")
@@ -86,6 +87,24 @@ object VapingDutyLocators {
   // ---------- Spoilt Adjustments ----------
   val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
   val spoiltAmountField: By      = By.id("value")
+
+  // ---------- Over / Under Adjustments ----------
+  val firstAdjustmentPeriodLink: By =
+    By.cssSelector("ul.govuk-task-list a.govuk-task-list__link[href*='enter-over-or-under-declaration-amount']")
+
+  val changeAdjustmentVolumeLink: By =
+    By.cssSelector("a.govuk-link[href*='enter-over-or-under-declaration-amount']")
+
+  def adjustmentPeriodLinkByMonth(month: String): By =
+    By.xpath(
+      s"//ul[contains(@class,'govuk-task-list')]" +
+        s"//a[contains(@class,'govuk-task-list__link') and normalize-space()='$month']"
+    )
+
+  val underDeclaredAdjustmentRadio: By = By.id("adjustmentType")
+  val overDeclaredAdjustmentRadio: By  = By.id("adjustmentType-2")
+  val underDeclaredVolumeField: By     = By.id("underDeclaredVolume")
+  val overDeclaredVolumeField: By      = By.id("overDeclaredVolume")
 
   // ---------- Contact Preferences ----------
   val postContactPreferenceRadioButton: By  = By.cssSelector("#value_1")
