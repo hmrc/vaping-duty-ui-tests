@@ -116,6 +116,15 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User selects no on do you have any over or under-declared adjustments page")
       VapingDutyPage.selectHasOverUnderAdjustmentsRadio(false)
 
+      Then("User should be on the declare duty CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.adjustmentCYAUrl),
+        "Expected to be on the declare duty CYA page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
       Then("User should be on task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
