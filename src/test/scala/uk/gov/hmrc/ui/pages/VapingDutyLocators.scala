@@ -101,8 +101,8 @@ object VapingDutyLocators {
         s"//a[contains(@class,'govuk-task-list__link') and normalize-space()='$month']"
     )
 
-  val underDeclaredAdjustmentRadio: By = By.id("adjustmentType")
-  val overDeclaredAdjustmentRadio: By  = By.id("adjustmentType-2")
+  val underDeclaredAdjustmentRadio: By = By.id("adjustmentType-2")
+  val overDeclaredAdjustmentRadio: By  = By.id("adjustmentType")
   val underDeclaredVolumeField: By     = By.id("underDeclaredVolume")
   val overDeclaredVolumeField: By      = By.id("overDeclaredVolume")
 

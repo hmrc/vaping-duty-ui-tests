@@ -412,6 +412,7 @@ class CompleteReturnSpecs extends BaseSpec {
       )
 
       When("User enters a new amount and clicks continue")
+      VapingDutyPage.submitOverOrUnderAdjustment("overDeclared", "")
       VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "2000")
 
       Then("User should be back on the adjustment check your answers page")
