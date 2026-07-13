@@ -367,7 +367,7 @@ class CompleteReturnSpecs extends BaseSpec {
       )
 
       When("User selects under declared and enters an amount")
-      VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "1000")
+      VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "5000")
 
       Then("User should be on the adjustment check your answers page")
       assert(
@@ -423,6 +423,15 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User selects no to adding another adjustment")
       VapingDutyPage.selectAddAnotherAdjustment(false)
+
+      Then("User should be on the Why did you make these adjustments page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.adjustmentReasonUrl),
+        "Expected to be on the Why did you make these adjustments page"
+      )
+
+      When("User gives reasons for adjusting")
+      VapingDutyPage.addAdjustmentReason("Testing")
 
       Then("User should be on the task list page")
       assert(

@@ -105,6 +105,7 @@ object VapingDutyLocators {
   val overDeclaredAdjustmentRadio: By  = By.id("adjustmentType")
   val underDeclaredVolumeField: By     = By.id("underDeclaredVolume")
   val overDeclaredVolumeField: By      = By.id("overDeclaredVolume")
+  val adjustmentReasonField: By        = By.id("adjustmentReason")
 
   // ---------- Contact Preferences ----------
   val postContactPreferenceRadioButton: By  = By.cssSelector("#value_1")

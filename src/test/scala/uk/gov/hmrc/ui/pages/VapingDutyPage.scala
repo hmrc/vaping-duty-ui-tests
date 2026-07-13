@@ -108,6 +108,7 @@ object VapingDutyPage extends BasePage {
   val selectAdjustmentPeriodUrl: String            = s"$adjustmentBase/select-period"
   val enterOverOrUnderDeclarationAmountUrl: String = s"$adjustmentBase/enter-over-or-under-declaration-amount"
   val adjustmentCYAUrl: String                     = s"$adjustmentBase/check-your-answers"
+  val adjustmentReasonUrl: String                  = s"$adjustmentBase/reason-for-adjustment"
 
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
@@ -284,6 +285,12 @@ object VapingDutyPage extends BasePage {
     sendKeys(vapingLiquidReceivedField, amount)
     waitForElementToBeVisible(vapingLiquidMovedField)
     sendKeys(vapingLiquidMovedField, amount)
+    click(saveAndContinueButton)
+  }
+
+  def addAdjustmentReason(reason: String): Unit = {
+    waitForElementToBeVisible(adjustmentReasonField)
+    sendKeys(adjustmentReasonField, reason)
     click(saveAndContinueButton)
   }
 
