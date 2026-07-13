@@ -98,6 +98,15 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User selects no on do you have any spoilt vaping products to declare page")
       VapingDutyPage.selectHasSpoiltProductsRadio(false)
 
+      Then("User should be on the spoilt adjustment cya page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.spoiltProductsCYAUrl),
+        "Expected to be on the spoilt adjustment cya page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
       Then("User should be on task list page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
@@ -324,10 +333,10 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User enters a spoilt amount and clicks save and continue")
       VapingDutyPage.submitSpoiltAmount("5")
 
-      Then("User should be on the add another spoilt adjustment page")
+      Then("User should be on the spoilt adjustment cya page")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.addAnotherSpoiltAdjustmentUrl),
-        "Expected to be on the add another spoilt adjustment page"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.spoiltProductsCYAUrl),
+        "Expected to be on the spoilt adjustment cya page"
       )
 
       When("User selects no to adding another spoilt adjustment")
