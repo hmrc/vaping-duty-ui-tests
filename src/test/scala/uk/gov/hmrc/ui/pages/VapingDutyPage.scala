@@ -102,6 +102,7 @@ object VapingDutyPage extends BasePage {
   val selectSpoiltPeriodUrl: String         = s"$adjustmentBase/select-spoilt-period"
   val enterSpoiltAmountUrl: String          = s"$adjustmentBase/enter-spoilt-amount"
   val addAnotherSpoiltAdjustmentUrl: String = s"$adjustmentBase/add-another-spoilt-adjustment"
+  val spoiltProductsCYAUrl: String          = s"$adjustmentBase/check-your-spoilt-products-answers"
 
   // ---------- Over / Under adjustment URLs ----------
   val declareAdjustmentsUrl: String                = s"$adjustmentBase/declare-adjustments"
