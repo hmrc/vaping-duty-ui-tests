@@ -421,8 +421,26 @@ class CompleteReturnSpecs extends BaseSpec {
       )
 
       When("User enters a new amount and clicks continue")
-      VapingDutyPage.submitOverOrUnderAdjustment("overDeclared", "")
-      VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "2000")
+      VapingDutyPage.submitOverOrUnderAdjustment("overDeclared", "2000")
+      // VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "2000")
+
+      Then("User should be back on the adjustment check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.adjustmentCYAUrl),
+        "Expected to be on the adjustment check your answers page"
+      )
+
+      When("User clicks Remove on the adjustment check your answers page")
+      VapingDutyPage.clickRemoveAdjustmentLink()
+
+      Then("User should be on the remove adjustment page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.removeAdjustmentUrl),
+        "Expected to be on the remove adjustment page"
+      )
+
+      When("User selects yes to remove the adjustment")
+      VapingDutyPage.confirmRemoveAdjustment(true)
 
       Then("User should be back on the adjustment check your answers page")
       assert(

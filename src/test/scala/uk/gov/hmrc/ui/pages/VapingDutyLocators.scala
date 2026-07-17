@@ -106,6 +106,8 @@ object VapingDutyLocators {
   val underDeclaredVolumeField: By     = By.id("underDeclaredVolume")
   val overDeclaredVolumeField: By      = By.id("overDeclaredVolume")
   val adjustmentReasonField: By        = By.id("adjustmentReason")
+  val removeAdjustmentLink: By         =
+    By.cssSelector("a.govuk-link[href*='remove-adjustment']")
 
   // ---------- Contact Preferences ----------
   val postContactPreferenceRadioButton: By  = By.cssSelector("#value_1")

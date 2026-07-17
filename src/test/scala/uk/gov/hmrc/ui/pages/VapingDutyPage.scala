@@ -110,6 +110,7 @@ object VapingDutyPage extends BasePage {
   val enterOverOrUnderDeclarationAmountUrl: String = s"$adjustmentBase/enter-over-or-under-declaration-amount"
   val adjustmentCYAUrl: String                     = s"$adjustmentBase/check-your-answers"
   val adjustmentReasonUrl: String                  = s"$adjustmentBase/reason-for-adjustment"
+  val removeAdjustmentUrl: String                  = s"$adjustmentBase/remove-adjustment"
 
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
@@ -363,6 +364,14 @@ object VapingDutyPage extends BasePage {
 
   def clickChangeAdjustmentVolume(): Unit =
     click(changeAdjustmentVolumeLink)
+
+  def clickRemoveAdjustmentLink(): Unit =
+    click(removeAdjustmentLink)
+
+  def confirmRemoveAdjustment(remove: Boolean): Unit = {
+    click(if (remove) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+  }
 
   private def capturedReturnMonth: String =
     completedReturnMonth.getOrElse(
