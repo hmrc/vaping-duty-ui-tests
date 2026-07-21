@@ -85,8 +85,10 @@ object VapingDutyLocators {
     By.cssSelector("a.govuk-link[href*='/duty-suspended/enter-received-or-moved-amount']")
 
   // ---------- Spoilt Adjustments ----------
-  val selectSpoiltPeriodLink: By = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
-  val spoiltAmountField: By      = By.id("value")
+  val selectSpoiltPeriodLink: By     = By.xpath("//a[contains(@href,'enter-spoilt-amount')]")
+  val spoiltAmountField: By          = By.id("value")
+  val removeSpoiltAdjustmentLink: By =
+    By.cssSelector("a.govuk-link[href*='remove-spoilt-adjustment']")
 
   // ---------- Over / Under Adjustments ----------
   val firstAdjustmentPeriodLink: By =
@@ -106,6 +108,8 @@ object VapingDutyLocators {
   val underDeclaredVolumeField: By     = By.id("underDeclaredVolume")
   val overDeclaredVolumeField: By      = By.id("overDeclaredVolume")
   val adjustmentReasonField: By        = By.id("adjustmentReason")
+  val removeAdjustmentLink: By         =
+    By.cssSelector("a.govuk-link[href*='remove-adjustment']")
 
   // ---------- Contact Preferences ----------
   val postContactPreferenceRadioButton: By  = By.cssSelector("#value_1")

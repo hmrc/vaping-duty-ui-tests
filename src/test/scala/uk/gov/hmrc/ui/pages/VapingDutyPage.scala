@@ -103,6 +103,7 @@ object VapingDutyPage extends BasePage {
   val enterSpoiltAmountUrl: String          = s"$adjustmentBase/enter-spoilt-amount"
   val addAnotherSpoiltAdjustmentUrl: String = s"$adjustmentBase/add-another-spoilt-adjustment"
   val spoiltProductsCYAUrl: String          = s"$adjustmentBase/check-your-spoilt-products-answers"
+  val removeSpoiltAdjustmentUrl: String     = s"$adjustmentBase/remove-spoilt-adjustment"
 
   // ---------- Over / Under adjustment URLs ----------
   val declareAdjustmentsUrl: String                = s"$adjustmentBase/declare-adjustments"
@@ -110,6 +111,7 @@ object VapingDutyPage extends BasePage {
   val enterOverOrUnderDeclarationAmountUrl: String = s"$adjustmentBase/enter-over-or-under-declaration-amount"
   val adjustmentCYAUrl: String                     = s"$adjustmentBase/check-your-answers"
   val adjustmentReasonUrl: String                  = s"$adjustmentBase/reason-for-adjustment"
+  val removeAdjustmentUrl: String                  = s"$adjustmentBase/remove-adjustment"
 
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
@@ -363,6 +365,22 @@ object VapingDutyPage extends BasePage {
 
   def clickChangeAdjustmentVolume(): Unit =
     click(changeAdjustmentVolumeLink)
+
+  def clickRemoveAdjustmentLink(): Unit =
+    click(removeAdjustmentLink)
+
+  def confirmRemoveAdjustment(remove: Boolean): Unit = {
+    click(if (remove) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+  }
+
+  def clickRemoveSpoiltAdjustmentLink(): Unit =
+    click(removeSpoiltAdjustmentLink)
+
+  def confirmRemoveSpoiltAdjustment(remove: Boolean): Unit = {
+    click(if (remove) yesRadioButton else noRadioButton)
+    click(saveAndContinueButton)
+  }
 
   private def capturedReturnMonth: String =
     completedReturnMonth.getOrElse(

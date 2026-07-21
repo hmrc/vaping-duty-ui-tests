@@ -339,6 +339,51 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the spoilt adjustment cya page"
       )
 
+      When("User selects yes to adding another spoilt adjustment")
+      VapingDutyPage.selectAddAnotherSpoiltAdjustment(true)
+
+      Then("User should be on the select spoilt period page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.selectSpoiltPeriodUrl),
+        "Expected to be on the select spoilt period page"
+      )
+
+      When("User selects a period to adjust")
+      VapingDutyPage.clickSelectSpoiltPeriod()
+
+      Then("User should be on the enter spoilt amount page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.enterSpoiltAmountUrl),
+        "Expected to be on the enter spoilt amount page"
+      )
+
+      When("User enters a spoilt amount and clicks save and continue")
+      VapingDutyPage.submitSpoiltAmount("100")
+
+      Then("User should be on the spoilt adjustment cya page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.spoiltProductsCYAUrl),
+        "Expected to be on the spoilt adjustment cya page"
+      )
+
+      When("User clicks Remove on the spoilt adjustment check your answers page")
+      VapingDutyPage.clickRemoveSpoiltAdjustmentLink()
+
+      Then("User should be on the remove spoilt adjustment page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.removeSpoiltAdjustmentUrl),
+        "Expected to be on the remove spoilt adjustment page"
+      )
+
+      When("User selects yes to remove the spoilt adjustment")
+      VapingDutyPage.confirmRemoveSpoiltAdjustment(true)
+
+      Then("User should be back on the spoilt adjustment cya page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.spoiltProductsCYAUrl),
+        "Expected to be on the spoilt adjustment cya page"
+      )
+
       When("User selects no to adding another spoilt adjustment")
       VapingDutyPage.selectAddAnotherSpoiltAdjustment(false)
 
@@ -384,7 +429,7 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the adjustment check your answers page"
       )
 
-      When("User selects no to adding another adjustment")
+      When("User selects yes to adding another adjustment")
       VapingDutyPage.selectAddAnotherAdjustment(true)
 
       Then("User should be on the select adjustment period page")
@@ -421,8 +466,25 @@ class CompleteReturnSpecs extends BaseSpec {
       )
 
       When("User enters a new amount and clicks continue")
-      VapingDutyPage.submitOverOrUnderAdjustment("overDeclared", "")
-      VapingDutyPage.submitOverOrUnderAdjustment("underDeclared", "2000")
+      VapingDutyPage.submitOverOrUnderAdjustment("overDeclared", "2000")
+
+      Then("User should be back on the adjustment check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.adjustmentCYAUrl),
+        "Expected to be on the adjustment check your answers page"
+      )
+
+      When("User clicks Remove on the adjustment check your answers page")
+      VapingDutyPage.clickRemoveAdjustmentLink()
+
+      Then("User should be on the remove adjustment page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.removeAdjustmentUrl),
+        "Expected to be on the remove adjustment page"
+      )
+
+      When("User selects yes to remove the adjustment")
+      VapingDutyPage.confirmRemoveAdjustment(true)
 
       Then("User should be back on the adjustment check your answers page")
       assert(
