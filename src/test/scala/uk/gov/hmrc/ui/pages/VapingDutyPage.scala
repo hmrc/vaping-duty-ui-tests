@@ -57,6 +57,7 @@ object VapingDutyPage extends BasePage {
   private val contactPrefBase: String    = s"$vapingDutyBase/contact-preferences"
   private val completeReturnBase: String = s"$vapingDutyBase/complete-return"
   private val dutySuspendedBase: String  = s"$completeReturnBase/duty-suspended"
+  private val DeclareDutyBase: String    = s"$completeReturnBase/declare-duty"
   private val adjustmentBase: String     = s"$completeReturnBase/adjustment"
 
   // ---------- Enrolment URLs ----------
@@ -85,11 +86,11 @@ object VapingDutyPage extends BasePage {
   val beforeYouStartPageUrl: String             = s"$completeReturnBase/before-you-start"
   val taskListUrl: String                       = s"$completeReturnBase/task-list"
   val declareDutyUrl: String                    = s"$completeReturnBase/declare-duty"
-  val amountOfVapingProductsReleasedUrl: String = s"$completeReturnBase/enter-amount-released"
+  val amountOfVapingProductsReleasedUrl: String = s"$DeclareDutyBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
-  val declareDutyCYAUrl: String                 = s"$completeReturnBase/duty-check-your-answers-summary"
+  val declareDutyCYAUrl: String                 = s"$DeclareDutyBase/duty-check-your-answers-summary"
   val returnDeclarationUrl: String              = s"$completeReturnBase/return-declaration"
 
   // ---------- Duty Suspended URLs ----------
