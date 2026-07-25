@@ -117,6 +117,12 @@ object VapingDutyPage extends BasePage {
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
 
+  // ---------- Main check your answers ----------
+  val changeDeclareDutyCYAUrl: String    = s"$DeclareDutyBase/change-duty-check-your-answers-summary"
+  val changeSpoiltProductsCYAUrl: String = s"$adjustmentBase/change-check-your-spoilt-products-answers"
+  val changeAdjustmentCYAUrl: String     = s"$adjustmentBase/change-check-your-answers"
+  val changeDutySuspendedCYAUrl: String  = s"$dutySuspendedBase/change-duty-suspense-check-your-answers-summary"
+
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
 
@@ -408,4 +414,13 @@ object VapingDutyPage extends BasePage {
     completedReturnHref = Option(link.getAttribute("href")).map(_.trim)
     click(completedPeriod)
   }
+
+  def clickDeclareDutyChangeLink(): Unit = click(VapingDutyLocators.declareDutyChangeLink)
+
+  def clickSpoiltProductsChangeLink(): Unit = click(VapingDutyLocators.spoiltProductsChangeLink)
+
+  def clickOverOrUnderAdjustmentChangeLink(): Unit = click(VapingDutyLocators.overOrUnderAdjustmentChangeLink)
+
+  def clickDutySuspendedChangeLink(): Unit = click(VapingDutyLocators.dutySuspendedChangeLink)
+
 }

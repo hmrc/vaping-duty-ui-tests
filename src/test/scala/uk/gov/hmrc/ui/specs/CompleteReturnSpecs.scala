@@ -175,6 +175,78 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
         "Expected to be on the check your answers page"
       )
+      /////////////////////////////////////////////////////////////
+      When("User clicks the declare duty change link on the check your answers page")
+      VapingDutyPage.clickDeclareDutyChangeLink()
+
+      Then("User should be on the declare duty CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.changeDeclareDutyCYAUrl),
+        "Expected to be on the declare duty CYA page"
+      )
+
+      When("User clicks save and continue on the declare duty CYA page")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be back on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be back on the check your answers page"
+      )
+
+      When("User clicks the spoilt products change link on the check your answers page")
+      VapingDutyPage.clickSpoiltProductsChangeLink()
+
+      Then("User should be on the spoilt products CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.changeSpoiltProductsCYAUrl),
+        "Expected to be on the spoilt products CYA page"
+      )
+
+      When("User clicks save and continue on the spoilt products CYA page")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be back on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be back on the check your answers page"
+      )
+
+      When("User clicks the over or under adjustment change link on the check your answers page")
+      VapingDutyPage.clickOverOrUnderAdjustmentChangeLink()
+
+      Then("User should be on the adjustment CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.changeAdjustmentCYAUrl),
+        "Expected to be on the adjustment CYA page"
+      )
+
+      When("User clicks save and continue on the adjustment CYA page")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be back on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be back on the check your answers page"
+      )
+
+      When("User clicks the duty suspended change link on the check your answers page")
+      VapingDutyPage.clickDutySuspendedChangeLink()
+
+      Then("User should be on the duty suspended CYA page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.changeDutySuspendedCYAUrl),
+        "Expected to be on the duty suspended CYA page"
+      )
+
+      When("User clicks save and continue on the duty suspended CYA page")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be back on the check your answers page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
+        "Expected to be back on the check your answers page"
+      )
 
       When("User clicks confirm and submit on the check your answers page")
       VapingDutyPage.clickConfirmAndSubmit()
