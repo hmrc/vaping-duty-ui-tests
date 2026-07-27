@@ -644,7 +644,7 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.checkYourAnswersUrl),
         "Expected to be on the check your answers page"
       )
-      //////////////////////
+
       When("User clicks the declare duty change link on the check your answers page")
       VapingDutyPage.clickDeclareDutyChangeLink()
 
