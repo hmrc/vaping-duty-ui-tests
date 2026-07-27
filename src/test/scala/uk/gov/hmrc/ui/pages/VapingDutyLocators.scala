@@ -127,4 +127,14 @@ object VapingDutyLocators {
   val declarationCapacityField: By = By.id("capacityInWhichSigned")
   val declarationEmailField: By    = By.id("email")
 
+  // ---------- Main check your answers ----------
+  val declareDutyChangeLink: By           =
+    By.cssSelector("a.govuk-link[href*='change-duty-check-your-answers-summary']")
+  val spoiltProductsChangeLink: By        =
+    By.cssSelector("a.govuk-link[href*='change-check-your-spoilt-products-answers']")
+  val overOrUnderAdjustmentChangeLink: By =
+    By.cssSelector("a.govuk-link[href*='adjustment/change-check-your-answers']")
+  val dutySuspendedChangeLink: By         =
+    By.cssSelector("a.govuk-link[href*='change-duty-suspense-check-your-answers-summary']")
+
 }
