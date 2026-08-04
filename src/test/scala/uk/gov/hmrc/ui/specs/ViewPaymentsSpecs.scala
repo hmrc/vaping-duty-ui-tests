@@ -41,6 +41,24 @@ class ViewPaymentsSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.viewPaymentsUrl),
         "Expected to be on the vaping products duty payments page"
       )
+
+      When("User clicks on the Pay now link")
+      VapingDutyPage.clickPayNowLink()
+
+      Then("User should be on the payment start page")
+      assert(
+        VapingDutyPage.urlConfirmation("select-payment-amount"),
+        "Expected to be on the payment selection page"
+      )
+
+      When("User clicks the back button")
+      VapingDutyPage.clickBackButton()
+
+      Then("User should be back on the view payments page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.viewPaymentsUrl),
+        "Expected to be back on the view payments page"
+      )
     }
   }
 }

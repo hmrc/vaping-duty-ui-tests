@@ -27,6 +27,7 @@ object VapingDutyLocators {
   val enrolmentUrl: String          = TestEnvironment.url("enrolment-management-frontend")
   val businessTaxAccountUrl: String = TestEnvironment.url("business-tax-account")
   val emailVerificationUrl: String  = TestEnvironment.url("email-verification")
+  val payUrl: String                = TestEnvironment.url("pay")
 
   // ---------- Auth Login Stub ----------
   val credIdField: By         = By.id("authorityId")
@@ -136,5 +137,9 @@ object VapingDutyLocators {
     By.cssSelector("a.govuk-link[href*='adjustment/change-check-your-answers']")
   val dutySuspendedChangeLink: By         =
     By.cssSelector("a.govuk-link[href*='change-duty-suspense-check-your-answers-summary']")
+
+  // ---------- View Payments ----------
+  val payNowLink: By = By.cssSelector("a[href*='/start-payment/']")
+  val backButton: By = By.cssSelector("a.govuk-back-link")
 
 }

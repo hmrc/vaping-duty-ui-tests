@@ -38,6 +38,7 @@ object VapingDutyPage extends BasePage {
   private val emailVerificationBase: String = emailVerificationUrl.stripSuffix("/")
   private val enrolmentFrontendBase: String = enrolmentUrl.stripSuffix("/")
   private val btaBase: String               = businessTaxAccountUrl.stripSuffix("/")
+  private val payBase: String               = payUrl.stripSuffix("/")
 
   // Auth-login-stub endpoints
   val ggSignInUrl: String = s"$authStubBase/gg-sign-in"
@@ -116,6 +117,7 @@ object VapingDutyPage extends BasePage {
 
   // ---------- View Payments URL ----------
   val viewPaymentsUrl: String = s"$vapingDutyBase/view-payments"
+  val startPaymentUrl: String = s"$payBase/select-payment-amount"
 
   // ---------- Main check your answers ----------
   val changeDeclareDutyCYAUrl: String    = s"$DeclareDutyBase/change-duty-check-your-answers-summary"
@@ -422,5 +424,9 @@ object VapingDutyPage extends BasePage {
   def clickOverOrUnderAdjustmentChangeLink(): Unit = click(VapingDutyLocators.overOrUnderAdjustmentChangeLink)
 
   def clickDutySuspendedChangeLink(): Unit = click(VapingDutyLocators.dutySuspendedChangeLink)
+
+  // ---------- View Payments - Actions ----------
+  def clickPayNowLink(): Unit = click(payNowLink)
+  def clickBackButton(): Unit = click(backButton)
 
 }
