@@ -88,4 +88,11 @@ object Enrolment {
       identifierValue = randomVpdId(emailFlag = "5")
     )
 
+  def InsolventVpdId: Enrolment =
+    Enrolment(
+      enrolmentKey = "HMRC-VPD-ORG",
+      identifierName = "ZVPD",
+      identifierValue = randomVpdId(emailFlag = "5", suffix = "300")
+    )
+
 }
