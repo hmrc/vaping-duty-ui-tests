@@ -22,6 +22,7 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.helper.{AuthLoginStubSessionClient, TestOnlyPasscodeClient}
 import uk.gov.hmrc.ui.models.AuthUser
 import uk.gov.hmrc.ui.pages.VapingDutyLocators.*
+import uk.gov.hmrc.ui.utils.PageCapture
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -39,6 +40,7 @@ object VapingDutyPage extends BasePage {
   private val enrolmentFrontendBase: String = enrolmentUrl.stripSuffix("/")
   private val btaBase: String               = businessTaxAccountUrl.stripSuffix("/")
   private val payBase: String               = payUrl.stripSuffix("/")
+  private val directDebitBase: String       = directDebitUrl.stripSuffix("/")
 
   // Auth-login-stub endpoints
   val ggSignInUrl: String = s"$authStubBase/gg-sign-in"
@@ -125,6 +127,9 @@ object VapingDutyPage extends BasePage {
   val changeAdjustmentCYAUrl: String     = s"$adjustmentBase/change-check-your-answers"
   val changeDutySuspendedCYAUrl: String  = s"$dutySuspendedBase/change-duty-suspense-check-your-answers-summary"
 
+  // ---------- Direct Debit redirect url ----------
+  val directDebitAccessUrl: String = s"$directDebitBase/enter-email-address"
+
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
 
@@ -172,10 +177,13 @@ object VapingDutyPage extends BasePage {
     click(submitButton)
   }
 
-  def urlConfirmation(expectedUrl: String): Boolean =
-    fluentWait.until { driver =>
+  def urlConfirmation(expectedUrl: String): Boolean = {
+    val confirmed = fluentWait.until { driver =>
       driver.getCurrentUrl.contains(expectedUrl)
     }
+    PageCapture.fromCurrentUrl()
+    confirmed
+  }
 
   def selectVapingDutyProductsIdRadio(hasVapingProductsId: Boolean): Unit = {
     click(if (hasVapingProductsId) yesRadioButton else noRadioButton)
@@ -206,6 +214,9 @@ object VapingDutyPage extends BasePage {
 
   def clickViewReturnLink(): Unit =
     click(viewReturnLink)
+
+  def clickPayNowByDirectDebitLink(): Unit =
+    click(payNowByDirectDebitLink)
 
   def clickLinkFromTaskList(task: String): Unit =
     task match {
