@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,9 @@ package uk.gov.hmrc.ui.specs
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
+import org.scalatest.{BeforeAndAfterEach, GivenWhenThen, Outcome}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
+import uk.gov.hmrc.ui.utils.PageCapture
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -28,6 +29,11 @@ trait BaseSpec
     with BeforeAndAfterEach
     with Browser
     with ScreenshotOnFailure {
+
+  override def withFixture(test: NoArgTest): Outcome = {
+    PageCapture.startTest(test.name)
+    super.withFixture(test)
+  }
 
   override def beforeEach(): Unit =
     startBrowser()

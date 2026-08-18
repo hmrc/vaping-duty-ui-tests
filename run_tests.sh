@@ -7,6 +7,7 @@ BROWSER="chrome"
 ENVIRONMENT="local"
 HEADLESS="true"
 SECURITY_ASSESSMENT="false"
+SCREENSHOTS="false"
 TAGS=""
 
 POSITIONAL_ARGS=()
@@ -35,19 +36,29 @@ while [[ $# -gt 0 ]]; do
       SECURITY_ASSESSMENT="true"
       shift
       ;;
+    -ss|--screenshots)
+      SCREENSHOTS="true"
+      shift
+      ;;
+    --no-screenshots)
+      SCREENSHOTS="false"
+      shift
+      ;;
     -t|--tags)
       [[ -n "${2-}" && ! "${2}" =~ ^- ]] || { echo "Error: Missing value for $1. See --help"; exit 1; }
       TAGS="$2"
       shift 2
       ;;
     --help)
-      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless] [-v|--visible] [-t|--tags <tagName>]"
+      echo "Usage: $0 [-b|--browser <chrome|firefox|edge>] [-e|--environment <local|qa|staging>] [-h|--headless] [-v|--visible] [-ss|--screenshots] [-t|--tags <tagName>]"
       echo "Examples:"
       echo "  $0 -b chrome -e local -h            # run with a headless browser (sets headless=true)"
       echo "  $0 -v, --visible, --headed          # run with a visible browser (sets headless=false)"
       echo "  $0 staging                          # auto detects environment"
       echo "  $0 firefox qa false                 # positional fallbacks (browser env headless)"
       echo "  $0 -s                               # enable security assessment"
+      echo "  $0 -ss, --screenshots               # enable screenshots during test run"
+      echo "  $0 --no-screenshots                 # disable screenshots"
       echo "  $0 -t CR  | CompleteReturn          # run only complete return tests"
       echo "  $0 -t CP  | ContactPreference       # run only contact preference tests"
       echo "  $0 -t EC  | EnrolmentClaim          # run only enrolment claim tests"
@@ -90,6 +101,7 @@ echo "BROWSER     = ${BROWSER}"
 echo "ENVIRONMENT = ${ENVIRONMENT}"
 echo "HEADLESS    = ${HEADLESS}"
 echo "ZAP         = ${SECURITY_ASSESSMENT}"
+echo "SCREENSHOTS = ${SCREENSHOTS}"
 echo "TAGS        = ${TAGS:-none}"
 echo "----------------------------------------"
 
@@ -105,4 +117,5 @@ sbt clean \
   -Dbrowser.option.headless="${HEADLESS}" \
   -Dzap.proxy=true \
   -Dsecurity.assessment=${SECURITY_ASSESSMENT} \
+  -Dscreenshots.enabled="${SCREENSHOTS}" \
   "${TEST_CMD}" testReport
