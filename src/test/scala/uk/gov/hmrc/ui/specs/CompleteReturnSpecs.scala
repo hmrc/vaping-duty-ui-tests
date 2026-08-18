@@ -738,6 +738,15 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
         "Expected to be on the return submitted confirmation page"
       )
+
+      When("User clicks pay now by direct debit link")
+      VapingDutyPage.clickPayNowByDirectDebitLink()
+
+      Then("User should be on the direct debit email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.directDebitAccessUrl),
+        "Expected to be on the direct debit email address page"
+      )
     }
 
     Scenario("Vaping Duty Journey view individual return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
