@@ -125,6 +125,9 @@ object VapingDutyPage extends BasePage {
   val changeAdjustmentCYAUrl: String     = s"$adjustmentBase/change-check-your-answers"
   val changeDutySuspendedCYAUrl: String  = s"$dutySuspendedBase/change-duty-suspense-check-your-answers-summary"
 
+  // ---------- Service unavailable URLs ----------
+  val insolvencyServiceUnavailableUrl: String = s"$vapingDutyBase/service-unavailable-insolvency"
+
   def authStubSession(): uk.gov.hmrc.ui.helper.AuthStubSession =
     authSessionClient.getSession(Driver.instance)
 

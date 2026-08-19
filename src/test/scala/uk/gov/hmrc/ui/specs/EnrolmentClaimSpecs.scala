@@ -98,5 +98,19 @@ class EnrolmentClaimSpecs extends BaseSpec {
       )
     }
 
+    Scenario("Vaping Duty Journey User With Insolvent account", EnrolmentClaim, VapingDutyTest, ZapAccessibility) {
+      Given("User authenticates using Government Gateway")
+      VapingDutyPage.signIntoAuth(
+        AuthUser.organisation(Some(Enrolment.InsolventVpdId)),
+        VapingDutyPage.viewYourReturnsUrl
+      )
+
+      Then("User should be on the ou cannot access this service at the moment page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.insolvencyServiceUnavailableUrl),
+        "Expected to be on the you cannot access this service at the moment page"
+      )
+    }
+
   }
 }
