@@ -56,21 +56,21 @@ object Enrolment {
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
-      identifierValue = "XIWK5004205WK" // email verified
+      identifierValue = "XIWK5004200WK" // email verified
     )
 
   val contactPreferencePostToPost: Enrolment =
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
-      identifierValue = "XIWK1004205WK" // post, email verified
+      identifierValue = "XIWK1004200WK" // post, email verified
     )
 
   val contactPreferenceEmailAlreadyVerified: Enrolment =
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
-      identifierValue = "XIWK5004205WK",
+      identifierValue = "XIWK5004200WK",
       credId = Some(emailCredId)
     )
 
@@ -78,7 +78,7 @@ object Enrolment {
     Enrolment(
       enrolmentKey = "HMRC-VPD-ORG",
       identifierName = "ZVPD",
-      identifierValue = "XIWK5004205WK" // verified email
+      identifierValue = "XIWK5004200WK" // verified email
     )
 
   def RandomVpdId: Enrolment =
