@@ -43,7 +43,7 @@ object VapingDutyLocators {
   // ---------- Common Buttons ----------
   val continueButton: By         = By.className("govuk-button")
   val saveAndContinueButton: By  = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
-  val confirmAndSubmitButton: By = By.xpath("//*[@type='submit']")
+  val confirmAndSubmitButton: By = By.cssSelector("#main-content > div > div > form > button")
   val continueToBTAButton: By    = By.cssSelector("#main-content > div > div > a")
   val continueBeforeYouStart: By = By.cssSelector("#main-content > div > div > a")
 
