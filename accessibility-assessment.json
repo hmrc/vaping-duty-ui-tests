@@ -7,6 +7,10 @@
     {
       "path": "/auth-login-stub",
       "reason": "Auth Login stub pages are not owned by the VPD team"
+    },
+    {
+      "path": "/direct-debit",
+      "reason": "direct debit pages are not owned by the VPD team"
     }
   ]
 }
