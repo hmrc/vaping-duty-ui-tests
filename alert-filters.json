@@ -1,0 +1,10 @@
+{
+  "remove": [
+    {
+      "contextId": 1,
+      "url": "http://localhost:9069/direct-debit/enter-email-address",
+      "ruleId": 10038,
+      "newLevel": -1
+    }
+  ]
+}
