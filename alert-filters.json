@@ -1,7 +1,8 @@
 {
-  "remove": [
+  "add": [
     {
       "contextId": 1,
+      "reason": "This issue is related to direct-debit which is outside VPD scope.",
       "url": "http://localhost:9069/direct-debit/enter-email-address",
       "ruleId": 10038,
       "newLevel": -1
