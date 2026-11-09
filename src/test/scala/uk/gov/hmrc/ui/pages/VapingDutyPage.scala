@@ -343,7 +343,7 @@ object VapingDutyPage extends BasePage {
     sendKeys(declarationFullNameField, fullName)
     sendKeys(declarationCapacityField, capacity)
     sendKeys(declarationEmailField, email)
-    click(confirmAndSubmitButton)
+    click(declarationConfirmAndSubmitButton)
   }
 
   def clickChangeDutySuspended(): Unit =

@@ -41,11 +41,12 @@ object VapingDutyLocators {
   val ggSignInButton: By      = By.id("vpd-gg-logon-1")
 
   // ---------- Common Buttons ----------
-  val continueButton: By         = By.className("govuk-button")
-  val saveAndContinueButton: By  = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
-  val confirmAndSubmitButton: By = By.cssSelector("#main-content > div > div > form > button")
-  val continueToBTAButton: By    = By.cssSelector("#main-content > div > div > a")
-  val continueBeforeYouStart: By = By.cssSelector("#main-content > div > div > a")
+  val continueButton: By                    = By.className("govuk-button")
+  val saveAndContinueButton: By             = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
+  val confirmAndSubmitButton: By            = By.cssSelector("#main-content > div > div > form > button")
+  val declarationConfirmAndSubmitButton: By = By.cssSelector("#main-content > div > div > div > form > button")
+  val continueToBTAButton: By               = By.cssSelector("#main-content > div > div > a")
+  val continueBeforeYouStart: By            = By.cssSelector("#main-content > div > div > a")
 
   // ---------- Radio Buttons ----------
   val yesRadioButton: By = By.id("value")
