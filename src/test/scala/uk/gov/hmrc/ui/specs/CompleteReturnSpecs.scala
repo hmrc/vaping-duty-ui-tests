@@ -166,6 +166,51 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
+      
+      When("User clicks on your details link")
+      VapingDutyPage.clickLinkFromTaskList("yourDetails")
+
+      Then("User should be on the what is your full name page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsFullNameUrl),
+        "Expected to be on the what is your full name page"
+      )
+
+      When("User enters their full and and click continue")
+      VapingDutyPage.SubmitYourFullName("John Smith")
+
+      Then("User should be on the what is your role in the company page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsRoleUrl),
+        "Expected to be on the what is your role in the company page"
+      )
+
+      When("User enters their role and click continue")
+      VapingDutyPage.SubmitYourRole("CEO")
+
+      Then("User should be on the what is your business email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsEmailUrl),
+        "Expected to be on the what is your business email address page"
+      )
+
+      When("User enters their email and click continue")
+      VapingDutyPage.SubmitYourEmail("Test@vpd.com")
+
+      Then("User should be on the your details mini cya page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsMiniCYAUrl),
+        "Expected to be on the your details mini cya page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
 
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
@@ -250,19 +295,6 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User clicks confirm and submit on the check your answers page")
       VapingDutyPage.clickConfirmAndSubmit()
-
-      Then("User should be on the declaration page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
-        "Expected to be on the declaration page"
-      )
-
-      When("User completes the declaration and submits the return")
-      VapingDutyPage.submitReturnDeclaration(
-        fullName = "Auto Test",
-        capacity = "Director",
-        email = "autotest@example.com"
-      )
 
       Then("User should be on the return submitted confirmation page")
       assert(
@@ -635,6 +667,51 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
         "Expected to be on the task list page"
       )
+      
+      When("User clicks on your details link")
+      VapingDutyPage.clickLinkFromTaskList("yourDetails")
+
+      Then("User should be on the what is your full name page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsFullNameUrl),
+        "Expected to be on the what is your full name page"
+      )
+
+      When("User enters their full and and click continue")
+      VapingDutyPage.SubmitYourFullName("John Smith")
+
+      Then("User should be on the what is your role in the company page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsRoleUrl),
+        "Expected to be on the what is your role in the company page"
+      )
+
+      When("User enters their role and click continue")
+      VapingDutyPage.SubmitYourRole("CEO")
+
+      Then("User should be on the what is your business email address page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsEmailUrl),
+        "Expected to be on the what is your business email address page"
+      )
+
+      When("User enters their email and click continue")
+      VapingDutyPage.SubmitYourEmail("Test@vpd.com")
+
+      Then("User should be on the your details mini cya page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.yourDetailsMiniCYAUrl),
+        "Expected to be on the your details mini cya page"
+      )
+
+      When("User clicks on save and continue button")
+      VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be on task list page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.taskListUrl),
+        "Expected to be on the task list page"
+      )
 
       When("User clicks on check your answers and submit return link")
       VapingDutyPage.clickLinkFromTaskList("checkYourAnswers")
@@ -720,19 +797,6 @@ class CompleteReturnSpecs extends BaseSpec {
       When("User clicks confirm and submit on the check your answers page")
       VapingDutyPage.clickConfirmAndSubmit()
 
-      Then("User should be on the declaration page")
-      assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
-        "Expected to be on the declaration page"
-      )
-
-      When("User completes the declaration and submits the return")
-      VapingDutyPage.submitReturnDeclaration(
-        fullName = "Auto Test",
-        capacity = "Director",
-        email = "autotest@example.com"
-      )
-
       Then("User should be on the return submitted confirmation page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.returnSubmittedUrl),
@@ -747,28 +811,23 @@ class CompleteReturnSpecs extends BaseSpec {
         VapingDutyPage.urlConfirmation(VapingDutyPage.directDebitAccessUrl),
         "Expected to be on the direct debit email address page"
       )
-    }
 
-    Scenario("Vaping Duty Journey view individual return journey", VapingDutyTest, CompleteReturn, ZapAccessibility) {
-      Given("User authenticates using Government Gateway and user redirects to before you start page")
-      VapingDutyPage.signIntoAuth(
-        AuthUser.organisation(Some(Enrolment.RandomVpdId)),
-        VapingDutyPage.viewYourReturnsUrl
-      )
+      When("User redirects to view your returns page")
+      VapingDutyPage.goToUrl(VapingDutyPage.viewYourReturnsUrl)
 
-      Then("User should be on view your returns page")
+      Then("User should be on the view your returns page")
       assert(
         VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
         "Expected to be on the view your returns page"
       )
 
-      When("User clicks on the first completed return link")
-      VapingDutyPage.clickFirstCompletedReturnLink()
+      When("User selects the return period that was just completed")
+      VapingDutyPage.clickCompletedReturnLinkForSelectedPeriod()
 
-      Then("User should be on the view your return page")
+      Then("User should be on the completed return summary page for that period")
       assert(
-        VapingDutyPage.urlConfirmation(VapingDutyPage.viewYourReturnsUrl),
-        "Expected to be on the view your return page"
+        VapingDutyPage.urlConfirmation(VapingDutyPage.completedReturnUrl),
+        s"Expected to be on the completed return page at ${VapingDutyPage.completedReturnUrl}"
       )
     }
   }

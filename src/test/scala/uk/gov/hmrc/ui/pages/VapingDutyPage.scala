@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.{By, JavascriptExecutor}
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.helper.{AuthLoginStubSessionClient, TestOnlyPasscodeClient}
@@ -60,8 +60,9 @@ object VapingDutyPage extends BasePage {
   private val contactPrefBase: String    = s"$vapingDutyBase/contact-preferences"
   private val completeReturnBase: String = s"$vapingDutyBase/complete-return"
   private val dutySuspendedBase: String  = s"$completeReturnBase/duty-suspended"
-  private val DeclareDutyBase: String    = s"$completeReturnBase/declare-duty"
+  private val declareDutyBase: String    = s"$completeReturnBase/declare-duty"
   private val adjustmentBase: String     = s"$completeReturnBase/adjustment"
+  private val yourDetailsBase: String    = s"$completeReturnBase/your-details"
 
   // ---------- Enrolment URLs ----------
   val doYouHaveApprovalIdUrl: String   = s"$enrolmentBase/do-you-have-an-approval-id"
@@ -89,12 +90,21 @@ object VapingDutyPage extends BasePage {
   val beforeYouStartPageUrl: String             = s"$completeReturnBase/before-you-start"
   val taskListUrl: String                       = s"$completeReturnBase/task-list"
   val declareDutyUrl: String                    = s"$completeReturnBase/declare-duty"
-  val amountOfVapingProductsReleasedUrl: String = s"$DeclareDutyBase/enter-amount-released"
+  val amountOfVapingProductsReleasedUrl: String = s"$declareDutyBase/enter-amount-released"
   val checkYourAnswersUrl: String               = s"$completeReturnBase/check-your-answers"
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
-  val declareDutyCYAUrl: String                 = s"$DeclareDutyBase/duty-check-your-answers-summary"
-  val returnDeclarationUrl: String              = s"$completeReturnBase/return-declaration"
+  val declareDutyCYAUrl: String                 = s"$declareDutyBase/duty-check-your-answers-summary"
+
+  // ---------- Your Details URLs ----------
+  val yourDetailsFullNameUrl: String       = s"$yourDetailsBase/what-is-your-full-name"
+  val yourDetailsRoleUrl: String           = s"$yourDetailsBase/what-is-your-role-in-the-company"
+  val yourDetailsEmailUrl: String          = s"$yourDetailsBase/what-is-your-business-email-address"
+  val yourDetailsMiniCYAUrl: String        = s"$yourDetailsBase/check-your-answers"
+  val changeYourDetailsFullNameUrl: String = s"$yourDetailsBase/change-what-is-your-full-name"
+  val changeYourDetailsRoleUrl: String     = s"$yourDetailsBase/change-what-is-your-role-in-the-company"
+  val changeYourDetailsEmailUrl: String    = s"$yourDetailsBase/change-what-is-your-business-email-address"
+  val changeYourDetailsMiniCYAUrl: String  = s"$yourDetailsBase/change-check-your-answers"
 
   // ---------- Duty Suspended URLs ----------
   val dutySuspendedUrl: String         = s"$dutySuspendedBase/suspended-products"
@@ -122,7 +132,7 @@ object VapingDutyPage extends BasePage {
   val startPaymentUrl: String = s"$payBase/select-payment-amount"
 
   // ---------- Main check your answers ----------
-  val changeDeclareDutyCYAUrl: String    = s"$DeclareDutyBase/change-duty-check-your-answers-summary"
+  val changeDeclareDutyCYAUrl: String    = s"$declareDutyBase/change-duty-check-your-answers-summary"
   val changeSpoiltProductsCYAUrl: String = s"$adjustmentBase/change-check-your-spoilt-products-answers"
   val changeAdjustmentCYAUrl: String     = s"$adjustmentBase/change-check-your-answers"
   val changeDutySuspendedCYAUrl: String  = s"$dutySuspendedBase/change-duty-suspense-check-your-answers-summary"
@@ -212,8 +222,10 @@ object VapingDutyPage extends BasePage {
   def clickSubmitReturnLink(): Unit =
     click(submitReturnLink)
 
-  def clickSaveAndContinue(): Unit =
+  def clickSaveAndContinue(): Unit = {
+    waitForElementToBeVisible(saveAndContinueButton)
     click(saveAndContinueButton)
+  }
 
   def clickViewReturnLink(): Unit =
     click(viewReturnLink)
@@ -237,6 +249,9 @@ object VapingDutyPage extends BasePage {
 
       case "dutySuspended" =>
         click(dutySuspendedLink)
+
+      case "yourDetails" =>
+        click(yourDetailsLink)
 
       case _ =>
         throw new IllegalArgumentException(s"Unknown task link: $task")
@@ -334,17 +349,25 @@ object VapingDutyPage extends BasePage {
     click(saveAndContinueButton)
   }
 
-  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit                      = {
+  def selectAddAnotherSpoiltAdjustment(addAnother: Boolean): Unit = {
     click(if (addAnother) yesRadioButton else noRadioButton)
     click(saveAndContinueButton)
   }
-  def submitReturnDeclaration(fullName: String, capacity: String, email: String): Unit = {
-    waitForElementToBeVisible(declarationFullNameField)
-    sendKeys(declarationFullNameField, fullName)
-    sendKeys(declarationCapacityField, capacity)
-    sendKeys(declarationEmailField, email)
-    click(declarationConfirmAndSubmitButton)
+
+  def submitYourDetailsField(field: By, value: String): Unit = {
+    waitForElementToBeVisible(field)
+    sendKeys(field, value)
+    clickSaveAndContinue()
   }
+
+  def SubmitYourFullName(fullName: String): Unit =
+    submitYourDetailsField(yourDetailsFullNameField, fullName)
+
+  def SubmitYourRole(companyRole: String): Unit =
+    submitYourDetailsField(yourDetailsCompanyRoleField, companyRole)
+
+  def SubmitYourEmail(emailAddress: String): Unit =
+    submitYourDetailsField(yourDetailsEmailField, emailAddress)
 
   def clickChangeDutySuspended(): Unit =
     click(changeDutySuspendedLink)
