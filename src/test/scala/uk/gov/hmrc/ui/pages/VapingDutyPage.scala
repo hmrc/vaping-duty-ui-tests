@@ -95,6 +95,7 @@ object VapingDutyPage extends BasePage {
   val returnSubmittedUrl: String                = s"$completeReturnBase/return-submitted"
   val viewYourReturnsUrl: String                = s"$vapingDutyBase/view-your-returns"
   val declareDutyCYAUrl: String                 = s"$declareDutyBase/duty-check-your-answers-summary"
+  val returnDeclarationUrl: String              = s"$completeReturnBase/return-declaration"
 
   // ---------- Your Details URLs ----------
   val yourDetailsFullNameUrl: String       = s"$yourDetailsBase/what-is-your-full-name"
@@ -250,9 +251,6 @@ object VapingDutyPage extends BasePage {
       case "dutySuspended" =>
         click(dutySuspendedLink)
 
-      case "yourDetails" =>
-        click(yourDetailsLink)
-
       case _ =>
         throw new IllegalArgumentException(s"Unknown task link: $task")
     }
@@ -267,6 +265,11 @@ object VapingDutyPage extends BasePage {
 
   def clickConfirmAndSubmit(): Unit =
     click(confirmAndSubmitButton)
+
+  def clickDeclarationConfirmAndSubmit(): Unit = {
+    waitForElementToBeVisible(declarationConfirmAndSubmitButton)
+    click(declarationConfirmAndSubmitButton)
+  }
 
   def submitEmailAddress(emailAddress: String): Unit = {
     waitForElementToBeVisible(emailContactField)

@@ -248,8 +248,8 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be back on the check your answers page"
       )
 
-      When("User clicks confirm and submit on the check your answers page")
-      VapingDutyPage.clickConfirmAndSubmit()
+      When("User clicks save and continue on the check your answers page")
+      VapingDutyPage.clickSaveAndContinue()
 
       Then("User should be on the what is your full name page")
       assert(
@@ -257,7 +257,7 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the what is your full name page"
       )
 
-      When("User enters their full and and click continue")
+      When("User enters their full name and click continue")
       VapingDutyPage.SubmitYourFullName("John Smith")
 
       Then("User should be on the what is your role in the company page")
@@ -286,6 +286,15 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User clicks on save and continue button")
       VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be on the return declaration page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
+        "Expected to be on the return declaration page"
+      )
+
+      When("User clicks confirm and submit on the return declaration page")
+      VapingDutyPage.clickDeclarationConfirmAndSubmit()
 
       Then("User should be on the return submitted confirmation page")
       assert(
@@ -740,8 +749,8 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be back on the check your answers page"
       )
 
-      When("User clicks confirm and submit on the check your answers page")
-      VapingDutyPage.clickConfirmAndSubmit()
+      When("User clicks save and continue on the check your answers page")
+      VapingDutyPage.clickSaveAndContinue()
 
       Then("User should be on the what is your full name page")
       assert(
@@ -749,7 +758,7 @@ class CompleteReturnSpecs extends BaseSpec {
         "Expected to be on the what is your full name page"
       )
 
-      When("User enters their full and and click continue")
+      When("User enters their full name and click continue")
       VapingDutyPage.SubmitYourFullName("John Smith")
 
       Then("User should be on the what is your role in the company page")
@@ -778,6 +787,15 @@ class CompleteReturnSpecs extends BaseSpec {
 
       When("User clicks on save and continue button")
       VapingDutyPage.clickSaveAndContinue()
+
+      Then("User should be on the return declaration page")
+      assert(
+        VapingDutyPage.urlConfirmation(VapingDutyPage.returnDeclarationUrl),
+        "Expected to be on the return declaration page"
+      )
+
+      When("User clicks confirm and submit on the return declaration page")
+      VapingDutyPage.clickDeclarationConfirmAndSubmit()
 
       Then("User should be on the return submitted confirmation page")
       assert(
