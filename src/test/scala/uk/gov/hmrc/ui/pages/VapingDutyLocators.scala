@@ -44,7 +44,8 @@ object VapingDutyLocators {
   val continueButton: By                    = By.className("govuk-button")
   val saveAndContinueButton: By             = By.xpath("//button[contains(normalize-space(),'Save and continue')]")
   val confirmAndSubmitButton: By            = By.cssSelector("#main-content > div > div > form > button")
-  val declarationConfirmAndSubmitButton: By = By.cssSelector("#main-content > div > div > div > form > button")
+  val declarationConfirmAndSubmitButton: By =
+    By.xpath("//button[contains(normalize-space(),'Confirm and submit')]")
   val continueToBTAButton: By               = By.cssSelector("#main-content > div > div > a")
   val continueBeforeYouStart: By            = By.cssSelector("#main-content > div > div > a")
 
@@ -69,7 +70,8 @@ object VapingDutyLocators {
   val submitReturnLink: By         = By.id("submit-link")
   val viewReturnLink: By           = By.id("view-link")
   val declareDutyLink: By          = By.xpath("//a[normalize-space(text())='Tell us if you need to declare duty']")
-  val checkYourAnswersLink: By     = By.xpath("//a[normalize-space(text())='Check your answers and submit return']")
+  val checkYourAnswersLink: By     =
+    By.xpath("//a[contains(@href, '/vaping-duty/complete-return/check-your-answers')]")
   val dutySuspendedLink: By        =
     By.xpath("//a[contains(@href, '/vaping-duty/complete-return/duty-suspended/suspended-products')]")
   val spoiltAdjustmentsLink: By    = By.xpath("//a[contains(@href,'/complete-return/adjustment/declare-spoilt-products')]")
@@ -125,10 +127,10 @@ object VapingDutyLocators {
   val emailConfirmationCodeField: By         = By.cssSelector("#passcode")
   val emailConfirmationCodeConfirmButton: By = By.xpath("//button[contains(normalize-space(),'Confirm')]")
 
-  // ---------- Return Declaration ----------
-  val declarationFullNameField: By = By.id("fullName")
-  val declarationCapacityField: By = By.id("capacityInWhichSigned")
-  val declarationEmailField: By    = By.id("email")
+  // ---------- Your Details / Return Declaration ----------
+  val yourDetailsFullNameField: By    = By.id("fullName")
+  val yourDetailsCompanyRoleField: By = By.id("capacityInWhichSigned")
+  val yourDetailsEmailField: By       = By.id("email")
 
   // ---------- Main check your answers ----------
   val declareDutyChangeLink: By           =
